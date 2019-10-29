@@ -1,0 +1,9 @@
+input {
+    height: 4vh;
+    width: 30vw;
+    font-size: 16px;
+    margin-left: 35vw;
+    margin-top: 5vh;
+    display: inline-block;
+    border-radius: 0.5vmin;
+}
