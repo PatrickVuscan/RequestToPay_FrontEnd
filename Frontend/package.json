@@ -4,6 +4,10 @@
   "description": "react application for Scotia Bank request to pay",
   "license": "ISC",
   "private": true,
+  "engine": {
+    "node": "12.13.0",
+    "npm": "6.12.0"
+  },
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
