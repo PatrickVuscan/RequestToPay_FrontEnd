@@ -17,13 +17,16 @@ class Login extends Component {
       'username': this.state.emailValue,
       'password': this.state.passwordValue
     };
+    if (login.username != '' && login.password != '') {
+        this.props.loginHandler();
+    }
   }
 
   render(){
     return (
       <div>
-        <EmailInput onChange={this.setState}/>
-        <PasswordInput onChange={this.setState}/>
+        <input placeholder="Username" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>
+        <input placeholder="Password" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
         <Button className="login" onClick={this.handleLoginClick} value="Login"/>
         <Button className="back" value="Go Back"/>
       </div>

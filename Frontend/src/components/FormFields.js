@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import './FormFields.css';
 
-class Input extends Component {
+export class EmailInput extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    handleChange(event){
+        this.props.onChange.bind({
+            emailValue: event.target.value,
+        });
+    }
+
+    render(){
+        return (
+        <input type="email"
+            className="email-input"
+            placeholder="Email"
+            onChange={this.handleChange.bind(this)} >
+        </input>);
+    }
+}
+
+export class PasswordInput extends Component {
     constructor(props) {
         super(props);
     }
@@ -11,20 +32,7 @@ class Input extends Component {
             passwordValue: event.target.value,
         }));
     }
-}
 
-export class EmailInput extends Input {
-    render(){
-        return (
-        <input type="email"
-            className="email-input"
-            placeholder="Email"
-            onChange={this.handleChange.bind(this)}>
-        </input>);
-    }
-}
-
-export class PasswordInput extends Input {
     render(){
         return (
         <input type="password"
