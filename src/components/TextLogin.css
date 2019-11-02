@@ -1,0 +1,15 @@
+/* Text Login Randomizer CSS*/
+
+#text_login {
+    text-align: left;
+    padding-bottom: 3vh;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 48px;
+}
+
+#text_login p{
+    margin:0;
+    padding:0;
+}

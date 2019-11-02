@@ -4,7 +4,7 @@ import {Button} from "../components/Elements";
 import request from "request-promise";
 import config from "../config";
 import './Login.css';
-import Header from "../components/Header";
+import TextLogin from "../components/TextLogin";
 
 class Login extends Component {
 	constructor(props) {
@@ -49,11 +49,7 @@ class Login extends Component {
     return (
         <div>
             <div id="login_block" className="centerVH">
-                <div id ="login_welcome">
-                    <p>Your money.</p>
-                    <p>Instantly.</p>
-                </div>
-
+                <TextLogin/>
                 <input placeholder="Username" required="" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>
                 <input type="password" placeholder="Password" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
                 <Button className="login" onClick={this.handleLoginClick} value="Sign in."/>

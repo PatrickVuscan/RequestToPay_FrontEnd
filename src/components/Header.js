@@ -4,10 +4,6 @@ import React, {Component} from "react";
 import './Header.css'
 
 export class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render(){
         return (
             <div id="header_block">
@@ -15,7 +11,7 @@ export class Header extends Component {
                     Scotia
                 </div>
                 <div id="header_menu">
-                    <img id="header_hamburger" src={require('../images/icon_menu.png')} />
+                    <img id="header_hamburger" src={require('../images/icon_menu.png')} alt={"menu"}/>
                 </div>
             </div>
         );
