@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import App from './containers/App';
 import Login from './containers/Login';
+import Header from "./components/Header";
 
 const SCREEN = {
     login: 'login',
@@ -25,7 +26,12 @@ class Control extends Component {
         } else if (this.state.screenDisplay === SCREEN.app) {
             element = <App />;
         }
-        return (<div> {element} </div>)
+        return (
+            <div id="control">
+                <Header/>
+                {element}
+            </div>
+        )
     }
 }
 

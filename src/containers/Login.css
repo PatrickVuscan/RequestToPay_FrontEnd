@@ -1,5 +1,6 @@
 /* Login.css */
 
+/* What is this for?
 .Login {
   text-align: center;
   min-height: 100vh;
@@ -8,4 +9,28 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+}
+*/
+
+#login_block {
+  min-height: 20vh;
+  width: 300px;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid white; */
+
+}
+
+#login_welcome {
+  text-align: left;
+  padding-bottom: 3vh;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 48px;
+}
+
+#login_welcome p{
+  margin:0;
+  padding:0;
 }

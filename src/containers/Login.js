@@ -3,6 +3,8 @@ import {EmailInput, PasswordInput} from "../components/FormFields";
 import {Button} from "../components/Elements";
 import request from "request-promise";
 import config from "../config";
+import './Login.css';
+import Header from "../components/Header";
 
 class Login extends Component {
 	constructor(props) {
@@ -45,18 +47,17 @@ class Login extends Component {
 
   render(){
     return (
+        <div>
+            <div id="login_block" className="centerVH">
+                <div id ="login_welcome">
+                    <p>Your money.</p>
+                    <p>Instantly.</p>
+                </div>
 
-        <div id="login_block">
-            <div id ="login_welcome">
-                <p>Your money.</p>
-                <p>Instantly.</p>
+                <input placeholder="Username" required="" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>
+                <input type="password" placeholder="Password" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+                <Button className="login" onClick={this.handleLoginClick} value="Sign in."/>
             </div>
-
-            <input placeholder="Username" required="" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>
-            <input type="password" placeholder="Password" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
-            <Button className="login" onClick={this.handleLoginClick} value="Sign in."/>
-
-
         </div>
     )
   }
