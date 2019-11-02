@@ -17,6 +17,7 @@ class Control extends Component {
 
     loginHandler(){
         this.setState({screenDisplay: SCREEN.app});
+        alert("could not log in");
     }
 
     render() {
