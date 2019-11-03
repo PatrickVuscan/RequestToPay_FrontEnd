@@ -2,26 +2,24 @@
 
 #header_block {
     position: relative;
+    z-index:1000;
     height: 125px;
     width: 100%;
     align-items: center;
     justify-content: left;
-    background: #EC1222;
+    background-color: var(--RED);
     /* border: 1px solid white; */
 }
 
 #header_scotia, #header_menu {
     position: absolute;
     bottom: 0;
-    padding: 3vh;
-    text-align: left;
-
 }
 
 #header_scotia {
     left: 0;
     padding: 3vh;
-
+    text-align: left;
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
     color: white;

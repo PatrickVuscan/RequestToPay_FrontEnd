@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {EmailInput, PasswordInput} from "../components/FormFields";
 import {Button} from "../components/Elements";
 import request from "request-promise";
+import {Helmet} from "react-helmet";
 import config from "../config";
 import './Login.css';
 import TextLogin from "../components/TextLogin";
@@ -47,7 +48,16 @@ class Login extends Component {
 
   render(){
     return (
-        <div>
+        <div id="login_full">
+            {/* Helmet - modify css based on current page - move off to another component? */}
+            <Helmet>
+                <style type="text/css">{''+
+                '#header_block {background-color: black;}' +
+                '#root {background-color: var(--MID_RED);}' +
+                '#bg_container {background-image: url(/images/bg/bg_speed_car.jpg); mix-blend-mode: multiply;}'}
+                </style>
+            </Helmet>
+
             <div id="login_block" className="centerVH">
                 <TextLogin/>
                 <input placeholder="Username" required="" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>

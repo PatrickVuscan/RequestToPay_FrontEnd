@@ -30,6 +30,8 @@ class Control extends Component {
         return (
             <div id="control">
                 <Header/>
+                <div id="bg_container">
+                </div>
                 {element}
             </div>
         )

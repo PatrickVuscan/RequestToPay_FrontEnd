@@ -1,5 +1,22 @@
 /* Login.css */
 
+#login_full {
+}
+
+#bg_container{
+  position:absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*background-image: url(../images/bg/bg_speed_car.jpg);*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  /*mix-blend-mode: multiply;*/
+}
+
 #login_block {
   min-height: 20vh;
   width: 300px;

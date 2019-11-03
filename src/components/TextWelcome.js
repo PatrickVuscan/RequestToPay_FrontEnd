@@ -3,7 +3,7 @@
 import React, {Component} from "react";
 import "./TextLogin.css"
 
-export class TextLogin extends Component {
+export class TextWelcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,11 +20,11 @@ export class TextLogin extends Component {
     render(){
         return (
             <div id ="text_login">
-                <p>Your money.</p>
-                <p>Instantly.</p>
+                <p>Welcome to</p>
+                <p>Your home.</p>
             </div>
         );
     }
 }
 
-export default TextLogin;
+export default TextWelcome;
