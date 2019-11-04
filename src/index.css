@@ -1,0 +1,53 @@
+/* Index.css */
+
+:root {
+  /* Default Colors*/
+  --RED: #ec111a;
+  --MID_RED: #FF384A;
+  --LIGHT_RED: #FF969B;
+  --WHITE: #FFFFFF;
+  --BLACK: #000000;
+  --GREY: #333333;
+  --LIGHT_GREY: #4D4D4D;
+  --BLUE: #019DD6;
+  --LIGHT_BLUE: #91DDF7;
+  --ORANGE: #FB6331;
+  --LIGHT_ORANGE: #FFBB8E;
+  --PURPLE: #7849B9;
+  --LIGHT_PURPLE: #ADA9F5;
+  --GREEN: #138467;
+  --LIGHT_GREEN: #85D8C5;
+  --PINK: #F2609E;
+  --LIGHT_PINK: #FDA8E1;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+
+  /* FONT */
+  @import url('https://fonts.googleapis.com/css?family=Cabin:400,500,700&display=swap');
+
+}
+
+#root{
+  height: inherit;
+  width: inherit;
+  background: #FF384A;
+}
+
+#control{
+  height: inherit;
+  width: inherit;
+}
+
+.centerVH {
+  margin: 0;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
