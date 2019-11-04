@@ -1,6 +1,10 @@
 # Request To Pay - Front End Application
 
-## Setting Up
+## Accessing On Heroku
+
+Visit: https://worksish-frontend-v1.herokuapp.com/
+
+## Setting Up Locally
 
 1) Checkout the master branch
 2) Install the dependencies by running 'npm install' in the project directory
