@@ -8,6 +8,10 @@ const SCREEN = {
     app: 'app'
 }
 
+/**
+ * Controller for redirecting from the login page, to the appropriate home page.
+ */
+
 class Control extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +21,6 @@ class Control extends Component {
 
     loginHandler(){
         this.setState({screenDisplay: SCREEN.app});
-        alert("could not log in");
     }
 
     render() {

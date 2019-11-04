@@ -6,6 +6,14 @@ import TextLogin from "../components/TextLogin";
 import TextWelcome from "../components/TextWelcome";
 import {Button} from "../components/Elements";
 
+/**
+ *
+ * The default react web page.
+ *
+ * @returns {*}
+ * @constructor
+ */
+
 function App() {
   return (
       <div id="app">

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './FormFields.css';
 
+/**
+ * An input field for an email.
+ */
 export class EmailInput extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +25,9 @@ export class EmailInput extends Component {
     }
 }
 
+/**
+ * An input field for a password.
+ */
 export class PasswordInput extends Component {
     constructor(props) {
         super(props);
@@ -40,5 +46,15 @@ export class PasswordInput extends Component {
             placeholder="Password"
             onChange={this.handleChange.bind(this)}>
         </input>);
+    }
+}
+
+function required() {
+    var empty = document.forms["form1"]["text1"].value;
+    if (empty == "") {
+        alert("Please input a Value");
+        return false;
+    } else {
+        return true;
     }
 }
