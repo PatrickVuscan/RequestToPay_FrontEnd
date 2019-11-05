@@ -14,15 +14,16 @@ class Login extends Component {
 	constructor(props) {
     super(props);
 	this.state = { 
-      emailValue: '',
+	  usernameValue: '',
 	  passwordValue: ''
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
   }
 
-  handleLoginClick(){
+  handleLoginClick(e){
+    e.preventDefault();
     let credentials = {
-      'username': this.state.emailValue,
+      'username': this.state.usernameValue,
       'password': this.state.passwordValue
     };
     if (credentials.username !== '' && credentials.password !== '') {
@@ -62,9 +63,11 @@ class Login extends Component {
 
             <div id="login_block" className="centerVH">
                 <TextLogin/>
-                <input placeholder="Username" required="" onChange={(event) => {this.setState({emailValue: event.target.value})}}/>
-                <input type="password" placeholder="Password" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
-                <Button className="login" onClick={this.handleLoginClick} value="Sign in."/>
+                <form onSubmit={this.handleLoginClick}>
+                  <input placeholder="Username" required="" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
+                  <input type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+                  <Button className="login" type="submit" value="Sign in."/>
+                </form>
             </div>
         </div>
     )
