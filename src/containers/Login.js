@@ -64,8 +64,8 @@ class Login extends Component {
             <div id="login_block" className="centerVH">
                 <TextLogin/>
                 <form onSubmit={this.handleLoginClick}>
-                  <input placeholder="Username" required="" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
-                  <input type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+                  <input required placeholder="Username" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
+                  <input required type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
                   <Button className="login" type="submit" value="Sign in."/>
                 </form>
             </div>
