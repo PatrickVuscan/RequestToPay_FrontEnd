@@ -1,5 +1,10 @@
 /* App CSS */
 
+/* Custom Page Colors & Styles*/
+#header_block {background-color: var(--RED)}
+#root {background-color: var(--MID_RED)}
+#bg_container {background: transparent}
+
 .App {
   text-align: center;
 }

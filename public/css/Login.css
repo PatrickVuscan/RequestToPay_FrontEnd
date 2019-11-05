@@ -1,5 +1,10 @@
 /* Login.css */
 
+/* Custom Page Colors & Styles */
+#header_block {background-color: black;}
+#root {background-color: var(--MID_RED);}
+#bg_container {background-image: url(/images/bg/bg_speed_car.jpg); mix-blend-mode: multiply;}
+
 #login_full {
 }
 
