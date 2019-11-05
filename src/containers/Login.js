@@ -7,6 +7,10 @@ import config from "../config";
 import './Login.css';
 import TextLogin from "../components/TextLogin";
 
+/**
+ * Creates a Login element, containing an username field, password field and login button.
+ */
+
 class Login extends Component {
 	constructor(props) {
     super(props);
@@ -18,32 +22,35 @@ class Login extends Component {
   }
 
   handleLoginClick(){
-    let login = {
+    let credentials = {
       'username': this.state.emailValue,
       'password': this.state.passwordValue
     };
-    if (login.username !== '' && login.password !== '') {
-        const options = {
-            method: 'GET',
-            uri: `${config.api.URL}/login?u=${login.username}&p=${login.password}`,
-            headers: {
-                'User-Agent': 'Request-Promise'
-            },
-            json: true // Automatically parses the JSON string in the response
-        };
-        let self = this;  // because this about to change. It's a bad work around but it's 2 am
-        request(options)
-            .then(function (res) {
-                alert(`remove the loading animation. Found user with credentials: ${res.username} -- ${res.password}`);
-                self.props.loginHandler();
-            })
-            .catch(function (err) {
-                alert(`there was an error: ${err.status} -- ${err.message}`);
-            });
-        alert('Display a loading animation');
+    if (credentials.username !== '' && credentials.password !== '') {
+        this.sendLoginRequest(credentials);
     } else {
         alert('Please enter a username and password');
     }
+  }
+
+  sendLoginRequest(credentials) {
+      const options = {
+          method: 'GET',
+          uri: `${config.api.URL}/login?u=${credentials.username}&p=${credentials.password}`,
+          headers: {
+              'User-Agent': 'Request-Promise'
+          },
+          json: true // Automatically parses the JSON string in the response
+      };
+      let self = this;  // Reference "this" is about to change. Necessary to access this.props.
+      request(options)
+          .then(function (res) {
+              self.props.loginHandler();
+          })
+          .catch(function (err) {
+              alert(`there was an error: ${err.status} -- ${err.message}`);
+          });
+      alert('Display a loading animation');
   }
 
   render(){

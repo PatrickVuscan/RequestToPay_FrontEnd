@@ -1,4 +1,33 @@
-Frontend application directory
+# Request To Pay - Front End Application
+
+## Setting Up
+
+1) Checkout the master branch
+2) Install the dependencies by running 'npm install' in the project directory
+3) Start the application by running 'npm start' in the project directory
+
+--------------------------------
+
+## Login Credentials
+
+Username: driver \
+Password: zoomzoom
+
+--------------------------------
+
+## File Overview
+
+- src/index.js:
+    - Renders the element defined in Control.js.
+- src/Control.js:
+    - Originally, creates a \<div/> containing the login page.
+    - Upon a successful login, \<div/> now contains appropriate home page.
+- src/containers/Login.js:
+    - The login page definition.
+- src/containers/App.js:
+    - The page that is redirected to after login (by Control.js).
+- src/components/Elements.js:
+    - Contains the button used in the login page.
 
 --------------------------------
 
@@ -40,33 +69,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
