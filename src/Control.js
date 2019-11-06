@@ -6,7 +6,7 @@ import Header from "./components/Header";
 const SCREEN = {
     login: 'login',
     app: 'app'
-}
+};
 
 /**
  * Controller for redirecting from the login page, to the appropriate home page.
@@ -15,11 +15,15 @@ const SCREEN = {
 class Control extends Component {
     constructor(props) {
         super(props);
-        this.state = {screenDisplay: SCREEN.login};
+        this.state = {
+            screenDisplay: SCREEN.login,
+            username: 'Not Logged In'
+        };
         this.loginHandler = this.loginHandler.bind(this);
     }
 
-    loginHandler(){
+    loginHandler(username){
+        this.setState({username: username});
         this.setState({screenDisplay: SCREEN.app});
     }
 
@@ -28,7 +32,7 @@ class Control extends Component {
         if (this.state.screenDisplay === SCREEN.login){
             element = <Login loginHandler = {this.loginHandler} />;
         } else if (this.state.screenDisplay === SCREEN.app) {
-            element = <App />;
+            element = <App username={this.state.username}/>;
         }
         return (
             <div id="control">

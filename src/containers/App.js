@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {Helmet} from "react-helmet";
 import TextWelcome from "../components/TextWelcome";
 
@@ -10,19 +10,29 @@ import TextWelcome from "../components/TextWelcome";
  * @constructor
  */
 
-function App() {
-  return (
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      usernameValue: this.props.username, // retrieve from Control
+    };
+  }
+
+  render() {
+    return (
       <div id="app">
         {/* Helmet - load stylesheet based on current page */}
         <Helmet>
-          <link rel="stylesheet" type="text/css" href="../../public/css/App.css" />
+          <link rel="stylesheet" type="text/css" href="../../public/css/App.css"/>
         </Helmet>
 
         <div id="login_block" className="centerVH">
-          <TextWelcome/>
+          <TextWelcome username={this.state.usernameValue}/>
         </div>
       </div>
-  );
+    );
+  }
 }
 
 export default App;
