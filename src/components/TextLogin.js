@@ -1,27 +1,22 @@
 /* Random money related quote for the login page */
 
 import React, {Component} from "react";
-import "./TextLogin.css"
+import "./Text.css"
+import styled, { keyframes } from "styled-components";
+import { fadeIn, fadeInDown } from "react-animations";
+
+// const FadeFast  = styled.div`animation: 1s ${keyframes`${fadeIn}`} 1`;
+const Fade = styled.div`animation: 3s ${keyframes`${fadeIn}`} 1`;
+const FadeSlow = styled.div`animation: 6s ${keyframes`${fadeIn}`} 1`;
 
 export class TextLogin extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bgColor: [
-                'Your Money',
-                'blue',
-                'yellow',
-            ],
-            selectedColor: '',
-        };
-    }
 
     /* TODO: randomize login welcome text*/
     render(){
         return (
             <div id ="text_login">
-                <p>Your money.</p>
-                <p>Instantly.</p>
+                <Fade><p>Your money.</p></Fade>
+                <FadeSlow><p>Instantly.</p></FadeSlow>
             </div>
         );
     }

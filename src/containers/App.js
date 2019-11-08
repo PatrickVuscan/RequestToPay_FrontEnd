@@ -1,10 +1,6 @@
-import React from 'react';
-import logo from '../assets/logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 import {Helmet} from "react-helmet";
-import TextLogin from "../components/TextLogin";
 import TextWelcome from "../components/TextWelcome";
-import {Button} from "../components/Elements";
 
 /**
  *
@@ -14,23 +10,29 @@ import {Button} from "../components/Elements";
  * @constructor
  */
 
-function App() {
-  return (
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      usernameValue: this.props.username, // retrieve from Control
+    };
+  }
+
+  render() {
+    return (
       <div id="app">
-        {/* Helmet - modify css based on current page - move off to another component? */}
+        {/* Helmet - load stylesheet based on current page */}
         <Helmet>
-          <style type="text/css">{''+
-          '#header_block {background-color: var(--RED);}' +
-          '#root {background-color: var(--MID_RED);}' +
-          '#bg_container {background: transparent}'}
-          </style>
+          <link rel="stylesheet" type="text/css" href="../../public/css/App.css"/>
         </Helmet>
 
         <div id="login_block" className="centerVH">
-          <TextWelcome/>
+          <TextWelcome username={this.state.usernameValue}/>
         </div>
       </div>
-  );
+    );
+  }
 }
 
 export default App;

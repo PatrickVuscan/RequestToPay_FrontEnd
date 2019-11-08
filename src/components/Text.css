@@ -1,0 +1,31 @@
+/* Title Message Text CSS*/
+
+#text_login {
+    text-align: left;
+    padding-bottom: 3vh;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 48px;
+}
+
+#text_login p {
+    margin:0;
+    padding:0;
+}
+
+#text_welcome {
+    text-align: left;
+    padding-bottom: 3vh;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 12vw;
+}
+#text_welcome p{
+    margin: -3vw;
+    padding:0;
+}
+#text_welcome #username{
+    text-transform: capitalize;
+}
