@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import App from './containers/App';
-import Login from './containers/Login';
+import App from './views/App';
+import Login from './views/Login';
 import Header from "./components/Header";
 
 const SCREEN = {
