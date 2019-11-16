@@ -37,7 +37,7 @@ class Login extends Component {
 
 	  const options = {
 	    method: 'GET',
-      uri: `${config.api.URL}/login?u=${credentials.username}&p=${credentials.password}`,
+      uri: `${config.api.URL}/login?user=${credentials.username}&pass=${credentials.password}`,
       headers: {
 	      'User-Agent': 'Request-Promise'
       },
