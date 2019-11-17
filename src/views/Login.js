@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import {Button} from "../components/Elements";
 import request from "request-promise";
 import {Helmet} from "react-helmet";
-import config from "../config";
+import {performLogin} from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
 
 /**
  * Creates a Login element, containing an username field, password field and login button.
  */
-
 class Login extends Component {
 	constructor(props) {
     super(props);
-	this.state = { 
-	  usernameValue: '',
-	  passwordValue: '',
-    loading: false,
+	this.state = {
+	    usernameValue: '',
+        passwordValue: '',
+        loading: false,
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
   }
@@ -27,35 +26,7 @@ class Login extends Component {
       'username': this.state.usernameValue,
       'password': this.state.passwordValue
     };
-    if (credentials.username !== '' && credentials.password !== '') {
-        this.sendLoginRequest(credentials);
-    }
-  }
-
-  sendLoginRequest(credentials) {
-    this.setState({loading: true});
-
-	  const options = {
-	    method: 'GET',
-      uri: `${config.api.URL}/login?user=${credentials.username}&pass=${credentials.password}`,
-      headers: {
-	      'User-Agent': 'Request-Promise'
-      },
-      json: true // Automatically parses the JSON string in the response
-      };
-
-	  let self = this;  // Reference "this" is about to change. Necessary to access this.props.
-
-    setTimeout(function() {
-      request(options)
-        .then(function (res) {
-          self.props.loginHandler(credentials.username);
-        })
-        .catch(function (err) {
-          alert(`there was an error: ${err.status} -- ${err.message}`);
-        });
-      this.setState({loading: false});
-    }.bind(this), 2000); // Set Delay (to test the loading animation)
+    performLogin(this, credentials, this.props.loginHandler);
   }
 
   render(){
@@ -66,7 +37,6 @@ class Login extends Component {
         <Helmet>
           <link rel="stylesheet" type="text/css" href="css/Login.css" />
         </Helmet>
-
         <div id="login_block" className="centerVH">
           {loading ? <TextLoading/> : <TextLogin/>}
           <form onSubmit={this.handleLoginClick}>
