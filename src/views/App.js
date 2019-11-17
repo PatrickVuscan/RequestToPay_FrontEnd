@@ -24,7 +24,7 @@ class App extends Component {
       <div id="app">
         {/* Helmet - load stylesheet based on current page */}
         <Helmet>
-          <link rel="stylesheet" type="text/css" href="../../public/css/App.css"/>
+          <link rel="stylesheet" type="text/css" href="/css/App.css"/>
         </Helmet>
 
         <div id="login_block" className="centerVH">

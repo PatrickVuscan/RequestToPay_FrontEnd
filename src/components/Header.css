@@ -1,38 +1,38 @@
 /* Header CSS */
 
 #header_block {
-    position: relative;
-    z-index:1000;
-    height: 125px;
-    width: 100%;
+    display: flex;
     align-items: center;
-    justify-content: left;
-    background-color: var(--RED);
-    /* border: 1px solid white; */
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    min-height: 60px;
+    position: fixed;
+    z-index: 1000;
+    /*background-color: var(--RED);*/
+
 }
 
 #header_scotia, #header_menu {
-    position: absolute;
-    bottom: 0;
 }
 
 #header_scotia {
-    left: 0;
-    padding: 3vh;
     text-align: left;
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
-    color: white;
+    color: var(--WHITE);
     font-size: 36px;
+    padding-left: 20px;
 }
 
 #header_menu {
-    right: 0;
-    padding: 2vh;
+    height: 50px;
+    margin-left: auto;
+    padding-right: 10px;
 }
 
 #header_hamburger {
     width: 50px;
     height: 50px;
-    right: 12px;
 }

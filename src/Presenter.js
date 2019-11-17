@@ -31,7 +31,7 @@ class Presenter extends Component {
     this.state = {
       currentView: VIEW.login,
       username: 'Not Logged In',
-      menuColor: 'Red'
+      menuColor: 'transparent',
     };
     this.loginHandler = this.loginHandler.bind(this);
   }
@@ -45,7 +45,9 @@ class Presenter extends Component {
 
   // Menu Methods -----------------------------//
 
-  //// setMenuColor(color)
+  setMenuColor(color){
+    this.setState({menuColor: color})
+  }
   //// menuShow(){}
   //// menuHide(){}
   //// payMenuShow(){}
@@ -56,10 +58,12 @@ class Presenter extends Component {
 
   transitionToLogin(){
     this.setState({currentView: VIEW.login});
+    this.setMenuColor('transparent');
   }
 
   transitionToHome(){
     this.setState({currentView: VIEW.home});
+    this.setMenuColor('var(--RED)');
   }
   // transitionToBuyerList(){}
   //transitionToSellerList(){} // TODO: Later
@@ -80,7 +84,7 @@ class Presenter extends Component {
   render() {
     return (
       <div id="control">
-        <Header color={this.menuColor}/>
+        <Header menuColor={this.state.menuColor}/>
         <div id="bg_container">
         </div>
         {this.viewSwitch(this.state.currentView)}

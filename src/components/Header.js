@@ -3,19 +3,24 @@
 import React, {Component} from "react";
 import './Header.css'
 
-export class Header extends Component {
-    render(){
-        return (
-            <div id="header_block">
-                <div id="header_scotia">
-                    Scotia
-                </div>
-                <div id="header_menu">
+class Header extends Component {
 
-                </div>
+  constructor(props) {
+    super(props);
+  }
+
+  render(){
+    return (
+        <div id="header_block" style={{backgroundColor : this.props.menuColor}}>
+            <div id="header_scotia">
+              Scotia
             </div>
-        );
-    }
+            <div id="header_menu">
+              <img id="header_hamburger" src='/images/icon_menu.png' alt={"menu"}/>
+            </div>
+        </div>
+    );
+  }
 }
 
 export default Header;
