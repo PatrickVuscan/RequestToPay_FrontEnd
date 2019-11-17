@@ -11,7 +11,7 @@ export class Header extends Component {
                     Scotia
                 </div>
                 <div id="header_menu">
-                    <img id="header_hamburger" src={require('../../public/images/icon_menu.png')} alt={"menu"}/>
+                    <img id="header_hamburger" src='/images/icon_menu.png' alt={"menu"}/>
                 </div>
             </div>
         );

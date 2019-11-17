@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Control from './Control';
+import Presenter from './Presenter';
 import * as serviceWorker from './serviceWorker';
 
 /**
  * Renders root element webpage.
  */
 
-ReactDOM.render(<Control />, document.getElementById('root'));
+ReactDOM.render(<Presenter />, document.getElementById('root'));
 
 serviceWorker.unregister();
