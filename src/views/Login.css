@@ -46,7 +46,7 @@
     outline: none;
 }
 
-#login_block input {
+#login_block .field {
     height: 4vh;
     width: 250px;
     margin-left: 0;
@@ -61,6 +61,22 @@
     font-size: 24px;
     color: white;
 }
+
+#button {
+    height: 4vh;
+    width: 250px;
+    text-align: left;
+    margin-left: -8px;
+    margin-top: 2vh;
+    display: block;
+    border: none;
+    background-color: transparent;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: white;
+}
+
 
 #login_block ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;

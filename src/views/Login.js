@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./Login.css"
-import {Button} from "../components/Elements";
 import {Helmet} from "react-helmet";
 import {performLogin} from "../models/index"
 import TextLogin from "../components/TextLogin";
@@ -41,9 +40,9 @@ class Login extends Component {
         <div id="login_block" className="centerVH">
           {loading ? <TextLoading/> : <TextLogin/>}
           <form onSubmit={this.handleLoginClick}>
-            <input required placeholder="Username" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
-            <input required type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
-            <Button className="login" type="submit" value="Sign in."/>
+            <input className={"field"} required placeholder="Username" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
+            <input className={"field"} required type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+            <input id="button" type="submit" value="Sign in."/>
           </form>
         </div>
       </div>
