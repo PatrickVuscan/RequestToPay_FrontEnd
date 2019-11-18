@@ -12,6 +12,7 @@
   --BLUE: #019DD6;
   --LIGHT_BLUE: #91DDF7;
   --ORANGE: #FB6331;
+  --MID_ORANGE: #FF5D29;
   --LIGHT_ORANGE: #FFBB8E;
   --PURPLE: #7849B9;
   --LIGHT_PURPLE: #ADA9F5;
@@ -37,11 +38,6 @@ body {
   background: #FF384A;
 }
 
-#control{
-  height: inherit;
-  width: inherit;
-}
-
 .centerVH {
   margin: 0;
   position: absolute;
@@ -51,3 +47,4 @@ body {
   transform: translate(-50%, -50%);
 }
 
+::-webkit-scrollbar {display:none;}

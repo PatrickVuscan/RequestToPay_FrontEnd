@@ -1,0 +1,8 @@
+/* Presenter CSS */
+
+#presenter_block{
+    height: inherit;
+    width: inherit;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+}
