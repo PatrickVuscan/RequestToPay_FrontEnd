@@ -1,20 +1,17 @@
 /* Login.css */
 
 #login_full {
-}
-
-#bg_container{
-    position:absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    /*background-image: url(../images/bg/bg_speed_car.jpg);*/
+    height: inherit;
+    width: inherit;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    background-image: url(/images/bg/bg_speed_car.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
-    /*mix-blend-mode: multiply;*/
 }
 
 #login_block {
@@ -46,7 +43,7 @@
     outline: none;
 }
 
-#login_block .field {
+#login_block .field,  #button{
     height: 4vh;
     width: 250px;
     margin-left: 0;
@@ -63,18 +60,11 @@
 }
 
 #button {
-    height: 4vh;
-    width: 250px;
     text-align: left;
     margin-left: -8px;
     margin-top: 2vh;
-    display: block;
     border: none;
     background-color: transparent;
-    font-family: 'Cabin', sans-serif;
-    font-weight: 400;
-    font-size: 24px;
-    color: white;
 }
 
 

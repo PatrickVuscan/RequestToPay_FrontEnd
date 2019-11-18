@@ -19,7 +19,7 @@ class OrderTypeBuy extends Component {
   render() {
     return (
       <div id="buy_wrapper">
-        <div className={"home_block"} style={{backgroundColor: 'var(--MID_ORANGE)'}}>
+        <div className={"home_block"} id={"buy_block"}>
           <div className={"type_block"}>
             <h1>Buying.</h1>
             <ul>

@@ -115,6 +115,11 @@ class Presenter extends Component {
       case "cardList": // TODO: Update according to CardList props parameters.
         return <CardList
                   username={'ID'}/>;
+
+      default:
+        return <OrderTypeMenu
+          username={this.state.username}
+          transitionToBuyerList={this.transitionToBuyerList}/>;
     }
   }
 
@@ -136,9 +141,8 @@ class Presenter extends Component {
               transitionTo = {this.transitionTo}
               showMenu = 'true'
         />
-        <div id="bg_container">
-        </div>
         {this.viewSwitch(this.state.currentView)}
+
       </div>
     )
   }

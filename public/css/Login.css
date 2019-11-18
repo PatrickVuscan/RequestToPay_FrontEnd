@@ -2,5 +2,5 @@
 
 /* Custom Page Colors & Styles */
 #root {background-color: var(--MID_RED);}
-#bg_container {background-image: url(/images/bg/bg_speed_car.jpg); mix-blend-mode: multiply;}
+/*#bg_container {background-image: url(/images/bg/bg_speed_car.jpg); mix-blend-mode: multiply;}*/
 

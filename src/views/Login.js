@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import "./Login.css"
-import {Helmet} from "react-helmet";
 import {performLogin} from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
@@ -33,11 +32,7 @@ class Login extends Component {
     const { loading } = this.state;
     return (
       <div id="login_full">
-        {/* Helmet - load stylesheet based on current page */}
-        <Helmet>
-          <link rel="stylesheet" type="text/css" href="css/Login.css" />
-        </Helmet>
-        <div id="login_block" className="centerVH">
+        <div id="login_block">
           {loading ? <TextLoading/> : <TextLogin/>}
           <form onSubmit={this.handleLoginClick}>
             <input className={"field"} required placeholder="Username" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>

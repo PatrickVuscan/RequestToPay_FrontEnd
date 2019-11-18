@@ -43,3 +43,24 @@
 .type_block li:hover {
     background-color: var(--LIGHT_ORANGE);
 }
+
+/* Maximum aspect ratio */
+#buy_block {
+    background-color: var(--MID_ORANGE);
+    background-image: url(/images/bg/bg_buying.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media (max-aspect-ratio: 2/3) {
+    #buy_block {
+        background-image: url(/images/bg/bg_buying_portrait.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+    }
+}
+
