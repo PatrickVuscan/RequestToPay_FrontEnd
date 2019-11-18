@@ -16,7 +16,7 @@ class Menu extends Component {
 
   logOut(){
     this.toggleMenuOpen();
-    this.props.logOut();
+    this.props.transitionTo("logOut");
   }
 
   toggleMenuOpen(){
@@ -32,8 +32,6 @@ class Menu extends Component {
     } else {
       menuID = "header_block-closed";
     }
-
-
 
     return (
       <div id={menuID} style={{backgroundColor : this.props.menuColor}}>
@@ -55,6 +53,9 @@ class Menu extends Component {
 
         <div className={"menu_block first"}>
           <s>Other Stuff.</s>
+        </div>
+        <div className={"menu_block"}>
+          <s>Buying</s>
         </div>
         <div className={"menu_block"} onClick={() => this.logOut()}>
           Log Out.

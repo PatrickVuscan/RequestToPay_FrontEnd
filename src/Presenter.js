@@ -34,25 +34,13 @@ class Presenter extends Component {
       currentView: VIEW.login,     // default: VIEW.login
       username: 'Not Logged In',
       loggedIn: false,
-      menuColor: 'transparent',           // default: transparent
+      menuColor: 'transparent',    // default: transparent
     };
 
     // Pass Methods to Components
-    this.loginHandler = this.loginHandler.bind(this);
+    this.transitionTo = this.transitionTo.bind(this);
     this.setMenuColor = this.setMenuColor.bind(this);
-    this.transitionToHome = this.transitionToHome.bind(this);
-    this.transitionToBuyerList = this.transitionToBuyerList.bind(this);
-    this.logOut = this.logOut.bind(this);
-  }
-
-  // Log In Methods ----------------------------//
-
-  loginHandler(username){
-    this.setState({
-      username: username,
-      loggedIn: true,
-    }); // TODO: replace with value from DB
-    this.transitionToHome();
+    this.loginHandler = this.loginHandler.bind(this);
   }
 
   // Menu Methods -----------------------------//
@@ -60,16 +48,40 @@ class Presenter extends Component {
   setMenuColor(color){
     this.setState({menuColor: color})
   }
-  //// menuShow(){}
-  //// menuHide(){}
+  //// menuToggle(){}
   //// payMenuShow(){}
   //// payMenuHide(){}
 
   // Transitions -----------------------------//
 
-  transitionToLogin(){
+  transitionTo(view){
+    switch(view){
+      case "logOut":
+        this.transitionToLogOut();
+        break;
+
+      case "home":
+        this.transitionToHome();
+        break;
+
+      case "buyList": // TODO: Update according to CardList props parameters.
+         this.transitionToBuyerList();
+         break;
+
+      default:
+        this.transitionToHome();
+        break;
+
+    }
+  }
+
+  transitionToLogOut(){
     this.setState({currentView: VIEW.login});
     this.setMenuColor('transparent');
+    this.setState({
+      username: 'Not Logged In!',
+      loggedIn: false
+    });
   }
 
   transitionToHome(){
@@ -82,14 +94,6 @@ class Presenter extends Component {
     this.setMenuColor('var(--ORANGE)');
   }
 
-  logOut() {
-    this.transitionToLogin();
-    this.setState({
-      username: 'Not Logged In!',
-      loggedIn: false
-    });
-    // clear cache stuff
-  }
 
   // transitionToSellerList(){}       // TODO: Later
   // transitionToBuyerInvoice(ID){}   // TODO: Later
@@ -114,12 +118,22 @@ class Presenter extends Component {
     }
   }
 
-  // Rendering the appropriate Views
+  // Log In Methods ----------------------------//
+
+  loginHandler(username){
+    this.setState({
+      username: username,
+      loggedIn: true,
+    }); // TODO: replace with value from DB
+    this.transitionToHome();
+  }
+
+  // Rendering the appropriate Views -----------//
   render() {
     return (
       <div id="presenter_block">
         <Menu menuColor = {this.state.menuColor}
-              logOut = {this.logOut}
+              transitionTo = {this.transitionTo}
               showMenu = 'true'
         />
         <div id="bg_container">

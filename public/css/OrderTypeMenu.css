@@ -1,50 +1,7 @@
-/* App CSS */
+/* OrderTypeMenu - Custom CSS */
 
 /* Custom Page Colors & Styles*/
 #root {background-color: var(--MID_RED)}
 #bg_container {background: transparent}
 
-#home_container {
-    display: flex;
-    flex-direction:column;
-    width:inherit;
-}
-
-#welcome_block {
-    min-height: 20vh;
-    width: 300px;
-    align-items: center;
-    justify-content: center;
-}
-
-.home_block {
-    height: 100vh;
-    width: inherit;
-
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-}
-
-.type_block {
-    font-family: 'Cabin', sans-serif;
-    font-weight: 700;
-    color: var(--WHITE);
-    font-size: 24px;
-}
-
-.type_block ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.type_block li {
-    margin: 0 0 4px 0;
-    list-style-type: none;
-}
-
-.type_block li:hover {
-    background-color: var(--LIGHT_ORANGE);
-}
 

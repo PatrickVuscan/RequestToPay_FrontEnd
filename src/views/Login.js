@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import "./Login.css"
 import {Button} from "../components/Elements";
-import request from "request-promise";
 import {Helmet} from "react-helmet";
 import {performLogin} from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
+
 
 /**
  * Creates a Login element, containing an username field, password field and login button.
