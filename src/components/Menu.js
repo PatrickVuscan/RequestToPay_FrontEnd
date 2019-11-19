@@ -9,14 +9,14 @@ class Menu extends Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showMenu: this.props.showMenu,
+      showMenu: true,
     };
-    this.logOut = this.logOut.bind(this);
+    this.transitionTo = this.transitionTo.bind(this);
   }
 
-  logOut(){
+  transitionTo(view){
     this.toggleMenuOpen();
-    this.props.transitionTo("logOut");
+    this.props.transitionTo(view);
   }
 
   toggleMenuOpen(){
@@ -51,13 +51,13 @@ class Menu extends Component {
           }
         </div>
 
-        <div className={"menu_block first"}>
-          <s>Other Stuff.</s>
+        <div className={"menu_block first"} onClick={() => this.transitionTo("home")}>
+          Home.
         </div>
         <div className={"menu_block"}>
           <s>Buying</s>
         </div>
-        <div className={"menu_block"} onClick={() => this.logOut()}>
+        <div className={"menu_block"} onClick={() => this.transitionTo("logOut")}>
           Log Out.
         </div>
 

@@ -19,7 +19,7 @@ class OrderTypeSell extends Component {
   render() {
     return (
       <div id="sell_wrapper">
-        <div className={"home_block"} style={{backgroundColor: 'var(--BLUE)'}}>
+        <div className={"home_block"}>
           <div className={"type_block"}>
             <h1>Selling.</h1>
             <ul>

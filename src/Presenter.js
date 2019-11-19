@@ -162,15 +162,17 @@ class Presenter extends Component {
     this.setState({'entityId': entityId});
   }
 
+
+
   // Rendering the appropriate Views -----------//
   render() {
     return (
       <div id="presenter_block">
         <Menu menuColor = {this.state.menuColor}
               transitionTo = {this.transitionTo}
-              showMenu = 'true'
+              // showMenu = {this.state.loggedIn ? 'true' : 'false'}
         />
-        {this.viewSwitch(this.state.currentView)}
+        {this.viewSwitch(this.state.currentView )}
       </div>
     )
   }

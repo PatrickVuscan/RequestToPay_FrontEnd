@@ -11,11 +11,13 @@ const FadeSlow = styled.div`animation: 3s ${keyframes`${fadeInDown}`} 1`;
 export class OrderTypeWelcome extends Component {
   render(){
     return (
-      <div className={"home_block"} style={{backgroundColor: 'var(--MID_RED)'}}>
-        <div id ="text_welcome">
-            <Fade><p>Welcome</p>
-            <p>Home,</p></Fade>
-            <FadeSlow><p id="username">{this.props.username}.</p></FadeSlow>
+      <div id={"welcome_wrapper"}>
+        <div className={"home_block"}>
+          <div id ="text_welcome">
+              <Fade><p>Welcome</p>
+              <p>Home,</p></Fade>
+              <FadeSlow><p id="username">{this.props.username}.</p></FadeSlow>
+          </div>
         </div>
       </div>
     );

@@ -10,7 +10,7 @@
 import React, { Component } from 'react';
 import {getCustomerUnpaidOrdersOverview} from '../data/CardData'
 import {Card} from '../components/Card'
-
+import "./CardList.css"
 /**
  * A component with a high-level view of every order of status 'status' where the entity 'entityId'
  * is listed as the persona 'persona'.
@@ -54,10 +54,18 @@ export class CardList extends Component {
         return cards;
     }
 
+    // TODO: remove duplicate {childElements}, used to create longer list
     render() {
         const childElements = this.createCards();
         return (
-            <div id={'CardList'}>
+
+            <div id={'CardList_container'}>
+                <div id={'CardList_header'}>
+                    Ready To Pay.
+                </div>
+                {childElements}
+                {childElements}
+                {childElements}
                 {childElements}
             </div>
         );

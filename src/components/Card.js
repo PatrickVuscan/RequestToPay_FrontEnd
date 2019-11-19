@@ -31,7 +31,8 @@ export class Card extends Component {
             infoElements.push(<div
                 key={key}
                 className={key}
-                style={divStyle}>
+                // style={divStyle}
+                >
                 {value}
             </div>);
         }
@@ -49,9 +50,9 @@ export class Card extends Component {
     }
 }
 
-const divStyle = {
-    position: 'relative',
-    width: '300px',
-    height: '50px',
-    color: '#FFFFFF'
-};
+// const divStyle = {
+//     position: 'relative',
+//     width: '300px',
+//     height: '50px',
+//     color: '#FFFFFF'
+// };

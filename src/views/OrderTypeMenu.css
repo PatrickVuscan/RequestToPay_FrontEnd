@@ -38,11 +38,32 @@
 .type_block li {
     margin: 0 0 4px 0;
     list-style-type: none;
+    cursor: pointer;
 }
 
 .type_block li:hover {
     background-color: var(--LIGHT_ORANGE);
 }
+
+#welcome_wrapper {
+    background-color: var(--MID_RED);
+    background-image: url(/images/bg/bg_home02.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+#sell_wrapper {
+    background-color: var(--BLUE);
+    background-image: url(/images/bg/bg_selling.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+
 
 /* Maximum aspect ratio */
 #buy_block {
@@ -54,12 +75,12 @@
     background-size: cover;
 }
 
-@media (max-aspect-ratio: 2/3) {
+@media (max-aspect-ratio: 1/1) {
     #buy_block {
         background-image: url(/images/bg/bg_buying_portrait.jpg);
         background-repeat: no-repeat;
         background-attachment: fixed;
-        background-position: center center;
+        background-position: center bottom;
         background-size: cover;
     }
 }
