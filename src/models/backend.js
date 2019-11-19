@@ -57,7 +57,7 @@ function getEntityInfoByUsername(username) {
  * @return String - The entity's ID
  */
 function getEntityIdByUsername(username) {
-    let allInfo = this.getEntityInfoByUsername(username);
+    let allInfo = getEntityInfoByUsername(username);
     return allInfo["EID"];
 }
 
@@ -65,9 +65,9 @@ function getEntityIdByUsername(username) {
  * Get the orders pertaining to the entity with ID 'entityID',
  * where the entity is the 'persona' (customer, seller or driver).
  *
- * @param entityId -
- * @param persona
- * @return
+ * @param entityId - The ID for the entity that is being searched by
+ * @param persona - The persona that is being searched by
+ * @return The JSON output from the endpoint
  */
 function getOrdersByEntityAndPersona(entityId, persona) {
     const options = {
