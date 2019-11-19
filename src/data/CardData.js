@@ -30,9 +30,9 @@
  * Returns the JSON format of all high-level card information where
  * 'buyerId' is the buyer and the order is in the unpaid status.
  *
- * TODO: Make use of endpoints. Currently mocked (hard-coded).
+ * TODO: Make use of endpoints. Then use getFormattedCustomerUnpaidOrders.
  */
-function getBuyerUnpaidOrdersOverview(buyerId) {
+function getCustomerUnpaidOrdersOverview(buyerId) {
     let data = {
         222222 : {
             'OrderId' : '222222',
@@ -59,4 +59,43 @@ function getBuyerUnpaidOrdersOverview(buyerId) {
     return data;
 }
 
-export {getBuyerUnpaidOrdersOverview}
+/**
+ * Returns a version of ordersData that is formatted for a high-level card
+ * viewed by a customer, excluding the orders that were paid for.
+ *
+ * @param ordersData - A list of JSON objects, where each object is an order where the entity was a customer
+ * @returns [] - A list of JSON objects, where each JSON object is one order
+ */
+function getFormattedCustomerUnpaidOrders(ordersData) {
+    let formattedOrdersData = [];
+    for (let i=0; i < ordersData.length; i++) {
+        let orderData = ordersData[i];
+        if (orderData["PaidStatus"] == false) {
+            let formattedOrderData = getFormattedCustomerOrder(orderData, "Unpaid");
+            formattedOrdersData.push(formattedOrderData);
+        }
+    }
+    return formattedOrdersData;
+}
+
+/**
+ * Gets the JSON format of the high-level card information a customer will see for a given order.
+ * The data is a reduced and formatted version of 'orderData', with a status attribute
+ * provided by the input 'status'.
+ *
+ * @param orderData - The JSON object for a given order
+ * @param status - The english (simplified) status associated with 'orderData'
+ * @returns {{OID: *, OrderDate: *, DeliveryDate: *, Entity: *, Status: *}}
+ */
+function getFormattedCustomerOrder(orderData, status) {
+    let formatted = {
+        'OID': orderData['OID'],
+        'OrderDate': orderData['OrderDate'].substring(0,10),
+        'DeliveryDate': orderData['DeliveryDate'].substring(0,10),
+        'Entity': orderData['SellerName'],
+        'Status': status
+    };
+    return formatted;
+}
+
+export {getFormattedCustomerUnpaidOrders, getFormattedCustomerOrder}
