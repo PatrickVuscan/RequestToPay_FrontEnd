@@ -25,3 +25,38 @@
 //           We will have to do status filtering in this file.
 // - return the json created above
 
+
+/**
+ * Returns the JSON format of all high-level card information where
+ * 'buyerId' is the buyer and the order is in the unpaid status.
+ *
+ * TODO: Make use of endpoints. Currently mocked (hard-coded).
+ */
+function getBuyerUnpaidOrdersOverview(buyerId) {
+    let data = {
+        222222 : {
+            'OrderId' : '222222',
+            'Date' : '09/09/2019',
+            'Entity' : 'Coca-Cola',
+            'Total' : '$2400.00',
+            'Status' : 'Paid'
+        },
+        222233 : {
+            'OrderId' : '222233',
+            'Date' : '09/09/2019',
+            'Entity' : 'Minute Maid',
+            'Total' : '$100.00',
+            'Status' : 'Paid'
+        },
+        222244 : {
+            'OrderId' : '222244',
+            'Date' : '09/09/2019',
+            'Entity' : 'Coca-Cola',
+            'Total' : '$50.00',
+            'Status' : 'Paid'
+        }
+    };
+    return data;
+}
+
+export {getBuyerUnpaidOrdersOverview}

@@ -8,7 +8,7 @@
 // GET INVOICE INFO
 // etc. (See backend endpoint documentation)
 
-import config from "../config";
+import config from "../constants";
 import request from "request-promise";
 
 /**

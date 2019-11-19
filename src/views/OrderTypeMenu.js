@@ -5,14 +5,6 @@ import OrderTypeBuy from "../components/OrderTypeBuy";
 import OrderTypeSell from "../components/OrderTypeSell";
 import "./OrderTypeMenu.css"
 
-/**
- *
- * The default react web page.
- *
- * @returns {*}
- * @constructor
- */
-
 class OrderTypeMenu extends Component {
 
   constructor(props) {
@@ -35,7 +27,7 @@ class OrderTypeMenu extends Component {
         </Helmet>
 
         <OrderTypeWelcome username={this.state.usernameValue}/>
-        <OrderTypeBuy/>
+        <OrderTypeBuy transitionToOrderList={this.props.transitionToOrderList}/>
         <OrderTypeSell/>
 
       </div>

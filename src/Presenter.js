@@ -12,10 +12,11 @@
 //     - then send the view data back to the view
 
 import React, { Component } from 'react'
+import constants from "./constants";
 import Login from './views/Login'
 import Menu from "./components/Menu"
 import OrderTypeMenu from "./views/OrderTypeMenu"
-import CardList from "./views/CardList"
+import {CardList} from "./views/CardList"
 import './Presenter.css'
 
 // enum of views
@@ -26,6 +27,11 @@ const VIEW = {
   cardList: 'cardList',
 };
 
+const PERSONA = constants.PERSONA;
+const STATUS = constants.STATUS;
+
+// TODO: Assure that we can open a card list of ANY TYPE. Currently only 'Customer Unpaid' is an option.
+
 class Presenter extends Component {
 
   constructor(props) {
@@ -35,12 +41,16 @@ class Presenter extends Component {
       username: 'Not Logged In',
       loggedIn: false,
       menuColor: 'transparent',    // default: transparent
+      persona: "ORIG",
+      status: "orig"
     };
 
     // Pass Methods to Components
     this.transitionTo = this.transitionTo.bind(this);
     this.setMenuColor = this.setMenuColor.bind(this);
     this.loginHandler = this.loginHandler.bind(this);
+    this.transitionToOrderList = this.transitionToOrderList.bind(this);
+    this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
   }
 
   // Menu Methods -----------------------------//
@@ -65,7 +75,7 @@ class Presenter extends Component {
         break;
 
       case "buyList": // TODO: Update according to CardList props parameters.
-         this.transitionToBuyerList();
+         this.transitionToOrderList();
          break;
 
       default:
@@ -89,12 +99,24 @@ class Presenter extends Component {
     this.setMenuColor('var(--RED)');
   }
 
-  transitionToBuyerList(){
-    this.setState({currentView: VIEW.cardList});
+  //transitionToOrderList(persona, status){
+  transitionToOrderList() {
+     let persona = PERSONA.customer;
+     let status = STATUS.customer.unpaid;
+     this.setState({
+      currentView: VIEW.cardList,
+      persona: persona,
+      status: status
+    });
+    console.log("State set to card list" , this);
     this.setMenuColor('var(--ORANGE)');
   }
 
-
+  // TODO: Remove when Buyer Invoice page created.
+  // This is currently testing that a function would be properly called.
+  TEMPtransitionToInvoice(ID) {
+    console.log("TEST: Would Transition To Invoice - " + ID);
+  }
   // transitionToSellerList(){}       // TODO: Later
   // transitionToBuyerInvoice(ID){}   // TODO: Later
   // transitionToSellerInvoice(ID){}  // TODO: Later
@@ -103,23 +125,26 @@ class Presenter extends Component {
   // Views and functions passed to views
   viewSwitch(view){
     switch(view){
-      case "login":
+      case VIEW.login:
         return <Login
                   loginHandler = {this.loginHandler}/>;
 
-      case "home":
+      case VIEW.home:
         return <OrderTypeMenu
                   username={this.state.username}
-                  transitionToBuyerList={this.transitionToBuyerList}/>;
+                  transitionToOrderList={this.transitionToOrderList}/>;
 
-      case "cardList": // TODO: Update according to CardList props parameters.
+      case VIEW.cardList: // TODO: Update according to CardList props parameters.
         return <CardList
-                  username={'ID'}/>;
+            entityId={this.state.username}
+            persona={this.state.persona}
+            status={this.state.status}
+            cardClickHandler={this.TEMPtransitionToInvoice} />;
 
       default:
         return <OrderTypeMenu
           username={this.state.username}
-          transitionToBuyerList={this.transitionToBuyerList}/>;
+          transitionToOrderList={this.transitionToOrderList}/>;
     }
   }
 
@@ -142,7 +167,6 @@ class Presenter extends Component {
               showMenu = 'true'
         />
         {this.viewSwitch(this.state.currentView)}
-
       </div>
     )
   }
