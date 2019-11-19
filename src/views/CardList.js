@@ -45,7 +45,7 @@ export class CardList extends Component {
             let key = keys[k];
             let id = this.state.ordersData[key].OID;
             let card = <Card
-                id={"Card-" + id}
+                id={id}
                 key={key}
                 orderData={this.state.ordersData[key]}
                 onClick={() => this.props.cardClickHandler(id)}/>;
