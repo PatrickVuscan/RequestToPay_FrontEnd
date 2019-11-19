@@ -19,17 +19,15 @@ export class Card extends Component {
 
     constructor(props) {
         super(props);
-        this.orderData = this.props.orderData;
-        this.orderId = this.orderData.OrderId;
-        this.onClick = this.props.onClick;
     }
 
     createInfoElements() {
+        let {orderData} = this.props;
         let infoElements = [];
-        let keys = Object.keys(this.orderData);
+        let keys = Object.keys(orderData);
         for (let k=0; k<keys.length; k++) {
             let key = keys[k];
-            let value = this.orderData[key];
+            let value = orderData[key];
             infoElements.push(<div
                 key={key}
                 className={key}
@@ -41,9 +39,10 @@ export class Card extends Component {
     }
 
     render() {
+        let {id, key, onClick} = this.props;
         let childElements = this.createInfoElements();
         return (
-            <div className={'Card'} onClick={this.onClick}>
+            <div id={id} key={key} className={'Card'} onClick={onClick}>
                 {childElements}
             </div>
         );

@@ -2,6 +2,8 @@ import {getFormattedCustomerUnpaidOrders, getFormattedCustomerOrder} from "../Ca
 
 /* TESTS */
 
+// TODO: Fix tests. These functions no longer return values.
+
 describe("getFormattedCustomerUnpaidOrders", () => {
 
     const input = [
