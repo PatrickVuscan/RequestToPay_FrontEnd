@@ -8,7 +8,7 @@
 // It will then iterate through the data and create a Card per item, adding this onto the main div.
 
 import React, { Component } from 'react';
-import {getBuyerUnpaidOrdersOverview} from '../data/CardData'
+import {getCustomerUnpaidOrdersOverview} from '../data/CardData'
 import {Card} from '../components/Card'
 
 /**
@@ -21,29 +21,34 @@ import {Card} from '../components/Card'
  * @props cardClickHandler - The function that is called to change views upon a card click
  */
 export class CardList extends Component {
+
     constructor(props) {
         super(props);
-        this.entityId = this.props.entityId;
-        this.persona = this.props.persona;
-        this.status = this.props.status;
-        this.cardClickHandler = this.props.cardClickHandler;
+        this.state = {
+            'ordersData': []
+        };
+        this.setOrdersData = this.setOrdersData.bind(this);
     }
 
-    getRelevantOrdersData() {
-        return getBuyerUnpaidOrdersOverview(this.entityId);
+    componentDidMount() {
+        getCustomerUnpaidOrdersOverview(this.setOrdersData, this.props.entityId);
+    }
+
+    setOrdersData(ordersData) {
+        this.setState({'ordersData': ordersData});
     }
 
     createCards() {
         const cards = [];
-        let ordersData = this.getRelevantOrdersData();
-        let keys = Object.keys(ordersData);
+        let keys = Object.keys(this.state.ordersData);
         for (let k = 0; k < keys.length; k++) {
             let key = keys[k];
+            let id = this.state.ordersData[key].OID;
             let card = <Card
-                id={"Card-" + key}
+                id={"Card-" + id}
                 key={key}
-                orderData={ordersData[key]}
-                onClick={() => this.cardClickHandler(key)}/>;
+                orderData={this.state.ordersData[key]}
+                onClick={() => this.props.cardClickHandler(id)}/>;
             cards.push(card);
         }
         return cards;

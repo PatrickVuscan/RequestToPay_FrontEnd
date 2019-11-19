@@ -25,38 +25,20 @@
 //           We will have to do status filtering in this file.
 // - return the json created above
 
+import constants from '../constants'
+import {getOrdersByEntityAndPersona} from "../models";
 
 /**
- * Returns the JSON format of all high-level card information where
- * 'buyerId' is the buyer and the order is in the unpaid status.
+ * Gets the JSON format of all high-level card information where
+ * 'customerId' is the customer and the order is in the unpaid status.
+ * Rather than being returned, setOrdersData is provided the list of JSON objects.
  *
- * TODO: Make use of endpoints. Then use getFormattedCustomerUnpaidOrders.
+ * @param setOrdersData - The function used to store the JSON objects
+ * @param customerId - The id of the entity who is the customer
  */
-function getCustomerUnpaidOrdersOverview(buyerId) {
-    let data = {
-        222222 : {
-            'OrderId' : '222222',
-            'Date' : '09/09/2019',
-            'Entity' : 'Coca-Cola',
-            'Total' : '$2400.00',
-            'Status' : 'Paid'
-        },
-        222233 : {
-            'OrderId' : '222233',
-            'Date' : '09/09/2019',
-            'Entity' : 'Minute Maid',
-            'Total' : '$100.00',
-            'Status' : 'Paid'
-        },
-        222244 : {
-            'OrderId' : '222244',
-            'Date' : '09/09/2019',
-            'Entity' : 'Coca-Cola',
-            'Total' : '$50.00',
-            'Status' : 'Paid'
-        }
-    };
-    return data;
+function getCustomerUnpaidOrdersOverview(setOrdersData, customerId) {
+    let formatter = getFormattedCustomerUnpaidOrders;
+    getOrdersByEntityAndPersona(customerId, constants.PERSONA.customer, formatter, setOrdersData);
 }
 
 /**
@@ -70,7 +52,7 @@ function getFormattedCustomerUnpaidOrders(ordersData) {
     let formattedOrdersData = [];
     for (let i=0; i < ordersData.length; i++) {
         let orderData = ordersData[i];
-        if (orderData["PaidStatus"] == false) {
+        if (orderData["PaidStatus"] === false) {
             let formattedOrderData = getFormattedCustomerOrder(orderData, "Unpaid");
             formattedOrdersData.push(formattedOrderData);
         }
@@ -98,4 +80,4 @@ function getFormattedCustomerOrder(orderData, status) {
     return formatted;
 }
 
-export {getFormattedCustomerUnpaidOrders, getFormattedCustomerOrder}
+export {getCustomerUnpaidOrdersOverview, getFormattedCustomerUnpaidOrders, getFormattedCustomerOrder}

@@ -16,6 +16,7 @@ import constants from "./constants";
 import Login from './views/Login'
 import Menu from "./components/Menu"
 import OrderTypeMenu from "./views/OrderTypeMenu"
+import {getEntityIdByUsername} from './models'
 import {CardList} from "./views/CardList"
 import './Presenter.css'
 
@@ -39,6 +40,7 @@ class Presenter extends Component {
     this.state = {
       currentView: VIEW.login,     // default: VIEW.login
       username: 'Not Logged In',
+      entityId: '',
       loggedIn: false,
       menuColor: 'transparent',    // default: transparent
       persona: "ORIG",
@@ -49,6 +51,7 @@ class Presenter extends Component {
     this.transitionTo = this.transitionTo.bind(this);
     this.setMenuColor = this.setMenuColor.bind(this);
     this.loginHandler = this.loginHandler.bind(this);
+    this.setEntityId = this.setEntityId.bind(this);
     this.transitionToOrderList = this.transitionToOrderList.bind(this);
     this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
   }
@@ -99,16 +102,12 @@ class Presenter extends Component {
     this.setMenuColor('var(--RED)');
   }
 
-  //transitionToOrderList(persona, status){
-  transitionToOrderList() {
-     let persona = PERSONA.customer;
-     let status = STATUS.customer.unpaid;
+  transitionToOrderList(persona, status){
      this.setState({
       currentView: VIEW.cardList,
       persona: persona,
       status: status
     });
-    console.log("State set to card list" , this);
     this.setMenuColor('var(--ORANGE)');
   }
 
@@ -136,7 +135,7 @@ class Presenter extends Component {
 
       case VIEW.cardList: // TODO: Update according to CardList props parameters.
         return <CardList
-            entityId={this.state.username}
+            entityId={this.state.entityId}
             persona={this.state.persona}
             status={this.state.status}
             cardClickHandler={this.TEMPtransitionToInvoice} />;
@@ -153,9 +152,14 @@ class Presenter extends Component {
   loginHandler(username){
     this.setState({
       username: username,
-      loggedIn: true,
+      loggedIn: true
     }); // TODO: replace with value from DB
     this.transitionToHome();
+    getEntityIdByUsername(username, this.setEntityId);
+  }
+
+  setEntityId(entityId) {
+    this.setState({'entityId': entityId});
   }
 
   // Rendering the appropriate Views -----------//
@@ -173,4 +177,3 @@ class Presenter extends Component {
 }
 
 export default Presenter;
-
