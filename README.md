@@ -1,10 +1,12 @@
 # Request To Pay - Front End Application
 
-## Accessing On Heroku
+## Access Methods
+
+### Accessing On Heroku
 
 Visit: https://worksish-frontend-v1.herokuapp.com/
 
-## Setting Up Locally
+### Setting Up Locally
 
 1) Checkout the master branch
 2) Install the dependencies by running 'npm install' in the project directory
@@ -14,8 +16,13 @@ Visit: https://worksish-frontend-v1.herokuapp.com/
 
 ## Login Credentials
 
-Username: driver \
-Password: zoomzoom
+### Primarily Customer
+Username: patrick \
+Password: patrick
+
+### Primarily Seller
+Username: coke \
+Password: coke
 
 --------------------------------
 
