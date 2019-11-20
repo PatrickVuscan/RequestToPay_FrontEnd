@@ -28,7 +28,7 @@ class OrderTypeMenu extends Component {
 
         <OrderTypeWelcome username={this.state.usernameValue}/>
         <OrderTypeBuy transitionToOrderList={this.props.transitionToOrderList}/>
-        <OrderTypeSell/>
+        <OrderTypeSell transitionToOrderList={this.props.transitionToOrderList}/>
 
       </div>
     );

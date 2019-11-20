@@ -25,8 +25,16 @@ function getOrdersOverview(entityId, persona, statusString, setOrdersData) {
             default: // constants.STATUS.customer.completed.string
                 formatter = getFormattedCustomerCompletedOrders;
         }
+    } else if (persona === constants.PERSONA.seller) {
+        switch(statusString) {
+            case constants.STATUS.seller.incomplete.string:
+                formatter = getFormattedSellerIncompleteOrders;
+                break;
+            default: // constants.STATUS.seller.completed.string
+                formatter = getFormattedCustomerCompletedOrders;
+        }
     }
-    getOrdersByEntityAndPersona(entityId, constants.PERSONA.customer, formatter, setOrdersData);
+    getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData);
 }
 
 /* --------------------------------------------- */
@@ -88,6 +96,20 @@ function getFormattedCustomerCompletedOrders(ordersData) {
     return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
 }
 
+/**
+ * Returns a version of ordersData that is formatted for a high-level card
+ * viewed by a seller, only including the orders that are not both paid and delivered.
+ *
+ * @param ordersData - A list of JSON objects, where each object is an order where the entity was a seller
+ * @returns [] - A list of JSON objects, where each JSON object is one order
+ */
+function getFormattedSellerIncompleteOrders(ordersData) {
+    let statusCondition = isStatusIncomplete;
+    let getOrderStatusForPersona = getOrderStatusForCustomer;
+    let orderFormatter = getFormattedCustomerOrder;
+    return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
+}
+
 // HELPER FOR ALL FORMATTERS:
 
 /**
@@ -135,26 +157,38 @@ const customerCompleted = constants.STATUS.customer.completed.name;
 /* "statusCondition" functions for getFormattedOrders() */
 /* ---------------------------------------------------- */
 
+// OUR STATUSES
+
 function isStatusUnpaid(orderData) {
-    return !isStatusPaid(orderData);
+    return !isPaid(orderData);
 }
 
 function isStatusPaid(orderData) {
-    return orderData["PaidStatus"] === true;
+    return isPaid(orderData) && !isStatusCompleted(orderData);
 }
 
-function isStatusArrived(orderData) {
-    return orderData["ArrivedStatus"] === true;
-}
-
-function isStatusDelivered(orderData) {
-    return orderData["DeliveredStatus"] == true;
+function isStatusIncomplete(orderData) {
+    return !isStatusCompleted(orderData);
 }
 
 function isStatusCompleted(orderData) {
-    return isStatusPaid(orderData) &&
-        isStatusArrived(orderData) &&
-        isStatusDelivered(orderData);
+    return isPaid(orderData) &&
+        isArrived(orderData) &&
+        isDelivered(orderData);
+}
+
+// DIRECT INTERPRETATION OF DATABASE VALUES
+
+function isPaid(orderData) {
+    return orderData["PaidStatus"] === true;
+}
+
+function isArrived(orderData) {
+    return orderData["ArrivedStatus"] === true;
+}
+
+function isDelivered(orderData) {
+    return orderData["DeliveredStatus"] == true;
 }
 
 /* --------------------------------------------------- */

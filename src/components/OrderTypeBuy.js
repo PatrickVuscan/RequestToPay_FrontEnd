@@ -12,10 +12,6 @@ class OrderTypeBuy extends Component {
     super(props);
   }
 
-  /* TODO: Replace the paid and completed lis with what is below, to have access to paid and completed orders */
-  /* <li onClick={() => transitionToOrderList(customer, paid)}>{paid}</li>
-   <li onClick={() => transitionToOrderList(customer, completed)}>{completed}</li> */
-
   render() {
     let {transitionToOrderList} = this.props;
     return (
@@ -25,8 +21,8 @@ class OrderTypeBuy extends Component {
             <h1>Buying.</h1>
             <ul>
               <li onClick={() => transitionToOrderList(customer, unpaid)}>{unpaid}</li>
-              <li><s>{paid}</s></li>
-              <li><s>{completed}</s></li>
+              <li onClick={() => transitionToOrderList(customer, paid)}>{paid}</li>
+              <li onClick={() => transitionToOrderList(customer, completed)}>{completed}</li>
             </ul>
           </div>
         </div>

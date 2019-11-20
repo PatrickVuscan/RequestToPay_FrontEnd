@@ -23,8 +23,14 @@ export default {
             }
         },
         seller: {
-            incomplete: 'incomplete',
-            completed: 'completed'
+            incomplete: {
+                name: 'Incomplete',
+                string: 'Incomplete Orders.'
+            },
+            completed: {
+                name: 'Completed',
+                string: 'Completed Orders.'
+            }
         }
     }
 }
