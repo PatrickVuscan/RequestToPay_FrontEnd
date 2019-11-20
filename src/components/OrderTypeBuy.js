@@ -2,9 +2,9 @@ import constants from "../constants";
 import React, { Component } from 'react';
 
 const customer = constants.PERSONA.customer;
-const unpaid = constants.STATUS.customer.unpaid;
-const paid = constants.STATUS.customer.paid;
-const completed = constants.STATUS.customer.completed;
+const unpaid = constants.STATUS.customer.unpaid.string;
+const paid = constants.STATUS.customer.paid.string;
+const completed = constants.STATUS.customer.completed.string;
 
 class OrderTypeBuy extends Component {
 
@@ -20,9 +20,9 @@ class OrderTypeBuy extends Component {
           <div className={"type_block"}>
             <h1>Buying.</h1>
             <ul>
-              <li onClick={() => transitionToOrderList(customer, unpaid)}>Ready to Pay.</li>
-              <li><s>Waiting for Delivery.</s></li>
-              <li><s>Completed Orders.</s></li>
+              <li onClick={() => transitionToOrderList(customer, unpaid)}>{unpaid}</li>
+              <li onClick={() => transitionToOrderList(customer, paid)}>{paid}</li>
+              <li onClick={() => transitionToOrderList(customer, completed)}>{completed}</li>
             </ul>
           </div>
         </div>

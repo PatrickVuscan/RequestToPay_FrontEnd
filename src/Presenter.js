@@ -137,7 +137,7 @@ class Presenter extends Component {
         return <CardList
             entityId={this.state.entityId}
             persona={this.state.persona}
-            status={this.state.status}
+            statusString={this.state.status}
             cardClickHandler={this.TEMPtransitionToInvoice} />;
 
       default:
@@ -161,8 +161,6 @@ class Presenter extends Component {
   setEntityId(entityId) {
     this.setState({'entityId': entityId});
   }
-
-
 
   // Rendering the appropriate Views -----------//
   render() {
