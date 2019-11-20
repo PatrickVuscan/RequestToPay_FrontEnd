@@ -16,14 +16,14 @@
 
 #text_welcome {
     text-align: left;
-    padding-bottom: 3vh;
+    /*padding-bottom: 3vh;*/
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
     color: white;
-    font-size: 12vw;
+    font-size: 48px;
 }
 #text_welcome p{
-    margin: -3vw;
+    margin: -6px;
     padding:0;
 }
 #text_welcome #username{

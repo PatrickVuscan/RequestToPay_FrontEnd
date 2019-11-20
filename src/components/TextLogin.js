@@ -3,7 +3,7 @@
 import React, {Component} from "react";
 import "./Text.css"
 import styled, { keyframes } from "styled-components";
-import { fadeIn, fadeInDown } from "react-animations";
+import { fadeIn } from "react-animations";
 
 // const FadeFast  = styled.div`animation: 1s ${keyframes`${fadeIn}`} 1`;
 const Fade = styled.div`animation: 3s ${keyframes`${fadeIn}`} 1`;

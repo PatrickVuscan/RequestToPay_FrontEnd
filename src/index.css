@@ -9,10 +9,12 @@
   --BLACK: #000000;
   --GREY: #333333;
   --LIGHT_GREY: #4D4D4D;
+  --DARK_BLUE: #00729c;
   --BLUE: #019DD6;
   --LIGHT_BLUE: #91DDF7;
-  --ORANGE: #FB6331;
-  --LIGHT_ORANGE: #FFBB8E;
+  --ORANGE: #F77700;
+  --MID_ORANGE: #ff9a00;
+  --LIGHT_ORANGE: #ffb21f;
   --PURPLE: #7849B9;
   --LIGHT_PURPLE: #ADA9F5;
   --GREEN: #138467;
@@ -37,11 +39,6 @@ body {
   background: #FF384A;
 }
 
-#control{
-  height: inherit;
-  width: inherit;
-}
-
 .centerVH {
   margin: 0;
   position: absolute;
@@ -51,3 +48,4 @@ body {
   transform: translate(-50%, -50%);
 }
 
+::-webkit-scrollbar {display:none;}
