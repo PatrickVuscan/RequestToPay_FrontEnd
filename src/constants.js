@@ -9,9 +9,18 @@ export default {
     },
     STATUS: {
         customer: {
-            unpaid: 'unpaid', // UI: Ready To Pay
-            paid: 'paid', // UI: Waiting or Delivery
-            completed: 'completed' // UI: Completed Orders
+            unpaid: {
+                name: 'Unpaid',
+                string: 'Ready to Pay.'
+            },
+            paid: {
+                name: 'Paid',
+                string: 'Waiting for Delivery.'
+            },
+            completed: {
+                name: 'Completed',
+                string: 'Completed Orders.'
+            }
         },
         seller: {
             incomplete: 'incomplete',

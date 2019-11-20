@@ -1,12 +1,3 @@
-// This is a view for invoice items within a list
-
-// A card contains the following info:
-//    - invoice id
-//    - date
-//    - entity (if buyer, show seller. Otherwise, show buyer)
-//    - total
-//    - status
-
 import React, { Component } from 'react';
 
 /**
@@ -31,7 +22,6 @@ export class Card extends Component {
             infoElements.push(<div
                 key={key}
                 className={key}
-                // style={divStyle}
                 >
                 {value}
             </div>);
@@ -49,10 +39,3 @@ export class Card extends Component {
         );
     }
 }
-
-// const divStyle = {
-//     position: 'relative',
-//     width: '300px',
-//     height: '50px',
-//     color: '#FFFFFF'
-// };

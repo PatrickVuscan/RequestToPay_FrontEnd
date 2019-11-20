@@ -1,16 +1,8 @@
-// THIS IS THE PAGE FEATURING HIGH-LEVEL DESCRIPTIONS OF ORDERS USING "CARDS"
-// It is basically one div that will contain many cards (from Card.js)
-
-// -----------
-
-// THE PRESENTER WILL GIVE THIS COMPONENT THE FORMATTED "CardData"
-// (Remember -> CardData will build the JSON format for information shown on all cards)
-// It will then iterate through the data and create a Card per item, adding this onto the main div.
-
 import React, { Component } from 'react';
-import {getCustomerUnpaidOrdersOverview} from '../data/CardData'
+import {getOrdersOverview} from '../data/CardData'
 import {Card} from '../components/Card'
 import "./CardList.css"
+
 /**
  * A component with a high-level view of every order of status 'status' where the entity 'entityId'
  * is listed as the persona 'persona'.
@@ -31,7 +23,8 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        getCustomerUnpaidOrdersOverview(this.setOrdersData, this.props.entityId);
+        let {entityId, persona, statusString} = this.props;
+        getOrdersOverview(entityId, persona, statusString, this.setOrdersData);
     }
 
     setOrdersData(ordersData) {
@@ -54,14 +47,13 @@ export class CardList extends Component {
         return cards;
     }
 
-    // TODO: remove duplicate {childElements}, used to create longer list
     render() {
+        let {status} = this.props;
         const childElements = this.createCards();
         return (
-
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
-                    Ready To Pay.
+                    {status}
                 </div>
                 {childElements}
             </div>
