@@ -16,7 +16,7 @@ export class OrderTypeWelcome extends Component {
           <div id ="text_welcome">
               <Fade><p>Welcome</p>
               <p>Home,</p></Fade>
-              <FadeSlow><p id="username">{this.props.username}.</p></FadeSlow>
+              <FadeSlow><p id="username">{global.username}.</p></FadeSlow>
           </div>
         </div>
       </div>

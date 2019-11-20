@@ -88,11 +88,11 @@ function getEntityIdByUsername(username, setEntityId) {
 
 /**
  * Get the orders pertaining to the entity with ID 'entityID',
- * where the entity is the 'persona' (customer, seller or driver).
+ * where the entity is the 'viewPersona' (customer, seller or driver).
  * Rather than returning a value, the orders data is passed to 'setOrdersData' to be stored.
  *
  * @param entityId - The ID for the entity that is being searched by
- * @param persona - The persona that is being searched by
+ * @param persona - The viewPersona that is being searched by
  * @param formatter - A function that can format the data provided by the endpoint
  * @param setOrdersData - A function used to store the orders
  */

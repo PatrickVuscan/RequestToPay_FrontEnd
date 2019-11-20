@@ -26,9 +26,9 @@ class OrderTypeMenu extends Component {
           <link rel="stylesheet" type="text/css" href="/css/OrderTypeMenu.css"/>
         </Helmet>
 
-        <OrderTypeWelcome username={this.state.usernameValue}/>
-        <OrderTypeBuy transitionToOrderList={this.props.transitionToOrderList}/>
-        <OrderTypeSell transitionToOrderList={this.props.transitionToOrderList}/>
+        <OrderTypeWelcome/>
+        <OrderTypeBuy/>
+        <OrderTypeSell/>
 
       </div>
     );

@@ -39,27 +39,22 @@ class Presenter extends Component {
     super(props);
     this.state = {
       currentView: VIEW.login,     // default: VIEW.login
-      username: 'Not Logged In',
-      entityId: '',
-      loggedIn: false,
-      menuColor: 'transparent',    // default: transparent
-      persona: "ORIG",
-      status: "orig"
     };
 
     // Pass Methods to Components
-    this.transitionTo = this.transitionTo.bind(this);
-    this.setMenuColor = this.setMenuColor.bind(this);
     this.loginHandler = this.loginHandler.bind(this);
-    this.setEntityId = this.setEntityId.bind(this);
-    this.transitionToOrderList = this.transitionToOrderList.bind(this);
-    this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
+    // this.setEntityId = this.setEntityId.bind(this);
+    // this.transitionToOrderList = this.transitionToOrderList.bind(this);
+    // this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
+
+    global.presenter = this;
+
   }
 
   // Menu Methods -----------------------------//
 
   setMenuColor(color){
-    this.setState({menuColor: color})
+    global.menuColor = color;
   }
   //// menuToggle(){}
   //// payMenuShow(){}
@@ -77,7 +72,7 @@ class Presenter extends Component {
         this.transitionToHome();
         break;
 
-      case "buyList": // TODO: Update according to CardList props parameters.
+      case "orderList":
          this.transitionToOrderList();
          break;
 
@@ -89,12 +84,15 @@ class Presenter extends Component {
   }
 
   transitionToLogOut(){
-    this.setState({currentView: VIEW.login});
     this.setMenuColor('transparent');
-    this.setState({
-      username: 'Not Logged In!',
-      loggedIn: false
-    });
+    this.setState({currentView: VIEW.login});
+    // global.currentView = VIEW.login;
+    global.loggedIn = false;
+    global.username = 'Not Logged In!';
+    // this.setState({
+    //   username: 'Not Logged In!',
+    //   loggedIn: false
+    // });
   }
 
   transitionToHome(){
@@ -103,12 +101,11 @@ class Presenter extends Component {
   }
 
   transitionToOrderList(persona, status){
-     this.setState({
-      currentView: VIEW.cardList,
-      persona: persona,
-      status: status
-    });
-    this.setMenuColor('var(--ORANGE)');
+     this.setState({currentView: VIEW.cardList,});
+     // global.currentView = VIEW.cardlist;
+     global.viewPersona = persona;
+     global.viewStatus = status;
+     this.setMenuColor('var(--ORANGE)');
   }
 
   // TODO: Remove when Buyer Invoice page created.
@@ -116,6 +113,7 @@ class Presenter extends Component {
   TEMPtransitionToInvoice(ID) {
     console.log("TEST: Would Transition To Invoice - " + ID);
   }
+
   // transitionToSellerList(){}       // TODO: Later
   // transitionToBuyerInvoice(ID){}   // TODO: Later
   // transitionToSellerInvoice(ID){}  // TODO: Later
@@ -125,13 +123,15 @@ class Presenter extends Component {
   viewSwitch(view){
     switch(view){
       case VIEW.login:
-        return <Login
-                  loginHandler = {this.loginHandler}/>;
+        // return <Login
+        //           loginHandler = {this.loginHandler}/>;
+        return <Login/>;
 
       case VIEW.home:
         return <OrderTypeMenu
-                  username={this.state.username}
-                  transitionToOrderList={this.transitionToOrderList}/>;
+                  // username={this.state.username}
+                  // transitionToOrderList={this.transitionToOrderList}
+        />;
 
       case VIEW.cardList: // TODO: Update according to CardList props parameters.
         return <CardList
@@ -142,35 +142,34 @@ class Presenter extends Component {
 
       default:
         return <OrderTypeMenu
-          username={this.state.username}
-          transitionToOrderList={this.transitionToOrderList}/>;
+          // transitionToOrderList={this.transitionToOrderList}
+        />;
     }
   }
 
   // Log In Methods ----------------------------//
 
   loginHandler(username){
-    this.setState({
-      username: username,
-      loggedIn: true
-    }); // TODO: replace with value from DB
+    global.loggedIn = true;
+    global.username = username;
     this.transitionToHome();
     getEntityIdByUsername(username, this.setEntityId);
   }
 
   setEntityId(entityId) {
-    this.setState({'entityId': entityId});
+    global.entityId = entityId;
   }
 
   // Rendering the appropriate Views -----------//
   render() {
     return (
       <div id="presenter_block">
-        <Menu menuColor = {this.state.menuColor}
-              transitionTo = {this.transitionTo}
-              // showMenu = {this.state.loggedIn ? 'true' : 'false'}
+        <Menu
+          // menuColor = {this.state.menuColor}
+          // transitionTo = {this.transitionTo}
+          // showMenu = {this.state.loggedIn ? 'true' : 'false'}
         />
-        {this.viewSwitch(this.state.currentView )}
+        {this.viewSwitch(this.state.currentView)}
       </div>
     )
   }

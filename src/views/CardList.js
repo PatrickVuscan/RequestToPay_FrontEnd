@@ -4,8 +4,8 @@ import {Card} from '../components/Card'
 import "./CardList.css"
 
 /**
- * A component with a high-level view of every order of status 'status' where the entity 'entityId'
- * is listed as the persona 'persona'.
+ * A component with a high-level view of every order of viewStatus 'viewStatus' where the entity 'entityId'
+ * is listed as the viewPersona 'viewPersona'.
  *
  * @props entityId - The ID of the entity viewing the orders.
  * @props persona - The persona for which the orders pertain to (ie: entityId is seller or customer or driver).
@@ -41,7 +41,7 @@ export class CardList extends Component {
                 id={id}
                 key={key}
                 orderData={this.state.ordersData[key]}
-                onClick={() => this.props.cardClickHandler(id)}/>;
+                onClick={() => global.presenter.TEMPtransitionToInvoice(id)}/>;
             cards.push(card);
         }
         return cards;

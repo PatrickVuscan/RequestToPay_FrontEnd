@@ -1,3 +1,4 @@
+
 import constants from '../constants'
 import {getOrdersByEntityAndPersona} from "../models";
 
@@ -197,11 +198,11 @@ function isDelivered(orderData) {
 
 /**
  * Gets the JSON format of the high-level card information a customer will see for a given order.
- * The data is a reduced and formatted version of 'orderData', with a status attribute
- * provided by the input 'status'.
+ * The data is a reduced and formatted version of 'orderData', with a viewStatus attribute
+ * provided by the input 'viewStatus'.
  *
  * @param orderData - The JSON object for a given order
- * @param status - The english (simplified) status associated with 'orderData'
+ * @param status - The english (simplified) viewStatus associated with 'orderData'
  * @returns {{OID: *, OrderDate: *, DeliveryDate: *, Entity: *, Status: *}}
  */
 function getFormattedCustomerOrder(orderData, status) {

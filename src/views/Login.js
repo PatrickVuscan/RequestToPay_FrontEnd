@@ -25,7 +25,7 @@ class Login extends Component {
       'username': this.state.usernameValue,
       'password': this.state.passwordValue
     };
-    performLogin(this, credentials, this.props.loginHandler);
+    performLogin(this, credentials, global.presenter.loginHandler);
   }
 
   render(){

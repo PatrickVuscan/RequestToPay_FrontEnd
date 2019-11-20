@@ -9,14 +9,13 @@ class Menu extends Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showMenu: true,
     };
     this.transitionTo = this.transitionTo.bind(this);
   }
 
   transitionTo(view){
     this.toggleMenuOpen();
-    this.props.transitionTo(view);
+    global.presenter.transitionTo(view);
   }
 
   toggleMenuOpen(){
@@ -24,23 +23,19 @@ class Menu extends Component {
   }
 
   render() {
-    const { menuOpen, showMenu } = this.state;
-    let menuID;
-
-    if (menuOpen) {
-      menuID = "header_block-open";
-    } else {
-      menuID = "header_block-closed";
-    }
+    const {
+      menuOpen
+    } = this.state;
 
     return (
-      <div id={menuID} style={{backgroundColor : this.props.menuColor}}>
+      <div id={menuOpen ? "header_block-open" : "header_block-closed"}
+           style={{backgroundColor : global.menuColor}}>
 
         <div id="header_bar">
           <div id="header_scotia">
             Scotia
           </div>
-          {showMenu &&
+          {global.loggedIn &&
             <div id="header_menu">
               <img id="header_hamburger"
                    src='/images/icon_menu.png'
