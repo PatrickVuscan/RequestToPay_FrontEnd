@@ -64,9 +64,6 @@ export class CardList extends Component {
                     Ready To Pay.
                 </div>
                 {childElements}
-                {childElements}
-                {childElements}
-                {childElements}
             </div>
         );
     }
