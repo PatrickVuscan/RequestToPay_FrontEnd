@@ -23,8 +23,8 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        let {entityId, persona, statusString} = this.props;
-        getOrdersOverview(entityId, persona, statusString, this.setOrdersData);
+        // let {entityId, persona, statusString} = this.props;
+        getOrdersOverview(global.entityId, global.viewPersona, global.viewStatus, this.setOrdersData);
     }
 
     setOrdersData(ordersData) {
@@ -48,12 +48,11 @@ export class CardList extends Component {
     }
 
     render() {
-        let {status} = this.props;
         const childElements = this.createCards();
         return (
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
-                    {status}
+                    TEST
                 </div>
                 {childElements}
             </div>

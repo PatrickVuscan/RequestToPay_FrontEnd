@@ -8,9 +8,6 @@ class OrderTypeMenu extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      usernameValue: this.props.username,
-    };
   }
 
   // TODO: smooth scrolling transitions
