@@ -69,27 +69,3 @@
 .menu_block {
     cursor: pointer;
 }
-
-/* COLORS --------------------------------- */
-
-.login-menu {
-    background-color: transparent;
-}
-.home-menu {
-    background-color: var(--RED);
-}
-/*.home-accent{*/
-/*    background-color: var(--MID_RED);*/
-/*}*/
-.home-background {
-    background-color: var(--LIGHT_RED);
-}
-.buying-menu {
-    background-color: var(--ORANGE);
-}
-.buying-accent {
-    background-color: var(--MID_ORANGE);
-}
-.buying-background {
-    background-color: var(--LIGHT_ORANGE);
-}

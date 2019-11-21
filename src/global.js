@@ -7,6 +7,9 @@
  * @props viewPersona - The viewPersona for which the orders pertain to (ie: entityId is seller or customer or driver).
  * @props viewStatus - The viewStatus of orders.
  */
+import constants from './constants'
+
+const VIEW = constants.VIEW;
 
 const global = {
 
@@ -19,9 +22,10 @@ const global = {
   /* View Data ---------------------------*/
   viewPersona: "ORIG",
   viewStatus: "orig",
+  currentView: VIEW.login,
 
   /* Style -------------------------------*/
-  menuColor: 'transparent', // TODO: replace with CSS?
+  // menuColor: 'transparent', // TODO: replace with CSS?
 };
 
 export default global

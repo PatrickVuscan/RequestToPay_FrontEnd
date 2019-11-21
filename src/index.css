@@ -39,13 +39,28 @@ body {
   background: #FF384A;
 }
 
-.centerVH {
-  margin: 0;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
 ::-webkit-scrollbar {display:none;}
+
+/* COLORS --------------------------------- */
+
+.login-menu {
+  background-color: transparent;
+}
+.home-menu {
+  background-color: var(--RED);
+}
+/*.home-accent{*/
+/*    background-color: var(--MID_RED);*/
+/*}*/
+.home-background {
+  background-color: var(--LIGHT_RED);
+}
+.buying-menu {
+  background-color: var(--ORANGE);
+}
+.buying-accent {
+  background-color: var(--MID_ORANGE);
+}
+.buying-background {
+  background-color: var(--LIGHT_ORANGE);
+}

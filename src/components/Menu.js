@@ -3,6 +3,9 @@
 import React, {Component} from "react";
 import './Menu.css'
 import constants from "../constants";
+import Login from "../views/Login";
+import OrderTypeMenu from "../views/OrderTypeMenu";
+import {CardList} from "../views/CardList";
 
 const VIEW = constants.VIEW;
 
@@ -25,14 +28,30 @@ class Menu extends Component {
     this.setState(prevState => ({menuOpen: !prevState.menuOpen}));
   }
 
+  // Change menu class to change colors.
+  viewSwitch(view){
+    switch(view){
+      case VIEW.login:
+        return " login-menu";
+      case VIEW.home:
+        return " home-menu";
+      case VIEW.cardList:
+        return " buying-menu"; // TODO: Make conditional based on persona
+      default:
+        return " home-menu";
+    }
+  }
+
   render() {
     const {
       menuOpen
     } = this.state;
 
     return (
+
       <div id={menuOpen ? "header_block-open" : "header_block-closed"}
-           style={{backgroundColor : global.menuColor}}>
+           className={this.viewSwitch(this.props.currentView)}
+      >
 
         <div id="header_bar">
           <div id="header_scotia">

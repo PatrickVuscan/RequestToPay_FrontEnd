@@ -4,7 +4,6 @@ import {performLogin} from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
 
-
 /**
  * Creates a Login element, containing an username field, password field and login button.
  */
@@ -35,9 +34,20 @@ class Login extends Component {
         <div id="login_block">
           {loading ? <TextLoading/> : <TextLogin/>}
           <form onSubmit={this.handleLoginClick}>
-            <input className={"field"} required placeholder="Username" onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
-            <input className={"field"} required type="password" placeholder="Password" autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
-            <input id="button" type="submit" value="Sign in."/>
+            <input
+              className={"field"}
+              required placeholder="Username"
+              onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
+            <input
+              className={"field"}
+              required type="password"
+              placeholder="Password"
+              autoCapitalize="none"
+              onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+            <input
+              id="button"
+              type="submit"
+              value="Sign in."/>
           </form>
         </div>
       </div>

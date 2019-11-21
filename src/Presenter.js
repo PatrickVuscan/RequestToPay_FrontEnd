@@ -44,23 +44,21 @@ class Presenter extends Component {
       case VIEW.login:
         this.transitionToLogOut();
         break;
-
       case VIEW.home:
         this.transitionToHome();
         break;
-
       case VIEW.cardList:
          this.transitionToCardList();
          break;
-
       default:
         this.transitionToHome();
         break;
     }
+    this.setCurrentView(view);
   }
 
   transitionToLogOut(){
-    this.setMenuColor('transparent');
+    this.setState({currentView: VIEW.login});
     global.loggedIn = false;
     global.username = 'Not Logged In!';
   }
@@ -71,7 +69,6 @@ class Presenter extends Component {
 
   transitionToCardList(){
     this.setState({currentView: VIEW.cardList,});
-    this.setMenuColor('var(--ORANGE)');
   }
 
   // TODO: Remove when Buyer Invoice page created.
@@ -108,6 +105,10 @@ class Presenter extends Component {
     global.entityId = entityId;
   }
 
+  setCurrentView(view){
+    global.currentView = view;
+  }
+
   setViewPersona(persona) {
     global.viewPersona = persona;
   }
@@ -116,9 +117,9 @@ class Presenter extends Component {
     global.viewStatus = status;
   }
 
-  setMenuColor(color) {
-    global.menuColor = color;
-  }
+  // setMenuColor(color) {
+  //   global.menuColor = color;
+  // }
 
   // Views to pass ----------------------------------//
   viewSwitch(view){
@@ -135,11 +136,14 @@ class Presenter extends Component {
   }
 
   // Return appropriate view to Index.js -----------//
+  // TODO: add observer pattern to menu instead of passing values through props?
 
   render() {
     return (
       <div id="presenter_block">
-        <Menu/>
+        <Menu
+          currentView={this.state.currentView}
+        />
         {this.viewSwitch(this.state.currentView)}
       </div>
     )
