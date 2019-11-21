@@ -2,6 +2,9 @@
 
 import React, {Component} from "react";
 import './Menu.css'
+import constants from "../constants";
+
+const VIEW = constants.VIEW;
 
 class Menu extends Component {
 
@@ -46,13 +49,13 @@ class Menu extends Component {
           }
         </div>
 
-        <div className={"menu_block first"} onClick={() => this.transitionTo("home")}>
+        <div className={"menu_block first"} onClick={() => this.transitionTo(VIEW.home)}>
           Home.
         </div>
         <div className={"menu_block"}>
           <s>Buying</s>
         </div>
-        <div className={"menu_block"} onClick={() => this.transitionTo("logOut")}>
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
         </div>
 

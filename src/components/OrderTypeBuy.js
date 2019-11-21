@@ -2,9 +2,10 @@ import constants from "../constants";
 import React, { Component } from 'react';
 
 const customer = constants.PERSONA.customer;
-const unpaid = constants.STATUS.customer.unpaid.string;
-const paid = constants.STATUS.customer.paid.string;
-const completed = constants.STATUS.customer.completed.string;
+const unpaid = constants.STATUS.customer.unpaid;
+const paid = constants.STATUS.customer.paid;
+const completed = constants.STATUS.customer.completed;
+const VIEW = constants.VIEW;
 
 class OrderTypeBuy extends Component {
 
@@ -13,7 +14,6 @@ class OrderTypeBuy extends Component {
   }
 
   render() {
-    let {transitionToOrderList} = this.props;
     return (
       <div id="buy_wrapper">
         <div className={"home_block"} id={"buy_block"}>

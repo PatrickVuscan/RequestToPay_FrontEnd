@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Helmet} from "react-helmet";
 import OrderTypeWelcome from "../components/OrderTypeWelcome";
 import OrderTypeBuy from "../components/OrderTypeBuy";
 import OrderTypeSell from "../components/OrderTypeSell";
@@ -21,15 +20,9 @@ class OrderTypeMenu extends Component {
   render() {
     return (
       <div id="home_container">
-        {/* Helmet - load stylesheet based on current page */}
-        <Helmet>
-          <link rel="stylesheet" type="text/css" href="/css/OrderTypeMenu.css"/>
-        </Helmet>
-
         <OrderTypeWelcome/>
         <OrderTypeBuy/>
         <OrderTypeSell/>
-
       </div>
     );
   }

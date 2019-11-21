@@ -32,5 +32,11 @@ export default {
                 string: 'Completed Orders.'
             }
         }
+    },
+    VIEW: {
+        login: 'login',
+        home: 'home',
+        orderList: 'orderList',
+        cardList: 'cardList',
     }
 }

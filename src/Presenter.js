@@ -20,14 +20,7 @@ import {getEntityIdByUsername} from './models'
 import {CardList} from "./views/CardList"
 import './Presenter.css'
 
-// enum of views
-const VIEW = {
-  login: 'login',
-  home: 'home',
-  orderTypeMenu: 'orderTypeMenu',
-  cardList: 'cardList',
-};
-
+const VIEW = constants.VIEW;
 const PERSONA = constants.PERSONA;
 const STATUS = constants.STATUS;
 
@@ -38,74 +31,47 @@ class Presenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: VIEW.login,     // default: VIEW.login
+      currentView: VIEW.login,
     };
-
-    // Pass Methods to Components
     this.loginHandler = this.loginHandler.bind(this);
-    // this.setEntityId = this.setEntityId.bind(this);
-    // this.transitionToOrderList = this.transitionToOrderList.bind(this);
-    // this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
-
-    global.presenter = this;
-
+    global.presenter = this;  // TODO: singleton pattern?
   }
-
-  // Menu Methods -----------------------------//
-
-  setMenuColor(color){
-    global.menuColor = color;
-  }
-  //// menuToggle(){}
-  //// payMenuShow(){}
-  //// payMenuHide(){}
 
   // Transitions -----------------------------//
-
+  // TODO: replace with hashmap pattern?
   transitionTo(view){
     switch(view){
-      case "logOut":
+      case VIEW.login:
         this.transitionToLogOut();
         break;
 
-      case "home":
+      case VIEW.home:
         this.transitionToHome();
         break;
 
-      case "orderList":
-         this.transitionToOrderList();
+      case VIEW.cardList:
+         this.transitionToCardList();
          break;
 
       default:
         this.transitionToHome();
         break;
-
     }
   }
 
   transitionToLogOut(){
     this.setMenuColor('transparent');
-    this.setState({currentView: VIEW.login});
-    // global.currentView = VIEW.login;
     global.loggedIn = false;
     global.username = 'Not Logged In!';
-    // this.setState({
-    //   username: 'Not Logged In!',
-    //   loggedIn: false
-    // });
   }
 
   transitionToHome(){
     this.setState({currentView: VIEW.home});
-    this.setMenuColor('var(--RED)');
   }
 
-  transitionToOrderList(persona, status){
-     this.setState({currentView: VIEW.cardList,});
-     // global.currentView = VIEW.cardlist;
-     global.viewPersona = persona;
-     global.viewStatus = status;
-     this.setMenuColor('var(--ORANGE)');
+  transitionToCardList(){
+    this.setState({currentView: VIEW.cardList,});
+    this.setMenuColor('var(--ORANGE)');
   }
 
   // TODO: Remove when Buyer Invoice page created.
@@ -119,56 +85,61 @@ class Presenter extends Component {
   // transitionToSellerInvoice(ID){}  // TODO: Later
   // transitionToPayID(ID){}          // TODO: Later
 
-  // Views and functions passed to views
-  viewSwitch(view){
-    switch(view){
-      case VIEW.login:
-        // return <Login
-        //           loginHandler = {this.loginHandler}/>;
-        return <Login/>;
-
-      case VIEW.home:
-        return <OrderTypeMenu
-                  // username={this.state.username}
-                  // transitionToOrderList={this.transitionToOrderList}
-        />;
-
-      case VIEW.cardList: // TODO: Update according to CardList props parameters.
-        return <CardList
-            entityId={this.state.entityId}
-            persona={this.state.persona}
-            statusString={this.state.status}
-            cardClickHandler={this.TEMPtransitionToInvoice} />;
-
-      default:
-        return <OrderTypeMenu
-          // transitionToOrderList={this.transitionToOrderList}
-        />;
-    }
-  }
-
   // Log In Methods ----------------------------//
 
   loginHandler(username){
-    global.loggedIn = true;
-    global.username = username;
-    this.transitionToHome();
+    this.setLoggedIn(true);
+    this.setUsername(username);
+    this.transitionTo(VIEW.home);
     getEntityIdByUsername(username, this.setEntityId);
+  }
+
+  // Global Setters ---------------------------//
+
+  setLoggedIn(isLoggedIn){
+    global.loggedIn = isLoggedIn;
+  }
+
+  setUsername(username){
+    global.username = username;
   }
 
   setEntityId(entityId) {
     global.entityId = entityId;
   }
 
-  // Rendering the appropriate Views -----------//
+  setViewPersona(persona) {
+    global.viewPersona = persona;
+  }
+
+  setViewStatus(status) {
+    global.viewStatus = status;
+  }
+
+  setMenuColor(color) {
+    global.menuColor = color;
+  }
+
+  // Views to pass ----------------------------------//
+  viewSwitch(view){
+    switch(view){
+      case VIEW.login:
+        return <Login/>;
+      case VIEW.home:
+        return <OrderTypeMenu/>;
+      case VIEW.cardList:
+        return <CardList/>;
+      default:
+        return <OrderTypeMenu/>;
+    }
+  }
+
+  // Return appropriate view to Index.js -----------//
+
   render() {
     return (
       <div id="presenter_block">
-        <Menu
-          // menuColor = {this.state.menuColor}
-          // transitionTo = {this.transitionTo}
-          // showMenu = {this.state.loggedIn ? 'true' : 'false'}
-        />
+        <Menu/>
         {this.viewSwitch(this.state.currentView)}
       </div>
     )
