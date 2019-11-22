@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import OrderTypeWelcome from "../components/OrderTypeWelcome";
 import OrderTypeBuy from "../components/OrderTypeBuy";
 import OrderTypeSell from "../components/OrderTypeSell";
-import "./OrderTypeMenu.css"
+import "./Home.css"
 
-class OrderTypeMenu extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props);
@@ -25,4 +25,4 @@ class OrderTypeMenu extends Component {
   }
 }
 
-export default OrderTypeMenu;
+export default Home;

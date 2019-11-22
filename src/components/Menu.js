@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import './Menu.css'
 import constants from "../constants";
 import Login from "../views/Login";
-import OrderTypeMenu from "../views/OrderTypeMenu";
+import Home from "../views/Home";
 import {CardList} from "../views/CardList";
 
 const VIEW = constants.VIEW;

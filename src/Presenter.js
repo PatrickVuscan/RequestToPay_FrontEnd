@@ -15,7 +15,7 @@ import React, { Component } from 'react'
 import constants from "./constants";
 import Login from './views/Login'
 import Menu from "./components/Menu"
-import OrderTypeMenu from "./views/OrderTypeMenu"
+import Home from "./views/Home"
 import {getEntityIdByUsername} from './models'
 import {CardList} from "./views/CardList"
 import './Presenter.css'
@@ -127,11 +127,11 @@ class Presenter extends Component {
       case VIEW.login:
         return <Login/>;
       case VIEW.home:
-        return <OrderTypeMenu/>;
+        return <Home/>;
       case VIEW.cardList:
         return <CardList/>;
       default:
-        return <OrderTypeMenu/>;
+        return <Home/>;
     }
   }
 
