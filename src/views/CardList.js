@@ -52,7 +52,7 @@ export class CardList extends Component {
         return (
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
-                    TEST
+                    {global.viewStatus}
                 </div>
                 {childElements}
             </div>
