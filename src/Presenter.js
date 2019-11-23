@@ -15,19 +15,12 @@ import React, { Component } from 'react'
 import constants from "./constants";
 import Login from './views/Login'
 import Menu from "./components/Menu"
-import OrderTypeMenu from "./views/OrderTypeMenu"
+import Home from "./views/Home"
 import {getEntityIdByUsername} from './models'
 import {CardList} from "./views/CardList"
 import './Presenter.css'
 
-// enum of views
-const VIEW = {
-  login: 'login',
-  home: 'home',
-  orderTypeMenu: 'orderTypeMenu',
-  cardList: 'cardList',
-};
-
+const VIEW = constants.VIEW;
 const PERSONA = constants.PERSONA;
 const STATUS = constants.STATUS;
 
@@ -38,77 +31,44 @@ class Presenter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: VIEW.login,     // default: VIEW.login
-      username: 'Not Logged In',
-      entityId: '',
-      loggedIn: false,
-      menuColor: 'transparent',    // default: transparent
-      persona: "ORIG",
-      status: "orig"
+      currentView: VIEW.login,
     };
-
-    // Pass Methods to Components
-    this.transitionTo = this.transitionTo.bind(this);
-    this.setMenuColor = this.setMenuColor.bind(this);
     this.loginHandler = this.loginHandler.bind(this);
-    this.setEntityId = this.setEntityId.bind(this);
-    this.transitionToOrderList = this.transitionToOrderList.bind(this);
-    this.TEMPtransitionToInvoice = this.TEMPtransitionToInvoice.bind(this);
+    global.presenter = this;  // TODO: singleton pattern?
   }
-
-  // Menu Methods -----------------------------//
-
-  setMenuColor(color){
-    this.setState({menuColor: color})
-  }
-  //// menuToggle(){}
-  //// payMenuShow(){}
-  //// payMenuHide(){}
 
   // Transitions -----------------------------//
-
+  // TODO: replace with hashmap pattern?
   transitionTo(view){
     switch(view){
-      case "logOut":
+      case VIEW.login:
         this.transitionToLogOut();
         break;
-
-      case "home":
+      case VIEW.home:
         this.transitionToHome();
         break;
-
-      case "buyList": // TODO: Update according to CardList props parameters.
-         this.transitionToOrderList();
+      case VIEW.cardList:
+         this.transitionToCardList();
          break;
-
       default:
         this.transitionToHome();
         break;
-
     }
+    this.setCurrentView(view);
   }
 
   transitionToLogOut(){
     this.setState({currentView: VIEW.login});
-    this.setMenuColor('transparent');
-    this.setState({
-      username: 'Not Logged In!',
-      loggedIn: false
-    });
+    global.loggedIn = false;
+    global.username = 'Not Logged In!';
   }
 
   transitionToHome(){
     this.setState({currentView: VIEW.home});
-    this.setMenuColor('var(--RED)');
   }
 
-  transitionToOrderList(persona, status){
-     this.setState({
-      currentView: VIEW.cardList,
-      persona: persona,
-      status: status
-    });
-    this.setMenuColor('var(--ORANGE)');
+  transitionToCardList(){
+    this.setState({currentView: VIEW.cardList,});
   }
 
   // TODO: Remove when Buyer Invoice page created.
@@ -116,61 +76,75 @@ class Presenter extends Component {
   TEMPtransitionToInvoice(ID) {
     console.log("TEST: Would Transition To Invoice - " + ID);
   }
+
   // transitionToSellerList(){}       // TODO: Later
   // transitionToBuyerInvoice(ID){}   // TODO: Later
   // transitionToSellerInvoice(ID){}  // TODO: Later
   // transitionToPayID(ID){}          // TODO: Later
 
-  // Views and functions passed to views
-  viewSwitch(view){
-    switch(view){
-      case VIEW.login:
-        return <Login
-                  loginHandler = {this.loginHandler}/>;
-
-      case VIEW.home:
-        return <OrderTypeMenu
-                  username={this.state.username}
-                  transitionToOrderList={this.transitionToOrderList}/>;
-
-      case VIEW.cardList: // TODO: Update according to CardList props parameters.
-        return <CardList
-            entityId={this.state.entityId}
-            persona={this.state.persona}
-            statusString={this.state.status}
-            cardClickHandler={this.TEMPtransitionToInvoice} />;
-
-      default:
-        return <OrderTypeMenu
-          username={this.state.username}
-          transitionToOrderList={this.transitionToOrderList}/>;
-    }
-  }
-
   // Log In Methods ----------------------------//
 
   loginHandler(username){
-    this.setState({
-      username: username,
-      loggedIn: true
-    }); // TODO: replace with value from DB
-    this.transitionToHome();
+    this.setLoggedIn(true);
+    this.setUsername(username);
+    this.transitionTo(VIEW.home);
     getEntityIdByUsername(username, this.setEntityId);
   }
 
-  setEntityId(entityId) {
-    this.setState({'entityId': entityId});
+  // Global Setters ---------------------------//
+
+  setLoggedIn(isLoggedIn){
+    global.loggedIn = isLoggedIn;
   }
 
-  // Rendering the appropriate Views -----------//
+  setUsername(username){
+    global.username = username;
+  }
+
+  setEntityId(entityId) {
+    global.entityId = entityId;
+  }
+
+  setCurrentView(view){
+    global.currentView = view;
+  }
+
+  setViewPersona(persona) {
+    global.viewPersona = persona;
+  }
+
+  setViewStatus(status) {
+    global.viewStatus = status;
+  }
+
+  // setMenuColor(color) {
+  //   global.menuColor = color;
+  // }
+
+  // Views to pass ----------------------------------//
+  viewSwitch(view){
+    switch(view){
+      case VIEW.login:
+        return <Login/>;
+      case VIEW.home:
+        return <Home/>;
+      case VIEW.cardList:
+        return <CardList/>;
+      default:
+        return <Home/>;
+    }
+  }
+
+  // Return appropriate view to Index.js -----------//
+  // TODO: add observer pattern to menu instead of passing values through props?
+
   render() {
     return (
       <div id="presenter_block">
-        <Menu menuColor = {this.state.menuColor}
-              transitionTo = {this.transitionTo}
-              // showMenu = {this.state.loggedIn ? 'true' : 'false'}
+        <Menu
+          currentView={this.state.currentView}
         />
-        {this.viewSwitch(this.state.currentView )}
+        {this.viewSwitch(this.state.currentView)}
       </div>
     )
   }

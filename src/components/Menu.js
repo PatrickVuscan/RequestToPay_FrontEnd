@@ -2,6 +2,12 @@
 
 import React, {Component} from "react";
 import './Menu.css'
+import constants from "../constants";
+import Login from "../views/Login";
+import Home from "../views/Home";
+import {CardList} from "../views/CardList";
+
+const VIEW = constants.VIEW;
 
 class Menu extends Component {
 
@@ -9,38 +15,49 @@ class Menu extends Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showMenu: true,
     };
     this.transitionTo = this.transitionTo.bind(this);
   }
 
   transitionTo(view){
     this.toggleMenuOpen();
-    this.props.transitionTo(view);
+    global.presenter.transitionTo(view);
   }
 
   toggleMenuOpen(){
     this.setState(prevState => ({menuOpen: !prevState.menuOpen}));
   }
 
-  render() {
-    const { menuOpen, showMenu } = this.state;
-    let menuID;
-
-    if (menuOpen) {
-      menuID = "header_block-open";
-    } else {
-      menuID = "header_block-closed";
+  // Change menu class to change colors.
+  viewSwitch(view){
+    switch(view){
+      case VIEW.login:
+        return " login-menu";
+      case VIEW.home:
+        return " home-menu";
+      case VIEW.cardList:
+        return " buying-menu"; // TODO: Make conditional based on persona
+      default:
+        return " home-menu";
     }
+  }
+
+  render() {
+    const {
+      menuOpen
+    } = this.state;
 
     return (
-      <div id={menuID} style={{backgroundColor : this.props.menuColor}}>
+
+      <div id={menuOpen ? "header_block-open" : "header_block-closed"}
+           className={this.viewSwitch(this.props.currentView)}
+      >
 
         <div id="header_bar">
           <div id="header_scotia">
             Scotia
           </div>
-          {showMenu &&
+          {global.loggedIn &&
             <div id="header_menu">
               <img id="header_hamburger"
                    src='/images/icon_menu.png'
@@ -51,13 +68,13 @@ class Menu extends Component {
           }
         </div>
 
-        <div className={"menu_block first"} onClick={() => this.transitionTo("home")}>
+        <div className={"menu_block first"} onClick={() => this.transitionTo(VIEW.home)}>
           Home.
         </div>
         <div className={"menu_block"}>
           <s>Buying</s>
         </div>
-        <div className={"menu_block"} onClick={() => this.transitionTo("logOut")}>
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
         </div>
 
