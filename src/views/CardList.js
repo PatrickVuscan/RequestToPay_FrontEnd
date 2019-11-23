@@ -23,7 +23,6 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        // let {entityId, persona, statusString} = this.props;
         getOrdersOverview(global.entityId, global.viewPersona, global.viewStatus, this.setOrdersData);
     }
 

@@ -22,7 +22,7 @@ export class Card extends Component {
             let value = orderData[key];
             infoElements.push(<div
                 key={key}
-                className={key}
+                className={global.viewPersona + " " + key}
                 >
                 {value}
             </div>);

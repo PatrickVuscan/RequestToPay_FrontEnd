@@ -84,11 +84,11 @@ class Presenter extends Component {
 
   // Log In Methods ----------------------------//
 
-  loginHandler(username){
+  loginHandler(username, entityId){
     this.setLoggedIn(true);
     this.setUsername(username);
+    this.setEntityId(entityId);
     this.transitionTo(VIEW.home);
-    getEntityIdByUsername(username, this.setEntityId);
   }
 
   // Global Setters ---------------------------//
