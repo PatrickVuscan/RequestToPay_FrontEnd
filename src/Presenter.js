@@ -91,7 +91,19 @@ class Presenter extends Component {
     getEntityIdByUsername(username, this.setEntityId);
   }
 
-  // Global Setters ---------------------------//
+  // Loading transition ------------------------//
+
+  startLoading(){
+    // replace entire view with loading view
+    // keep Scotia text, hide menu
+    //  (replace with view with text in same spot)
+  }
+
+  finishLoading(){
+    // Transition to finished view.
+  }
+
+  // Global Setters ----------------------------//
 
   setLoggedIn(isLoggedIn){
     global.loggedIn = isLoggedIn;
@@ -116,10 +128,6 @@ class Presenter extends Component {
   setViewStatus(status) {
     global.viewStatus = status;
   }
-
-  // setMenuColor(color) {
-  //   global.menuColor = color;
-  // }
 
   // Views to pass ----------------------------------//
   viewSwitch(view){
