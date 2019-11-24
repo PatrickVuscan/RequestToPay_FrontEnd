@@ -14,27 +14,7 @@ import {getOrdersByEntityAndPersona} from "../models";
  * @param setOrdersData - The function that will be passed the list of JSON objects to store
  */
 function getOrdersOverview(entityId, persona, statusString, setOrdersData) {
-    let formatter;
-    if (persona === constants.PERSONA.customer) {
-        switch(statusString) {
-            case constants.STATUS.customer.unpaid.string:
-                formatter = getFormattedCustomerUnpaidOrders;
-                break;
-            case constants.STATUS.customer.paid.string:
-                formatter = getFormattedCustomerPaidOrders;
-                break;
-            default: // constants.STATUS.customer.completed.string
-                formatter = getFormattedCustomerCompletedOrders;
-        }
-    } else if (persona === constants.PERSONA.seller) {
-        switch(statusString) {
-            case constants.STATUS.seller.incomplete.string:
-                formatter = getFormattedSellerIncompleteOrders;
-                break;
-            default: // constants.STATUS.seller.completed.string
-                formatter = getFormattedCustomerCompletedOrders;
-        }
-    }
+    let formatter = ordersDataFormatter[persona][statusString];
     getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData);
 }
 
@@ -42,18 +22,30 @@ function getOrdersOverview(entityId, persona, statusString, setOrdersData) {
 /* Formatters for ordersData by Persona & Status */
 /* --------------------------------------------- */
 
-// TODO: Get a mapping such as what is commented out to function.
-// const customer = constants.PERSONA.customer;
-// const customerUnpaidString = constants.STATUS.customer.unpaid.string;
-// const customerPaidString = constants.STATUS.customer.paid.string;
-// const customerCompletedString = constants.STATUS.customer.completed.string;
-//
-// // TODO: Also, have mappings for personas: 'seller' and 'driver'
-// // Object: formatters[persona][statusString] (mapping persona and statusName to formatter)
-// let formatters = {};
-// formatters[customer][customerUnpaidString] = getFormattedCustomerUnpaidOrders;
-// formatters[customer][customerPaidString] = getFormattedCustomerPaidOrders;
-// formatters[customer][customerCompletedString] = getFormattedCustomerCompletedOrders;
+/* --- JSON Object to Map Persona & Status to Formatter --- */
+
+// Get Formatter Using: ordersDataFormatter[persona][status.string]
+let ordersDataFormatter = {};
+
+// Contents
+const customer = constants.PERSONA.customer;
+const customerUnpaidString = constants.STATUS.customer.unpaid.string;
+const customerPaidString = constants.STATUS.customer.paid.string;
+const customerCompletedString = constants.STATUS.customer.completed.string
+const seller = constants.PERSONA.seller;
+const sellerIncompleteString = constants.STATUS.seller.incomplete.string;
+const sellerCompletedString = constants.STATUS.seller.completed.string;
+
+// Mapping
+ordersDataFormatter[customer] = {};
+ordersDataFormatter.customer[customerUnpaidString] = getFormattedCustomerUnpaidOrders;
+ordersDataFormatter.customer[customerPaidString] = getFormattedCustomerPaidOrders;
+ordersDataFormatter.customer[customerCompletedString] = getFormattedCustomerCompletedOrders;
+ordersDataFormatter[seller] = {};
+ordersDataFormatter.seller[sellerIncompleteString] = getFormattedSellerIncompleteOrders;
+ordersDataFormatter.seller[sellerCompletedString] = getFormattedSellerCompletedOrders;
+
+/* --- Definition of OrdersData Formatters --- */
 
 /**
  * Returns a version of ordersData that is formatted for a high-level card
@@ -106,12 +98,26 @@ function getFormattedCustomerCompletedOrders(ordersData) {
  */
 function getFormattedSellerIncompleteOrders(ordersData) {
     let statusCondition = isStatusIncomplete;
-    let getOrderStatusForPersona = getOrderStatusForCustomer;
-    let orderFormatter = getFormattedCustomerOrder;
+    let getOrderStatusForPersona = getOrderStatusForCustomer; // NOTE: Chose to use customer data for more details
+    let orderFormatter = getFormattedSellerOrder;
     return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
 }
 
-// HELPER FOR ALL FORMATTERS:
+/**
+ * Returns a version of ordersData that is formatted for a high-level card
+ * viewed by a seller, only including the orders that are both paid and delivered.
+ *
+ * @param ordersData - A list of JSON objects, where each object is an order where the entity was a seller
+ * @returns [] - A list of JSON objects, where each JSON object is one order
+ */
+function getFormattedSellerCompletedOrders(ordersData) {
+    let statusCondition = isStatusCompleted;
+    let getOrderStatusForPersona = getOrderStatusForSeller;
+    let orderFormatter = getFormattedSellerOrder;
+    return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
+}
+
+/* --- Helper for all formatters --- */
 
 /**
  * Returns a version of ordersData that is formatted for a high-level card.
@@ -140,6 +146,8 @@ function getFormattedOrders(ordersData, orderCondition, getOrderStatus, orderFor
 /* "getOrderStatusForPersona" functions for getFormattedOrders() */
 /* ------------------------------------------------------------- */
 
+/* --- CUSTOMER --- */
+
 function getOrderStatusForCustomer(orderData) {
     if (isStatusCompleted(orderData)) {
         return customerCompleted;
@@ -153,6 +161,18 @@ function getOrderStatusForCustomer(orderData) {
 const customerUnpaid = constants.STATUS.customer.unpaid.name;
 const customerPaid = constants.STATUS.customer.paid.name;
 const customerCompleted = constants.STATUS.customer.completed.name;
+
+/* --- SELLER --- */
+
+function getOrderStatusForSeller(orderData) {
+    if (isStatusCompleted(orderData)) {
+        return sellerCompleted;
+    }
+    return sellerIncomplete;
+}
+
+const sellerIncomplete = constants.STATUS.seller.incomplete.name;
+const sellerCompleted = constants.STATUS.seller.completed.name;
 
 /* ---------------------------------------------------- */
 /* "statusCondition" functions for getFormattedOrders() */
@@ -211,6 +231,26 @@ function getFormattedCustomerOrder(orderData, status) {
         'OrderDate': orderData['OrderDate'].substring(0,10),
         'DeliveryDate': orderData['DeliveryDate'].substring(0,10),
         'Entity': orderData['SellerName'],
+        'Status': status
+    };
+    return formatted;
+}
+
+/**
+ * Gets the JSON format of the high-level card information a seller will see for a given order.
+ * The data is a reduced and formatted version of 'orderData', with a viewStatus attribute
+ * provided by the input 'viewStatus'.
+ *
+ * @param orderData - The JSON object for a given order
+ * @param status - The english (simplified) viewStatus associated with 'orderData'
+ * @returns {{OID: *, OrderDate: *, DeliveryDate: *, Entity: *, Status: *}}
+ */
+function getFormattedSellerOrder(orderData, status) {
+    let formatted = {
+        'OID': orderData['OID'],
+        'OrderDate': orderData['OrderDate'].substring(0,10),
+        'DeliveryDate': orderData['DeliveryDate'].substring(0,10),
+        'Entity': orderData['CustomerName'],
         'Status': status
     };
     return formatted;

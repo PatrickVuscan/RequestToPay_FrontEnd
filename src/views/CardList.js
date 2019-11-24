@@ -23,7 +23,6 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        // let {entityId, persona, statusString} = this.props;
         getOrdersOverview(global.entityId, global.viewPersona, global.viewStatus, this.setOrdersData);
     }
 
@@ -51,7 +50,7 @@ export class CardList extends Component {
         return (
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
-                    TEST
+                    {global.viewStatus}
                 </div>
                 {this.createCards()}
             </div>

@@ -62,8 +62,11 @@
 .DeliveryDate:before {
     content: "Delivery on ";
 }
-.Entity:before {
+.customer.Entity:before {
     content: "Sold by ";
+}
+.seller.Entity:before {
+    content: "Ordered by ";
 }
 .Status:before {
     content: "Status is ";

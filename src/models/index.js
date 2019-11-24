@@ -3,10 +3,8 @@
 
 import {performLogin,
     getEntityInfoByUsername,
-    getEntityIdByUsername,
     getOrdersByEntityAndPersona} from "./backend";
 
 export {performLogin,
     getEntityInfoByUsername,
-    getEntityIdByUsername,
     getOrdersByEntityAndPersona};

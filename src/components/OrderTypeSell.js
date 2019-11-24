@@ -4,6 +4,7 @@ import constants from "../constants";
 const seller = constants.PERSONA.seller;
 const incomplete = constants.STATUS.seller.incomplete.string;
 const completed = constants.STATUS.seller.completed.string;
+const VIEW = constants.VIEW;
 
 class OrderTypeSell extends Component {
 
@@ -13,19 +14,21 @@ class OrderTypeSell extends Component {
     };
   }
 
-  /* TODO: Make of transition orderList*/
-  /* ex: <li onClick={() => transitionToOrderList(seller, incomplete)}>{incomplete}</li> */
+  transitionTo(status) {
+    global.presenter.setViewPersona(seller);
+    global.presenter.setViewStatus(status);
+    global.presenter.transitionTo(VIEW.cardList)
+  }
 
   render() {
-    let {transitionToOrderList} = this.props;
     return (
       <div id="sell_wrapper">
         <div className={"home_block"}>
           <div className={"type_block"}>
             <h1>Selling.</h1>
             <ul>
-              <li><s>{incomplete}</s></li>
-              <li><s>{completed}</s></li>
+              <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
+              <li onClick={() => this.transitionTo(completed)}>{completed}</li>
             </ul>
           </div>
         </div>

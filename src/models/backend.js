@@ -8,7 +8,7 @@ import request from "request-promise";
  *
  * @param view - the view that initiated the login.
  * @param credentials - credentials.username and credentials.password contain the respect credentials to validate.
- * @param successfulLoginHandler - a handler for the UI, should the user successfully log in.
+ * @param successfulLoginHandler - A callback function, which is used upon a successful login.
  */
 function performLogin(view, credentials, successfulLoginHandler) {
     view.setState({loading: true});
@@ -24,7 +24,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                successfulLoginHandler(credentials.username);
+                successfulLoginHandler(credentials.username, res.EID); // passing
             })
             .catch(function (err) {
                 alert(`The login was unsuccessful: ${err.status} -- ${err.message}`);
@@ -35,10 +35,10 @@ function performLogin(view, credentials, successfulLoginHandler) {
 
 /**
  * Get the information related to the entity with username 'username'.
- * Rather than returning a value, entity information is passed to 'setEntityInfo' to be stored.
+ * Rather than returning a value, 'setEntityInfo' is a callback function provided the data.
  *
  * @param username - The username of the entity
- * @param setEntityInfo - The function used to save the entity information
+ * @param setEntityInfo - A callback function, which is used to save the entity information
  */
 function getEntityInfoByUsername(username, setEntityInfo) {
     const options = {
@@ -66,42 +66,14 @@ function getEntityInfoByUsername(username, setEntityInfo) {
 }
 
 /**
- * Get the entity ID of the entity with username 'username'.
- * Rather than returning a value, entityID is passed to 'setEntityId' to be stored.
- *
- * @param username - The username of the entity
- * @param setEntityId - The function used to save the entityId
- */
-function getEntityIdByUsername(username, setEntityId) {
-    const options = {
-        method: 'GET',
-        uri: `${config.api.URL}/entityByName?user=${username}`,
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };
-
-    setTimeout(function() {
-        request(options)
-            .then(function (res) {
-                setEntityId(res.EID);
-            })
-            .catch(function (err) {
-                alert(`There was an error: ${err.status} -- ${err.message}`);
-            });
-    }, 1000);
-}
-
-/**
  * Get the orders pertaining to the entity with ID 'entityID',
  * where the entity is the 'viewPersona' (customer, seller or driver).
- * Rather than returning a value, the orders data is passed to 'setOrdersData' to be stored.
+ * Rather than returning a value, 'setOrdersData' is is a callback function provided the data.
  *
  * @param entityId - The ID for the entity that is being searched by
  * @param persona - The viewPersona that is being searched by
  * @param formatter - A function that can format the data provided by the endpoint
- * @param setOrdersData - A function used to store the orders
+ * @param setOrdersData - A callback function, which is used to store the orders
  */
 function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData) {
     const options = {
@@ -131,5 +103,4 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
 
 export {performLogin,
     getEntityInfoByUsername,
-    getEntityIdByUsername,
     getOrdersByEntityAndPersona};
