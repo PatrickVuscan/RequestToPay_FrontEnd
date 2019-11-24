@@ -48,13 +48,12 @@ export class CardList extends Component {
     }
 
     render() {
-        const childElements = this.createCards();
         return (
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
                     TEST
                 </div>
-                {childElements}
+                {this.createCards()}
             </div>
         );
     }

@@ -3,9 +3,6 @@
 import React, {Component} from "react";
 import './Menu.css'
 import constants from "../constants";
-import Login from "../views/Login";
-import Home from "../views/Home";
-import {CardList} from "../views/CardList";
 
 const VIEW = constants.VIEW;
 
@@ -73,6 +70,9 @@ class Menu extends Component {
         </div>
         <div className={"menu_block"}>
           <s>Buying</s>
+        </div>
+        <div className={"menu_block"} onClick={() => global.presenter.startLoading()}>
+          <s>Loading Test.</s>
         </div>
         <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
