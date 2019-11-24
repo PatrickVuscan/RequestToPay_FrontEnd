@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {getOrdersOverview} from '../data/CardData'
 import {Card} from '../components/Card'
 import "./CardList.css"
+import constants from "../constants";
 
 /**
  * A component with a high-level view of every order of viewStatus 'viewStatus' where the entity 'entityId'
@@ -12,6 +13,9 @@ import "./CardList.css"
  * @props status - The status of orders.
  * @props cardClickHandler - The function that is called to change views upon a card click
  */
+
+const VIEW = constants.VIEW;
+
 export class CardList extends Component {
 
     constructor(props) {
@@ -20,6 +24,7 @@ export class CardList extends Component {
             'ordersData': []
         };
         this.setOrdersData = this.setOrdersData.bind(this);
+        this.transitionToInvoiceID = this.transitionToInvoiceID.bind(this);
     }
 
     componentDidMount() {
@@ -28,6 +33,11 @@ export class CardList extends Component {
 
     setOrdersData(ordersData) {
         this.setState({'ordersData': ordersData});
+    }
+
+    transitionToInvoiceID(ID){
+        global.presenter.setInvoiceID(ID);
+        global.presenter.transitionTo(VIEW.invoice);
     }
 
     createCards() {
@@ -40,7 +50,7 @@ export class CardList extends Component {
                 id={id}
                 key={key}
                 orderData={this.state.ordersData[key]}
-                onClick={() => global.presenter.TEMPtransitionToInvoice(id)}/>;
+                onClick={() => this.transitionToInvoiceID(id)}/>;
             cards.push(card);
         }
         return cards;
