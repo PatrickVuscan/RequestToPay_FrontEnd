@@ -20,6 +20,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
         },
         json: true // Automatically parses the JSON string in the response
     };
+
     setTimeout(function() {
         request(options)
             .then(function (res) {
@@ -48,12 +49,17 @@ function getEntityInfoByUsername(username, setEntityInfo) {
         },
         json: true // Automatically parses the JSON string in the response
     };
+
+    global.presenter.startLoading();
+
     setTimeout(function() {
         request(options)
             .then(function (res) {
                 setEntityInfo(res);
+                global.presenter.stopLoading();
             })
             .catch(function (err) {
+                global.presenter.stopLoading();
                 alert(`There was an error: ${err.status} -- ${err.message}`);
             });
     }, 1000);
@@ -78,15 +84,21 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
         },
         json: true // Automatically parses the JSON string in the response
     };
+
+    global.presenter.startLoading();
+
     setTimeout(function() {
         request(options)
             .then(function (res) {
                 setOrdersData(formatter(res));
+                global.presenter.stopLoading();
             })
             .catch(function (err) {
+                global.presenter.stopLoading();
                 alert(`There was an error: ${err.status} -- ${err.message}`);
             });
     }, 1000);
+
 }
 
 export {performLogin,

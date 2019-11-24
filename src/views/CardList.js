@@ -47,13 +47,12 @@ export class CardList extends Component {
     }
 
     render() {
-        const childElements = this.createCards();
         return (
             <div id={'CardList_container'}>
                 <div id={'CardList_header'}>
                     {global.viewStatus}
                 </div>
-                {childElements}
+                {this.createCards()}
             </div>
         );
     }

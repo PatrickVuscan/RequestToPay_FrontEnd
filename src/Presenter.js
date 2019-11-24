@@ -15,6 +15,7 @@ import React, { Component } from 'react'
 import constants from "./constants";
 import Login from './views/Login'
 import Menu from "./components/Menu"
+import Loading from "./views/Loading";
 import Home from "./views/Home"
 import {getEntityIdByUsername} from './models'
 import {CardList} from "./views/CardList"
@@ -32,6 +33,7 @@ class Presenter extends Component {
     super(props);
     this.state = {
       currentView: VIEW.login,
+      isLoading: false,
     };
     this.loginHandler = this.loginHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
@@ -91,7 +93,17 @@ class Presenter extends Component {
     this.transitionTo(VIEW.home);
   }
 
-  // Global Setters ---------------------------//
+  // Loading transition ------------------------//
+
+  startLoading(){
+      this.setState({isLoading: true})
+  }
+
+  stopLoading(){
+      this.setState({isLoading: false})
+  }
+
+  // Global Setters ----------------------------//
 
   setLoggedIn(isLoggedIn){
     global.loggedIn = isLoggedIn;
@@ -117,10 +129,6 @@ class Presenter extends Component {
     global.viewStatus = status;
   }
 
-  // setMenuColor(color) {
-  //   global.menuColor = color;
-  // }
-
   // Views to pass ----------------------------------//
   viewSwitch(view){
     switch(view){
@@ -136,11 +144,11 @@ class Presenter extends Component {
   }
 
   // Return appropriate view to Index.js -----------//
-  // TODO: add observer pattern to menu instead of passing values through props?
 
   render() {
     return (
       <div id="presenter_block">
+        {this.state.isLoading && <Loading currentView={this.state.currentView}/>}
         <Menu
           currentView={this.state.currentView}
         />
