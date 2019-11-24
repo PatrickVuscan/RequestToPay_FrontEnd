@@ -38,5 +38,6 @@ export default {
         home: 'home',
         orderList: 'orderList',
         cardList: 'cardList',
+        invoice: 'invoice',
     }
 }

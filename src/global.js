@@ -24,6 +24,8 @@ const global = {
   viewStatus: "orig",
   currentView: VIEW.login,
 
+  viewInvoiceID: '',
+
   /* Style -------------------------------*/
   // menuColor: 'transparent', // TODO: replace with CSS?
 };

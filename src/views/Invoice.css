@@ -1,0 +1,22 @@
+/* Invoice CSS */
+
+#invoice_container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice_block {
+    display: flex;
+    flex-direction: column;
+    /*width: 300px;*/
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: var(--WHITE);
+    font-size: 30px;
+}

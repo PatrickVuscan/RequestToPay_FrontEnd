@@ -12,14 +12,15 @@
 //     - then send the view data back to the view
 
 import React, { Component } from 'react'
-import constants from "./constants";
+import Home from "./views/Home"
 import Login from './views/Login'
+import {CardList} from "./views/CardList"
+import Invoice from "./views/Invoice";
 import Menu from "./components/Menu"
 import Loading from "./views/Loading";
-import Home from "./views/Home"
-import {getEntityIdByUsername} from './models'
-import {CardList} from "./views/CardList"
+import constants from "./constants";
 import './Presenter.css'
+import {getEntityIdByUsername} from './models'
 
 const VIEW = constants.VIEW;
 const PERSONA = constants.PERSONA;
@@ -52,6 +53,9 @@ class Presenter extends Component {
       case VIEW.cardList:
          this.transitionToCardList();
          break;
+      case VIEW.invoice:
+        this.transitionToInvoice();
+        break;
       default:
         this.transitionToHome();
         break;
@@ -75,8 +79,9 @@ class Presenter extends Component {
 
   // TODO: Remove when Buyer Invoice page created.
   // This is currently testing that a function would be properly called.
-  TEMPtransitionToInvoice(ID) {
-    console.log("TEST: Would Transition To Invoice - " + ID);
+  transitionToInvoice() {
+    // console.log("TEST: Would Transition To Invoice - " + ID);
+    this.setState({currentView: VIEW.invoice,});
   }
 
   // transitionToSellerList(){}       // TODO: Later
@@ -129,6 +134,10 @@ class Presenter extends Component {
     global.viewStatus = status;
   }
 
+  setInvoiceID(ID){
+    global.viewInvoiceID = ID;
+  }
+
   // Views to pass ----------------------------------//
   viewSwitch(view){
     switch(view){
@@ -138,6 +147,8 @@ class Presenter extends Component {
         return <Home/>;
       case VIEW.cardList:
         return <CardList/>;
+      case VIEW.invoice:
+        return <Invoice/>;
       default:
         return <Home/>;
     }
