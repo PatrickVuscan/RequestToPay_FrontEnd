@@ -32,40 +32,25 @@ class Order extends Component {
     const { payMenuOpen } = this.state;
 
     return (
-      <div id={"invoice_container"}>
-
-        {/* Order Contents goes Here */}
-        <div
-          className={"invoice_block"}
-        >
-          INVOICE #{global.viewInvoiceID}
+      <div id={"order_container"}>
+        <div className={"order_block"}>
+          ORDER #{global.viewInvoiceID}
         </div>
-        <div className={"invoice_block"}>
-          SOME INFORMATION
-        </div>
-        <div className={"invoice_block"}>
-          SOME INFORMATION
-        </div>
-        <div className={"invoice_block"}>
+        <Invoice />
+        <div className={"order_block"}>
           ~~~~~~
         </div>
         {/* Order Contents goes Here */}
-
-
         {/* PayMenu interaction IF status is UNPAID */}
-        <div
-          className={"invoice_block"}
-          onClick={() => this.togglePayMenuOpen()}
-        >
+        <div className={"order_block"} onClick={() => this.togglePayMenuOpen()}>
           ~ Pay Menu Button ~
         </div>
         {payMenuOpen &&
           <PayMenu
             payMenuOpen={this.state.payMenuOpen}
-            invoice={this}
+            order={this}
           />
         }
-        <Invoice />
       </div>
 
     );

@@ -22,7 +22,7 @@ class PayMenu extends Component {
   }
 
   togglePayMenuOpen(){
-    this.props.invoice.togglePayMenuOpen()
+    this.props.order.togglePayMenuOpen()
   }
 
   render() {

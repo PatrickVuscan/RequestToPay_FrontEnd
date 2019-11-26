@@ -35,86 +35,68 @@ class Invoice extends Component {
         this.setState({'total': total.toFixed(2)});
     }
 
-    getRows() {
+    getRows(data) {
         let rows = [];
-        let items = this.state.items;
-        for (let i=0; i<items.length; i++) {
-            rows.push(Object.values(items[i]));
+        for (let i=0; i<data.length; i++) {
+            rows.push(Object.values(data[i]));
         }
         return rows;
     }
 
+    getGeneralInfoDiv() {
+        const info = this.state.info;
+        return(
+            <div id={"GeneralInfo"}>
+                <div id={"InvoiceId"}> Invoice #{info["InID"]}</div>
+                <div id={"OrderDate"}> Ordered: {info["OrderDate"]}</div>
+                <div id={"DeliveryDate"}> Expected Delivery: {info["DeliveryDate"]}</div>
+                <div id={"Status"}> Status: {info["Status"]}</div>
+            </div>
+        );
+    }
+
+    getEntityTable() {
+        const info = this.state.info;
+        const headings = ["Supplier", "Customer"];
+        const rows = [
+            [info["SellerName"], info["CustomerName"]],
+            [info["SellerBillingAddress"], info["CustomerBillingAddress"]]
+        ];
+        return (<DataTable id={"Entities"} headings={headings} rows={rows} title="" />);
+    }
+
+    getItemsTable() {
+        let firstItem = this.state.items[0];
+        const headings = Object.keys(firstItem);
+        const rows = this.getRows(this.state.items);
+        return (<DataTable id={"Items"} headings={headings} rows={rows} title="Invoice Items" />);
+    }
+
+    getTotalDiv() {
+        const total = this.state.total;
+        return (<div id={"Total"}>Total: ${total}</div>)
+    }
+
     render() {
         if (this.state.items.length !== 0) {
-            let firstItem = this.state.items[0];
-            const headings = Object.keys(firstItem);
-            const rows = this.getRows();
-            return (<DataTable headings={headings} rows={rows} title="Invoice Information" />);
+            const infoDiv = this.getGeneralInfoDiv();
+            const entityTable = this.getEntityTable();
+            const itemsTable = this.getItemsTable();
+            const totalDiv = this.getTotalDiv();
+            return (
+                <div id={"Invoice"}>
+                    {infoDiv}
+                    <br/>
+                    {entityTable}
+                    <br/>
+                    {itemsTable}
+                    <br/>
+                    {totalDiv}
+                </div>
+            );
         } else {
             return ("Retrieving your invoice.");
         }
-
-
-        // const headings = [
-        //     'Product name',
-        //     'SKU',
-        //     'Stock quantity',
-        //     'Wholesale cost',
-        //     'Sale price',
-        //     'Quantity sold',
-        //     'Gross sales',
-        //     'Net sales',
-        //     'Notes',
-        // ];
-        //
-        // const rows = [
-        //     [
-        //         'Red and black plaid scarf with thin red stripes and thick black stripes',
-        //         124689325,
-        //         28,
-        //         '$35.00',
-        //         '$60.00',
-        //         12,
-        //         '$720.00',
-        //         '$300.00',
-        //         '',
-        //     ],
-        //     [
-        //         'Yellow plaid scarf',
-        //         124689389,
-        //         0,
-        //         '$35.00',
-        //         '$60.00',
-        //         20,
-        //         '$1200.00',
-        //         '$500.00',
-        //         'Currently on back order by the supplier. Do not place another order to restock.',
-        //     ],
-        //     [
-        //         'Blue plaid scarf',
-        //         124689332,
-        //         30,
-        //         '$35.00',
-        //         '$60.00',
-        //         10,
-        //         '$600.00',
-        //         '$250.00',
-        //         '',
-        //     ],
-        //     [
-        //         'Pink plaid scarf',
-        //         124689376,
-        //         16,
-        //         '$35.00',
-        //         '$60.00',
-        //         4,
-        //         '$240.00',
-        //         '$100.00',
-        //         '',
-        //     ],
-        // ];
-        //
-        // return (<DataTable headings={headings} rows={rows} title="Product sales" />);
     }
 }
 
