@@ -3,23 +3,50 @@ import OrderTypeWelcome from "../components/OrderTypeWelcome";
 import OrderTypeBuy from "../components/OrderTypeBuy";
 import OrderTypeSell from "../components/OrderTypeSell";
 import "./Home.css"
+import {getEntityPersona} from "../models";
+import constants from "../constants";
 
 class Home extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+        'customer': false,
+        'seller': false,
+        'driver': false
+    }
+    this.setCustomer = this.setCustomer.bind(this);
+    this.setSeller = this.setSeller.bind(this);
+    this.setDriver = this.setDriver.bind(this);
   }
 
   // TODO: smooth scrolling transitions
   // https://github.com/alvarotrigo/react-fullpage
 
+    componentDidMount() {
+        getEntityPersona(global.entityId, constants.PERSONA.customer, this.setCustomer);
+        getEntityPersona(global.entityId, constants.PERSONA.seller, this.setSeller);
+        getEntityPersona(global.entityId, constants.PERSONA.driver, this.setDriver);
+    }
+
+    setCustomer(boolean) {
+        this.setState({'customer': boolean});
+    }
+
+    setSeller(boolean) {
+        this.setState({'seller': boolean});
+    }
+
+    setDriver(boolean) {
+        this.setState({'driver': boolean});
+    }
 
   render() {
     return (
       <div id="home_container">
         <OrderTypeWelcome/>
-        <OrderTypeBuy/>
-        <OrderTypeSell/>
+          {this.state.customer ? (<OrderTypeBuy/>) : (null)}
+          {this.state.seller ? (<OrderTypeSell/>) : (null)}
       </div>
     );
   }
