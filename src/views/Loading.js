@@ -19,7 +19,7 @@ class Loading extends Component {
       case VIEW.home:
         return " home-menu";
       case VIEW.cardList:
-        return " buying-menu"; // TODO: Make conditional based on persona
+        return " customer-menu"; // TODO: Make conditional based on persona
       default:
         return " home-menu";
     }

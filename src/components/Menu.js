@@ -29,13 +29,15 @@ class Menu extends Component {
   viewSwitch(view){
     switch(view){
       case VIEW.login:
-        return " login-menu";
+        return "login-menu";
       case VIEW.home:
-        return " home-menu";
+        return "home-menu";
       case VIEW.cardList:
-        return " buying-menu"; // TODO: Make conditional based on persona
+        return "customer-menu";
+      case VIEW.invoice:
+        return "customer-menu";
       default:
-        return " home-menu";
+        return "home-menu";
     }
   }
 
@@ -72,7 +74,7 @@ class Menu extends Component {
           <s>Buying</s>
         </div>
         <div className={"menu_block"} onClick={() => global.presenter.startLoading()}>
-          <s>Loading Test.</s>
+          Loading Test.
         </div>
         <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
