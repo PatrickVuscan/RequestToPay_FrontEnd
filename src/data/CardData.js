@@ -28,11 +28,11 @@ function getOrdersOverview(entityId, persona, statusString, setOrdersData) {
 let ordersDataFormatter = {};
 
 // Contents
-const customer = constants.PERSONA.customer;
+const customer = constants.PERSONA.customer.name;
 const customerUnpaidString = constants.STATUS.customer.unpaid.string;
 const customerPaidString = constants.STATUS.customer.paid.string;
 const customerCompletedString = constants.STATUS.customer.completed.string
-const seller = constants.PERSONA.seller;
+const seller = constants.PERSONA.seller.name;
 const sellerIncompleteString = constants.STATUS.seller.incomplete.string;
 const sellerCompletedString = constants.STATUS.seller.completed.string;
 

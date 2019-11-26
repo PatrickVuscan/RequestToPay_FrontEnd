@@ -24,9 +24,9 @@ class Home extends Component {
   // https://github.com/alvarotrigo/react-fullpage
 
     componentDidMount() {
-        getEntityPersona(global.entityId, constants.PERSONA.customer, this.setCustomer);
-        getEntityPersona(global.entityId, constants.PERSONA.seller, this.setSeller);
-        getEntityPersona(global.entityId, constants.PERSONA.driver, this.setDriver);
+        getEntityPersona(global.entityId, constants.PERSONA.customer.name, this.setCustomer);
+        getEntityPersona(global.entityId, constants.PERSONA.seller.name, this.setSeller);
+        getEntityPersona(global.entityId, constants.PERSONA.driver.name, this.setDriver);
     }
 
     setCustomer(boolean) {

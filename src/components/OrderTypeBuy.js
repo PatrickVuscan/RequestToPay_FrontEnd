@@ -1,7 +1,8 @@
 import constants from "../constants";
 import React, { Component } from 'react';
 
-const customer = constants.PERSONA.customer;
+const customer = constants.PERSONA.customer.name;
+const customerString = constants.PERSONA.customer.string;
 const unpaid = constants.STATUS.customer.unpaid.string;
 const paid = constants.STATUS.customer.paid.string;
 const completed = constants.STATUS.customer.completed.string;
@@ -25,7 +26,7 @@ class OrderTypeBuy extends Component {
       <div id="buy_wrapper">
         <div className={"home_block"} id={"buy_block"}>
           <div className={"type_block"}>
-            <h1>Buying.</h1>
+            <h1>{customerString}</h1>
             <ul>
               <li onClick={() => this.transitionTo(unpaid)}> {unpaid} </li>
               <li onClick={() => this.transitionTo(paid)}> {paid} </li>
