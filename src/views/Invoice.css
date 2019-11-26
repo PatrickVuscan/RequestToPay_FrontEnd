@@ -1,7 +1,6 @@
 /* Invoice CSS */
 
 #invoice_container {
-    position: fixed;
     width: 100vw;
     height: 100vh;
     z-index: 9999;
@@ -9,6 +8,27 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
+}
+
+#invoice_header {
+    position: fixed;
+    top: 60px;
+    z-index: 900;
+    width: inherit;
+    margin: 0;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 0 10px 40px;
+
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: var(--WHITE);
+    font-size: 32px;
+}
+.invoice_header_item {
+    font-size: 16px;
 }
 
 .invoice_block {

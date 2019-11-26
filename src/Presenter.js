@@ -98,6 +98,15 @@ class Presenter extends Component {
     this.transitionTo(VIEW.home);
   }
 
+  // Request to Pay
+  // TODO: Add payment actions here.
+  processPayment(){
+    console.log("TEST: Process payment for Order #" + global.viewInvoiceID);
+    // TODO: add some function to backend.js to interact with Interac RTP
+    // TODO: add some function to backend.js to change status of Invoice to Paid
+    this.setState({currentView: VIEW.invoice,}); // return to view
+  }
+
   // Loading transition ------------------------//
 
   startLoading(){
