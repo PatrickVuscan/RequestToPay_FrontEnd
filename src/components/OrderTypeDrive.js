@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import constants from "../constants";
 
-const seller = constants.PERSONA.seller.name;
-const sellerString = constants.PERSONA.seller.string;
-const incomplete = constants.STATUS.seller.incomplete.string;
-const completed = constants.STATUS.seller.completed.string;
+const driver = constants.PERSONA.driver.name;
+const driverString = constants.PERSONA.driver.string;
+const incomplete = constants.STATUS.driver.incomplete.string;
+const completed = constants.STATUS.driver.completed.string;
 const VIEW = constants.VIEW;
 
-class OrderTypeSell extends Component {
+class OrderTypeDrive extends Component {
 
   constructor(props) {
     super(props);
@@ -16,17 +16,18 @@ class OrderTypeSell extends Component {
   }
 
   transitionTo(status) {
-    global.presenter.setViewPersona(seller);
+    global.presenter.setViewPersona(driver);
     global.presenter.setViewStatus(status);
     global.presenter.transitionTo(VIEW.cardList)
   }
 
   render() {
+    // TODO: Change sell_wrapper to drive_wrapper
     return (
       <div id="sell_wrapper">
         <div className={"home_block"}>
           <div className={"type_block"}>
-            <h1>{sellerString}</h1>
+            <h1>{driverString}</h1>
             <ul>
               <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
               <li onClick={() => this.transitionTo(completed)}>{completed}</li>
@@ -38,7 +39,7 @@ class OrderTypeSell extends Component {
   }
 }
 
-export default OrderTypeSell;
+export default OrderTypeDrive;
 
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import OrderTypeWelcome from "../components/OrderTypeWelcome";
 import OrderTypeBuy from "../components/OrderTypeBuy";
 import OrderTypeSell from "../components/OrderTypeSell";
+import OrderTypeDrive from "../components/OrderTypeDrive";
 import "./Home.css"
 import {getEntityPersona} from "../models";
 import constants from "../constants";
@@ -24,9 +25,9 @@ class Home extends Component {
   // https://github.com/alvarotrigo/react-fullpage
 
     componentDidMount() {
-        getEntityPersona(global.entityId, constants.PERSONA.customer, this.setCustomer);
-        getEntityPersona(global.entityId, constants.PERSONA.seller, this.setSeller);
-        getEntityPersona(global.entityId, constants.PERSONA.driver, this.setDriver);
+        getEntityPersona(global.entityId, constants.PERSONA.customer.name, this.setCustomer);
+        getEntityPersona(global.entityId, constants.PERSONA.seller.name, this.setSeller);
+        getEntityPersona(global.entityId, constants.PERSONA.driver.name, this.setDriver);
     }
 
     setCustomer(boolean) {
@@ -45,8 +46,9 @@ class Home extends Component {
     return (
       <div id="home_container">
         <OrderTypeWelcome/>
-          {this.state.customer ? (<OrderTypeBuy/>) : (null)}
-          {this.state.seller ? (<OrderTypeSell/>) : (null)}
+        {this.state.customer ? (<OrderTypeBuy/>) : (null)}
+        {this.state.seller ? (<OrderTypeSell/>) : (null)}
+        {this.state.driver ? (<OrderTypeDrive/>) : (null)}
       </div>
     );
   }
