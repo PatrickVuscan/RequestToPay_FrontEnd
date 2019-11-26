@@ -40,6 +40,16 @@ export default {
                 name: 'Completed',
                 string: 'Completed Orders.'
             }
+        },
+        driver: {
+            incomplete: {
+                name: 'Incomplete',
+                string: 'To Deliver.'
+            },
+            completed: {
+                name: 'Completed',
+                string: 'Completed Deliveries.'
+            }
         }
     },
     VIEW: {
