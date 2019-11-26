@@ -23,7 +23,7 @@ const global = {
   viewPersona: "ORIG",
   viewStatus: "orig",
   currentView: VIEW.login,
-
+  viewOrderID: '',
   viewInvoiceID: '',
 
   /* Style -------------------------------*/

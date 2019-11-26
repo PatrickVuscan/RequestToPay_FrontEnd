@@ -34,7 +34,7 @@ class Menu extends Component {
         return "home-menu";
       case VIEW.cardList:
         return "customer-menu";
-      case VIEW.invoice:
+      case VIEW.order:
         return "customer-menu";
       default:
         return "home-menu";

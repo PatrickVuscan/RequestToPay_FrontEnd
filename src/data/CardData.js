@@ -234,6 +234,7 @@ function isDelivered(orderData) {
 function getFormattedCustomerOrder(orderData, status) {
     let formatted = {
         'OID': orderData['OID'],
+        'InID': orderData['InID'],
         'OrderDate': orderData['OrderDate'].substring(0,10),
         'DeliveryDate': orderData['DeliveryDate'].substring(0,10),
         'Entity': orderData['SellerName'],
@@ -254,6 +255,7 @@ function getFormattedCustomerOrder(orderData, status) {
 function getFormattedSellerOrder(orderData, status) {
     let formatted = {
         'OID': orderData['OID'],
+        'InID': orderData['InID'],
         'OrderDate': orderData['OrderDate'].substring(0,10),
         'DeliveryDate': orderData['DeliveryDate'].substring(0,10),
         'Entity': orderData['CustomerName'],
