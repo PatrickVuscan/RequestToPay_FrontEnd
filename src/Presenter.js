@@ -15,7 +15,7 @@ import React, { Component } from 'react'
 import Home from "./views/Home"
 import Login from './views/Login'
 import {CardList} from "./views/CardList"
-import Invoice from "./views/Invoice";
+import Order from "./views/Order";
 import Menu from "./components/Menu"
 import Loading from "./views/Loading";
 import constants from "./constants";
@@ -39,7 +39,13 @@ class Presenter extends Component {
 
   // Transitions -----------------------------//
   // TODO: replace with hashmap pattern?
-  transitionTo(view){
+  /**
+   * A function which calls helper functions to setup data for the next transition
+   *
+   * @param view - The name of the view being transitioned to
+   * @param orderId - An optional parameter. This is necessary for the invoice view.
+   */
+  transitionTo(view, orderId){
     switch(view){
       case VIEW.login:
         this.transitionToLogOut();
@@ -50,8 +56,8 @@ class Presenter extends Component {
       case VIEW.cardList:
          this.transitionToCardList();
          break;
-      case VIEW.invoice:
-        this.transitionToInvoice();
+      case VIEW.order:
+        this.transitionToOrder(orderId);
         break;
       default:
         this.transitionToHome();
@@ -74,11 +80,12 @@ class Presenter extends Component {
     this.setState({currentView: VIEW.cardList,});
   }
 
-  // TODO: Remove when Buyer Invoice page created.
+  // TODO: Remove when Buyer Order page created.
   // This is currently testing that a function would be properly called.
-  transitionToInvoice() {
-    // console.log("TEST: Would Transition To Invoice - " + ID);
-    this.setState({currentView: VIEW.invoice,});
+  transitionToOrder(ID) {
+    console.log("TEST: In Transition To Order - " + ID);
+    this.setState({currentView: VIEW.order,});
+    this.setInvoiceID(ID);
   }
 
   // transitionToSellerList(){}       // TODO: Later
@@ -144,8 +151,8 @@ class Presenter extends Component {
         return <Home/>;
       case VIEW.cardList:
         return <CardList/>;
-      case VIEW.invoice:
-        return <Invoice/>;
+      case VIEW.order:
+        return <Order/>;
       default:
         return <Home/>;
     }

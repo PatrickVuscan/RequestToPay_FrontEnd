@@ -1,17 +1,18 @@
 /*
 * This component will display the contents of the invoice.
-* If this is a Buying Invoice, it will have an option to pay,
+* If this is a Buying Order, it will have an option to pay,
 * which will reveal a pay menu (transitioning to RTP)
 */
 
 import React, { Component } from 'react';
 import constants from "../constants";
-import "./Invoice.css"
+import "./Order.css"
 import PayMenu from "../components/PayMenu.js"
+import Invoice from "../components/Invoice";
 
 const VIEW = constants.VIEW;
 
-class Invoice extends Component {
+class Order extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +26,7 @@ class Invoice extends Component {
     this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
   }
 
-  // TODO: Getting Invoice Logic
+  // TODO: Getting Order Logic
 
   render() {
     const { payMenuOpen } = this.state;
@@ -33,7 +34,7 @@ class Invoice extends Component {
     return (
       <div id={"invoice_container"}>
 
-        {/* Invoice Contents goes Here */}
+        {/* Order Contents goes Here */}
         <div
           className={"invoice_block"}
         >
@@ -48,7 +49,7 @@ class Invoice extends Component {
         <div className={"invoice_block"}>
           ~~~~~~
         </div>
-        {/* Invoice Contents goes Here */}
+        {/* Order Contents goes Here */}
 
 
         {/* PayMenu interaction IF status is UNPAID */}
@@ -64,6 +65,7 @@ class Invoice extends Component {
             invoice={this}
           />
         }
+        <Invoice />
       </div>
 
     );
@@ -71,4 +73,4 @@ class Invoice extends Component {
 
 }
 
-export default Invoice;
+export default Order;
