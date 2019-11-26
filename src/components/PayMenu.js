@@ -1,4 +1,4 @@
-/* Pay Menu is the payment confirmation menu for the Invoice View */
+/* Pay Menu is the payment confirmation menu for the Order View */
 
 import React, {Component} from "react";
 import constants from "../constants";
@@ -22,7 +22,7 @@ class PayMenu extends Component {
   }
 
   togglePayMenuOpen(){
-    this.props.invoice.togglePayMenuOpen()
+    this.props.order.togglePayMenuOpen()
   }
 
   render() {

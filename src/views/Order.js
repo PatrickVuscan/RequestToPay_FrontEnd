@@ -1,17 +1,18 @@
 /*
 * This component will display the contents of the invoice.
-* If this is a Buying Invoice, it will have an option to pay,
+* If this is a Buying Order, it will have an option to pay,
 * which will reveal a pay menu (transitioning to RTP)
 */
 
 import React, { Component } from 'react';
 import constants from "../constants";
-import "./Invoice.css"
+import "./Order.css"
 import PayMenu from "../components/PayMenu.js"
+import Invoice from "../components/Invoice";
 
 const VIEW = constants.VIEW;
 
-class Invoice extends Component {
+class Order extends Component {
 
   constructor(props) {
     super(props);
@@ -25,43 +26,29 @@ class Invoice extends Component {
     this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
   }
 
-  // TODO: Getting Invoice Logic
+  // TODO: Getting Order Logic
 
   render() {
     const { payMenuOpen } = this.state;
 
     return (
-      <div id={"invoice_container"}>
-
-        {/* Invoice Contents goes Here */}
-        <div
-          className={"invoice_block"}
-        >
-          INVOICE #{global.viewInvoiceID}
+      <div id={"order_container"}>
+        <div className={"order_block"}>
+          ORDER #{global.viewInvoiceID}
         </div>
-        <div className={"invoice_block"}>
-          SOME INFORMATION
-        </div>
-        <div className={"invoice_block"}>
-          SOME INFORMATION
-        </div>
-        <div className={"invoice_block"}>
+        <Invoice />
+        <div className={"order_block"}>
           ~~~~~~
         </div>
-        {/* Invoice Contents goes Here */}
-
-
+        {/* Order Contents goes Here */}
         {/* PayMenu interaction IF status is UNPAID */}
-        <div
-          className={"invoice_block"}
-          onClick={() => this.togglePayMenuOpen()}
-        >
+        <div className={"order_block"} onClick={() => this.togglePayMenuOpen()}>
           ~ Pay Menu Button ~
         </div>
         {payMenuOpen &&
           <PayMenu
             payMenuOpen={this.state.payMenuOpen}
-            invoice={this}
+            order={this}
           />
         }
       </div>
@@ -71,4 +58,4 @@ class Invoice extends Component {
 
 }
 
-export default Invoice;
+export default Order;

@@ -98,7 +98,6 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
                 alert(`There was an error: ${err.status} -- ${err.message}`);
             });
     }, 1000);
-
 }
 
 /**
@@ -132,7 +131,82 @@ function getEntityPersona(entityId, persona, setPersona) {
     }, 1000);
 }
 
+/**
+ * Get the information (entities, statuses and dates) related to the order with id 'orderId'.
+ *
+ * @param orderId - The id of the order
+ * @param setOrderInfo - A callback function, which is provided the formatted order info
+ * @param formatter - A function which is used to format the order info
+ */
+function getOrderInfo(orderId, setOrderInfo, formatter) {
+    console.log("ORDERID: " + orderId);
+    const options = {
+        method: 'GET',
+        uri: `${config.api.URL}/orderUInvoiceUEntity?OID=${orderId}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    global.presenter.startLoading();
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                setOrderInfo(formatter(res));
+                global.presenter.stopLoading();
+            })
+            .catch(function (err) {
+                global.presenter.stopLoading();
+            });
+    }, 1000);
+}
+
+/**
+ * Get the items pertaining to the invoice of id 'invoiceId'.
+ *
+ * @param invoiceId - The id of the invoice
+ * @param setOrderItems - A callback function, which is provided the formatted order items
+ * @param formatter - A function which is used to format the order items
+ * @param setOrderTotal - An optional function, which is used to set the calculated total invoice cost
+ */
+function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
+    const options = {
+        method: 'GET',
+        uri: `${config.api.URL}/invoiceItems?InID=${invoiceId}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+    console.log(invoiceId);
+
+    global.presenter.startLoading();
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                console.log("Success");
+                console.log(res);
+                if (setOrderTotal === undefined) {
+                    console.log("No Set Orders Total");
+                    setOrderItems(formatter(res));
+                } else {
+                    console.log("Set Orders Total");
+                    setOrderItems(formatter(res, setOrderTotal));
+                }
+                global.presenter.stopLoading();
+            })
+            .catch(function (err) {
+                global.presenter.stopLoading();
+            });
+    }, 1000);
+}
+
 export {performLogin,
     getEntityInfoByUsername,
     getOrdersByEntityAndPersona,
-    getEntityPersona};
+    getEntityPersona,
+    getOrderInfo,
+    getInvoiceItems};
