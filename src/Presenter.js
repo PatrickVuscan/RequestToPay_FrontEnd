@@ -20,11 +20,8 @@ import Menu from "./components/Menu"
 import Loading from "./views/Loading";
 import constants from "./constants";
 import './Presenter.css'
-import {getEntityIdByUsername} from './models'
 
 const VIEW = constants.VIEW;
-const PERSONA = constants.PERSONA;
-const STATUS = constants.STATUS;
 
 // TODO: Assure that we can open a card list of ANY TYPE. Currently only 'Customer Unpaid' is an option.
 
