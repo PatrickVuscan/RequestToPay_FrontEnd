@@ -6,7 +6,6 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    background-color: var(--LIGHT_ORANGE);
     padding: 120px 0 50px 0;
 }
 
@@ -21,7 +20,6 @@
     flex-direction: row;
     align-items: center;
     padding-left: 40px;
-    background-color: var(--MID_ORANGE);
 
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
@@ -35,6 +33,10 @@
     width: 300px;
     padding: 20px 0;
     border-bottom: 3px solid #eee;
+}
+
+.InID{
+    display: none;
 }
 
 .OID {

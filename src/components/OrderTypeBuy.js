@@ -7,6 +7,7 @@ const unpaid = constants.STATUS.customer.unpaid.string;
 const paid = constants.STATUS.customer.paid.string;
 const completed = constants.STATUS.customer.completed.string;
 const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 class OrderTypeBuy extends Component {
 
@@ -23,23 +24,20 @@ class OrderTypeBuy extends Component {
 
   render() {
     return (
-      <div id="buy_wrapper">
-        <div className={"home_block"} id={"buy_block"}>
-          <div className={"type_block"}>
-            <h1>{customerString}</h1>
-            <ul>
-              <li onClick={() => this.transitionTo(unpaid)}> {unpaid} </li>
-              <li onClick={() => this.transitionTo(paid)}> {paid} </li>
-              <li onClick={() => this.transitionTo(completed)}> {completed} </li>
-            </ul>
+        <div id="buy_wrapper">
+          <div className={"home_block"} id={"buy_block"}>
+            <div className={"type_block"}>
+              <h1>{customerString}</h1>
+              <ul>
+                <li onClick={() => this.transitionTo(unpaid)}> {unpaid} </li>
+                <li onClick={() => this.transitionTo(paid)}> {paid} </li>
+                <li onClick={() => this.transitionTo(completed)}> {completed} </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
     );
   }
 }
 
 export default OrderTypeBuy;
-
-
-

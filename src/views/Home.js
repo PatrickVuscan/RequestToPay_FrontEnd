@@ -6,23 +6,24 @@ import OrderTypeDrive from "../components/OrderTypeDrive";
 import "./Home.css"
 import {getEntityPersona} from "../models";
 import constants from "../constants";
+import Order from "./Order";
 
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-        'customer': false,
-        'seller': false,
-        'driver': false
+    constructor(props) {
+        super(props);
+        this.state = {
+            'customer': false,
+            'seller': false,
+            'driver': false
+        };
+        this.setCustomer = this.setCustomer.bind(this);
+        this.setSeller = this.setSeller.bind(this);
+        this.setDriver = this.setDriver.bind(this);
     }
-    this.setCustomer = this.setCustomer.bind(this);
-    this.setSeller = this.setSeller.bind(this);
-    this.setDriver = this.setDriver.bind(this);
-  }
 
-  // TODO: smooth scrolling transitions
-  // https://github.com/alvarotrigo/react-fullpage
+    // TODO: smooth scrolling transitions
+    // https://github.com/alvarotrigo/react-fullpage
 
     componentDidMount() {
         getEntityPersona(global.entityId, constants.PERSONA.customer.name, this.setCustomer);
@@ -42,18 +43,16 @@ class Home extends Component {
         this.setState({'driver': boolean});
     }
 
-  render() {
-    return (
-        <div>
+    render() {
+        return (
             <div id="home_container">
                 <OrderTypeWelcome/>
-                {this.state.customer ? (<OrderTypeBuy/>) : (null)}
-                {this.state.seller ? (<OrderTypeSell/>) : (null)}
-                {this.state.driver ? (<OrderTypeDrive/>) : (null)}
+                {this.state.customer && <OrderTypeBuy/>}
+                {this.state.seller && <OrderTypeSell/>}
+                {this.state.driver && <OrderTypeDrive/>}
             </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 
 export default Home;
