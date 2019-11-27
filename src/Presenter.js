@@ -168,9 +168,8 @@ class Presenter extends Component {
 
   // Order Methods ---------------------------//
 
-  makeorderHandler(transition){
-    this.transitionTo(VIEW.makeorder)
-    // transition(unpaid);
+  makeorderHandler(){
+    this.transitionTo(VIEW.home)
   }
 
   // Invoice Methods ---------------------------//

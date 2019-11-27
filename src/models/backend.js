@@ -197,24 +197,33 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
  * Inserts a new invoice into the database
  *
  * @param details - contains the details of the order being inserted into the backend
- * @param topage - contains the method to go the unpaid orders page for customer
  * @param makeorderHandler - handles the transition from actioning invoice page to the home page
  */
-function performMakeOrder(details, topage, makeorderHandler) {
+//TODO need to solve how to load invoice items aka how to set parameter of a query or smth
+function performMakeOrder(details, makeorderHandler) {
     const options = {
         method: 'PUT',
         uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=${details.driverID}&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
-
+        body: JSON.stringify({
+            "invoiceItems": [
+                {
+                    "IID": details.itemID,
+                    "Quantity": details.itemquantity
+                }
+            ]
+        }),
         headers: {
             'User-Agent': 'Request-Promise'
         },
         json: true // Automatically parses the JSON string in the response
     };
 
+    //TODO use res where res is the ID of the new order
+
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                makeorderHandler(topage); // passing
+                makeorderHandler(); // passing
             })
             .catch(function (err) {
                 alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);
