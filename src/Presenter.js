@@ -14,6 +14,7 @@
 import React, { Component } from 'react'
 import Home from "./views/Home"
 import Login from './views/Login'
+import SignUp from "./views/SignUp";
 import {CardList} from "./views/CardList"
 import Order from "./views/Order";
 import Menu from "./components/Menu"
@@ -34,6 +35,8 @@ class Presenter extends Component {
       isLoading: false,
     };
     this.loginHandler = this.loginHandler.bind(this);
+    this.toSignUpHandler = this.toSignUpHandler.bind(this);
+    this.registerHandler = this.registerHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
   }
 
@@ -49,6 +52,9 @@ class Presenter extends Component {
     switch(view){
       case VIEW.login:
         this.transitionToLogOut();
+        break;
+      case VIEW.signup:
+        this.transitionToSignUp();
         break;
       case VIEW.home:
         this.transitionToHome();
@@ -70,6 +76,10 @@ class Presenter extends Component {
     this.setState({currentView: VIEW.login});
     global.loggedIn = false;
     global.username = 'Not Logged In!';
+  }
+
+  transitionToSignUp(){
+    this.setState({currentView: VIEW.signup});
   }
 
   transitionToHome(){
@@ -100,6 +110,27 @@ class Presenter extends Component {
     this.setUsername(username);
     this.setEntityId(entityId);
     this.transitionTo(VIEW.home);
+  }
+
+  // Sign Up Methords ---------------------------//
+
+  toSignUpHandler(){
+    this.transitionTo(VIEW.signup);
+  }
+
+  registerHandler(username){
+    this.setLoggedIn(true);
+    this.setUsername(username);
+    this.transitionTo(VIEW.home);
+  }
+
+  // Request to Pay
+  // TODO: Add payment actions here.
+  processPayment(){
+    console.log("TEST: Process payment for Order #" + global.viewInvoiceID);
+    // TODO: add some function to backend.js to interact with Interac RTP
+    // TODO: add some function to backend.js to change status of Invoice to Paid
+    this.setState({currentView: VIEW.invoice,}); // return to view
   }
 
   // Loading transition ------------------------//
@@ -147,6 +178,8 @@ class Presenter extends Component {
     switch(view){
       case VIEW.login:
         return <Login/>;
+      case VIEW.signup:
+        return <SignUp/>;
       case VIEW.home:
         return <Home/>;
       case VIEW.cardList:

@@ -34,6 +34,8 @@ class Menu extends Component {
         return " home-menu";
       case VIEW.cardList:
         return " buying-menu"; // TODO: Make conditional based on persona
+      case VIEW.invoice:
+        return "customer-menu";
       default:
         return " home-menu";
     }

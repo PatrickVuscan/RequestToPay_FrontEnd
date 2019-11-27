@@ -55,6 +55,7 @@ export default {
     VIEW: {
         login: 'login',
         home: 'home',
+        signup: 'signup',
         orderList: 'orderList',
         cardList: 'cardList',
         order: 'order',

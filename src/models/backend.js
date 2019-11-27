@@ -34,6 +34,35 @@ function performLogin(view, credentials, successfulLoginHandler) {
 }
 
 /**
+ * Register a new user.
+ *
+ * @param view - the view that initiated the login.
+ * @param credentials - credentials.username and credentials.password contain the respect credentials to validate.
+ * @param successfulRegisterHandlerHandler - A callback function, which is used upon a successful register.
+ */
+function performRegister(view, credentials, successfulRegisterHandler) {
+    view.setState({loading: true});
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/entity?Name=${credentials.name}&Username=${credentials.username}&Password=${credentials.password}&BillingAddress=${credentials.address}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                successfulRegisterHandler(credentials.username, res.EID); // passing
+            })
+            .catch(function (err) {
+                alert(`The register was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+        view.setState({loading: false});
+    }, 2000); // Set Delay (to test the loading animation)
+}
+
+/**
  * Get the information related to the entity with username 'username'.
  * Rather than returning a value, 'setEntityInfo' is a callback function provided the data.
  *
@@ -205,6 +234,7 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
 }
 
 export {performLogin,
+    performRegister,
     getEntityInfoByUsername,
     getOrdersByEntityAndPersona,
     getEntityPersona,

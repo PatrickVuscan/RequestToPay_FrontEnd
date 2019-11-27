@@ -29,7 +29,7 @@ body {
   width: 100vw;
 
   /* FONT */
-  @import url('https://fonts.googleapis.com/css?family=Cabin:400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,500,700&display=swap');
 
 }
 
@@ -49,18 +49,28 @@ body {
 .home-menu {
   background-color: var(--RED);
 }
-/*.home-accent{*/
-/*    background-color: var(--MID_RED);*/
-/*}*/
+.home-accent{
+  background-color: var(--MID_RED);
+}
 .home-background {
   background-color: var(--LIGHT_RED);
 }
-.buying-menu {
+.customer-menu {
   background-color: var(--ORANGE);
 }
-.buying-accent {
+.customer-accent {
   background-color: var(--MID_ORANGE);
 }
-.buying-background {
+.customer-background {
   background-color: var(--LIGHT_ORANGE);
+}
+
+.seller-menu {
+  background-color: var(--DARK_BLUE);
+}
+.seller-accent {
+  background-color: var(--BLUE);
+}
+.seller-background {
+  background-color: var(--LIGHT_BLUE);
 }

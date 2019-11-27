@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Login.css"
-import {performLogin} from "../models/index"
+import {performLogin, performToSignUp } from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
 
@@ -16,7 +16,8 @@ class Login extends Component {
         loading: false,
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
-  }
+    this.handleSignUpClick = this.handleSignUpClick.bind(this);
+    }
 
   handleLoginClick(e){
     e.preventDefault();
@@ -26,6 +27,11 @@ class Login extends Component {
     };
     performLogin(this, credentials, global.presenter.loginHandler);
   }
+
+  handleSignUpClick(e){
+	    e.preventDefault();
+	    performToSignUp(this, global.presenter.toSignUpHandler);
+	}
 
   render(){
     const { loading } = this.state;
@@ -49,6 +55,12 @@ class Login extends Component {
               type="submit"
               value="Sign in."/>
           </form>
+            <form onSubmit={this.handleSignUpClick}>
+                <input
+                    id="button"
+                    type="submit"
+                    value="Sign up."/>
+            </form>
         </div>
       </div>
     )
