@@ -63,6 +63,15 @@
     background-size: cover;
 }
 
+#driver_wrapper {
+    background-color: var(--PURPLE);
+    background-image: url(/images/bg/bg_driver.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
 
 
 /* Maximum aspect ratio */
