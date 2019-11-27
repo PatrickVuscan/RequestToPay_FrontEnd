@@ -69,16 +69,19 @@ class Presenter extends Component {
 
   transitionToLogOut(){
     this.setState({currentView: VIEW.login});
+    this.setCurrentView(VIEW.login);
     global.loggedIn = false;
     global.username = 'Not Logged In!';
   }
 
   transitionToHome(){
     this.setState({currentView: VIEW.home});
+    this.setCurrentView(VIEW.home);
   }
 
   transitionToCardList(){
     this.setState({currentView: VIEW.cardList,});
+    this.setCurrentView(VIEW.cardList);
   }
 
   // TODO: Remove when Buyer Order page created.
@@ -86,6 +89,7 @@ class Presenter extends Component {
   transitionToOrder(orderId, invoiceId) {
     console.log("TEST: In Transition To Order - " + orderId);
     this.setState({currentView: VIEW.order,});
+    this.setCurrentView(VIEW.order);
     this.setOrderID(orderId);
     this.setInvoiceID(invoiceId);
   }

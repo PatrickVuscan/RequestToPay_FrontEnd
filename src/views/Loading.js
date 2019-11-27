@@ -4,6 +4,7 @@ import loader from "../assets/loader.gif"
 import constants from "../constants";
 
 const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 class Loading extends Component {
 
@@ -19,9 +20,24 @@ class Loading extends Component {
       case VIEW.home:
         return " home-menu";
       case VIEW.cardList:
-        return " customer-menu"; // TODO: Make conditional based on persona
+        return this.backgroundSwitch();
+      case VIEW.order:
+        return this.backgroundSwitch();
       default:
         return " home-menu";
+    }
+  }
+
+  backgroundSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-menu";
+      case PERSONA.customer.name:
+        return "customer-menu";
+      case PERSONA.driver.name:
+        return "driver-menu";
+      default:
+        return "home-menu";
     }
   }
 

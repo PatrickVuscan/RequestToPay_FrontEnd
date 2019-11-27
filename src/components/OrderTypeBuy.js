@@ -7,6 +7,7 @@ const unpaid = constants.STATUS.customer.unpaid.string;
 const paid = constants.STATUS.customer.paid.string;
 const completed = constants.STATUS.customer.completed.string;
 const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 class OrderTypeBuy extends Component {
 

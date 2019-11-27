@@ -5,6 +5,7 @@ import './Menu.css'
 import constants from "../constants";
 
 const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 class Menu extends Component {
 
@@ -33,13 +34,21 @@ class Menu extends Component {
       case VIEW.home:
         return "home-menu";
       case VIEW.cardList:
-        return "customer-menu";
+        return this.userSwitch();
       case VIEW.order:
-        return "customer-menu";
+        return this.userSwitch();
       default:
         return "home-menu";
     }
   }
+  userSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-menu";
+      case PERSONA.customer.name:
+        return "customer-menu";
+    }
+}
 
   render() {
     const {

@@ -5,6 +5,7 @@ import "./CardList.css"
 import constants from "../constants";
 
 const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 /**
  * A component with a high-level view of every order of viewStatus 'viewStatus' where the entity 'entityId'
@@ -50,10 +51,36 @@ export class CardList extends Component {
         return cards;
     }
 
+    // Change menu class to change colors.
+    accentSwitch() {
+        switch(global.viewPersona) {
+            case PERSONA.seller.name:
+                return "seller-accent";
+            case PERSONA.customer.name:
+                return "customer-accent";
+            case PERSONA.driver.name:
+                return "driver-accent";
+            default:
+                return "home-accent";
+        }
+    }
+    backgroundSwitch() {
+        switch(global.viewPersona) {
+            case PERSONA.seller.name:
+                return "seller-background";
+            case PERSONA.customer.name:
+                return "customer-background";
+            case PERSONA.driver.name:
+                return "driver-background";
+            default:
+                return "home-background";
+        }
+    }
+
     render() {
         return (
-            <div id={'CardList_container'}>
-                <div id={'CardList_header'}>
+            <div id={'CardList_container'} className={this.backgroundSwitch()}>
+                <div id={'CardList_header'} className={this.accentSwitch()}>
                     {global.viewStatus}
                 </div>
                 {this.createCards()}
