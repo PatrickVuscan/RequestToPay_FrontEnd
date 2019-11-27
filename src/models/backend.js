@@ -36,7 +36,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
 /**
  * Register a new user.
  *
- * @param view - the view that initiated the login.
+ * @param view - the view that initiated the register.
  * @param credentials - credentials.username and credentials.password contain the respect credentials to validate.
  * @param successfulRegisterHandlerHandler - A callback function, which is used upon a successful register.
  */
@@ -194,6 +194,33 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
 }
 
 /**
+ * Inserts a new invoice into the database
+ *
+ * @param details - contains the delivery date and the ID that this new invoice replaces
+ * @param invoiceHandler - handles the transition from actioning invoice page to the home page
+ */
+function performActionInvoice(details, invoiceHandler) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/invoice?DeliveryDate=${details.deliverydate}&NextInID=${details.nextinID}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                invoiceHandler(); // passing
+            })
+            .catch(function (err) {
+                alert(`The action was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
  * Get the items pertaining to the invoice of id 'invoiceId'.
  *
  * @param invoiceId - The id of the invoice
@@ -240,4 +267,5 @@ export {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
+    performActionInvoice,
     getInvoiceItems};

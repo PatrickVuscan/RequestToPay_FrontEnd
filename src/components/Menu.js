@@ -73,7 +73,9 @@ class Menu extends Component {
         <div className={"menu_block"}>
           <s>Buying</s>
         </div>
-
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.invoice)}>
+          Action an invoice.
+        </div>
         <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.setup)}>
           Set up.
         </div>

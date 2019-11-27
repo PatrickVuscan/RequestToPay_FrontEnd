@@ -60,6 +60,7 @@ export default {
         login: 'login',
         home: 'home',
         signup: 'signup',
+        invoice: 'invoice',
         setup: 'setup',
         orderList: 'orderList',
         cardList: 'cardList',

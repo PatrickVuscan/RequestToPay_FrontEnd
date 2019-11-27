@@ -16,6 +16,7 @@ import Home from "./views/Home"
 import Login from './views/Login'
 import SignUp from "./views/SignUp";
 import SetUp from "./views/SetUp";
+import Invoice from "./views/invoice";
 import {CardList} from "./views/CardList"
 import Order from "./views/Order";
 import Menu from "./components/Menu"
@@ -61,6 +62,9 @@ class Presenter extends Component {
       case VIEW.setup:
         this.transitionToSetUp();
         break;
+      case VIEW.invoice:
+        this.transitionToInvoice();
+        break;
       case VIEW.home:
         this.transitionToHome();
         break;
@@ -89,6 +93,10 @@ class Presenter extends Component {
 
   transitionToSetUp(){
     this.setState({currentView: VIEW.setup});
+  }
+
+  transitionToInvoice(){
+    this.setState({currentView: VIEW.invoice});
   }
 
   transitionToHome(){
@@ -145,6 +153,12 @@ class Presenter extends Component {
     shifts.setCustomer(personas.customer);
     shifts.setSeller(personas.seller);
     shifts.setDriver(personas.driver);
+    this.transitionTo(VIEW.home);
+  }
+
+  // Invoice Methods ---------------------------//
+
+  invoiceHandler(){
     this.transitionTo(VIEW.home);
   }
 
@@ -206,6 +220,8 @@ class Presenter extends Component {
         return <SignUp/>;
       case VIEW.setup:
         return <SetUp/>;
+      case VIEW.invoice:
+        return <Invoice/>;
       case VIEW.home:
         return <Home/>;
       case VIEW.cardList:
