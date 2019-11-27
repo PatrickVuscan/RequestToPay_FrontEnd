@@ -139,6 +139,8 @@ class Presenter extends Component {
 
   // Set Up Methods ---------------------------//
 
+
+  //TODO: this method doesn't work ~consider having backend make changes to persona directly
   personaSetHandler(shifts, personas){
     shifts.setCustomer(personas.customer);
     shifts.setSeller(personas.seller);

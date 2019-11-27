@@ -29,7 +29,6 @@ class OrderTypeSell extends Component {
           <div className={"type_block"}>
             <h1>{sellerString}</h1>
             <ul>
-              {/*<li onClick={() => this.transitionTo(action_invoice)}>{action_invoice}</li>*/}
               <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
               <li onClick={() => this.transitionTo(completed)}>{completed}</li>
             </ul>
