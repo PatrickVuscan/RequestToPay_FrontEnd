@@ -35,6 +35,10 @@
     border-bottom: 3px solid #eee;
 }
 
+.InID{
+    display: none;
+}
+
 .OID {
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
