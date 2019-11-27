@@ -39,8 +39,12 @@
 #order_OrderId {
     font-weight: 700;
     font-size: 24px;
+    padding-bottom: 5px;
 }
-
+#order_invoiceID {
+    font-weight: 700;
+    font-size: 18px;
+}
 .order_block {
     display: flex;
     flex-direction: column;

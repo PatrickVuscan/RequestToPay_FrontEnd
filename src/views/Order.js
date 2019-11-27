@@ -93,11 +93,19 @@ class Order extends Component {
   }
 
   getPayButton() {
+    if (global.viewPersona === PERSONA.customer.name){
     return(
         <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
           [[ Pay Now! ]]
         </div>
-    );
+    );}
+  }
+
+  getPayMenu() {
+    if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
+      return(
+        <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
+      );}
   }
 
   // TODO: Getting Invoice Logic
@@ -106,6 +114,7 @@ class Order extends Component {
     const { payMenuOpen, info, items, total } = this.state;
     const headerInfo = this.getHeaderInfo();
     const payButton = this.getPayButton();
+    const payMenu = this.getPayMenu();
 
     return (
       <div id={"order_container"} className={this.backgroundSwitch()}>
@@ -117,15 +126,13 @@ class Order extends Component {
           <div className={"order_block"}>
             <div className={"order_invoice"} id={"order_block_spacer"}/>
             <div className={"order_invoice"}>
-              Invoice #{info["InID"]}
+              <div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>
               <Invoice info={info} items={items} total={total}/>
             </div>
           </div>
         </div>
-        {/* PayMenu interaction IF status is UNPAID */}
-        {payMenuOpen && <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>}
+        {payMenu}
       </div>
-
     );
   }
 
