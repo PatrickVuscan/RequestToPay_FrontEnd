@@ -54,25 +54,40 @@ class Order extends Component {
     this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
   }
 
-  viewSwitch(){
+  backgroundSwitch(){
     switch(global.viewPersona){
-      case PERSONA.seller:
+      case PERSONA.seller.name:
         return "seller-background";
-      case PERSONA.customer:
+      case PERSONA.customer.name:
         return "customer-background";
+      case PERSONA.driver.name:
+        return "driver-background";
       default:
         return "home-background"
+    }
+  }
+
+  accentSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-accent";
+      case PERSONA.customer.name:
+        return "customer-accent";
+      case PERSONA.driver.name:
+        return "driver-accent";
+      default:
+        return "home-accent";
     }
   }
 
   getHeaderInfo() {
     let info = this.state.info;
     return(
-        <div id={"GeneralInfo"}>
-          <div id={"InvoiceId"}> Invoice #{info["InID"]}</div>
-          <div id={"OrderDate"}> Ordered: {info["OrderDate"]}</div>
-          <div id={"DeliveryDate"}> Expected Delivery: {info["DeliveryDate"]}</div>
-          <div id={"Status"}> Status: {info["Status"]}</div>
+        <div id={"order_GeneralInfo"}>
+          <div id={"order_OrderId"} className={"order_header_item"}> Order #{global.viewOrderID}</div>
+          <div id={"order_OrderDate"} className={"order_header_item"}> Ordered: {info["OrderDate"]}</div>
+          <div id={"order_DeliveryDate"} className={"order_header_item"}> Expected Delivery: {info["DeliveryDate"]}</div>
+          <div id={"order_Status"} className={"order_header_item"}> Status: {info["Status"]}</div>
         </div>
     );
   }
@@ -93,15 +108,20 @@ class Order extends Component {
     const payButton = this.getPayButton();
 
     return (
-      <div id={"order_container"} className={this.viewSwitch()}>
-        <div id={'order_header'} className={'customer-accent'}>
+      <div id={"order_container"} className={this.backgroundSwitch()}>
+        <div id={'order_header'} className={this.accentSwitch()}>
           {headerInfo}
           {payButton}
         </div>
-        <div className={"order_block"}>
-          ORDER #{global.viewOrderID}
+        <div id={"order_wrapper"}>
+          <div className={"order_block"}>
+            <div className={"order_invoice"} id={"order_block_spacer"}/>
+            <div className={"order_invoice"}>
+              Invoice #{info["InID"]}
+              <Invoice info={info} items={items} total={total}/>
+            </div>
+          </div>
         </div>
-        <Invoice info={info} items={items} total={total}/>
         {/* PayMenu interaction IF status is UNPAID */}
         {payMenuOpen && <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>}
       </div>

@@ -16,7 +16,7 @@ class Home extends Component {
         'customer': false,
         'seller': false,
         'driver': false
-    }
+    };
     this.setCustomer = this.setCustomer.bind(this);
     this.setSeller = this.setSeller.bind(this);
     this.setDriver = this.setDriver.bind(this);
