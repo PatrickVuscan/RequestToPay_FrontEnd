@@ -6,6 +6,7 @@ import OrderTypeDrive from "../components/OrderTypeDrive";
 import "./Home.css"
 import {getEntityPersona} from "../models";
 import constants from "../constants";
+import Order from "./Order";
 
 class Home extends Component {
 
@@ -46,9 +47,9 @@ class Home extends Component {
     return (
       <div id="home_container">
         <OrderTypeWelcome/>
-        {this.state.customer ? (<OrderTypeBuy/>) : (null)}
-        {this.state.seller ? (<OrderTypeSell/>) : (null)}
-        {this.state.driver ? (<OrderTypeDrive/>) : (null)}
+        {this.state.customer && <OrderTypeBuy/>}
+        {this.state.seller && <OrderTypeSell/>}
+        {this.state.driver && <OrderTypeDrive/>}
       </div>
     );
   }

@@ -38,12 +38,13 @@ export class CardList extends Component {
         let keys = Object.keys(this.state.ordersData);
         for (let k = 0; k < keys.length; k++) {
             let key = keys[k];
-            let id = this.state.ordersData[key].OID;
+            let orderId = this.state.ordersData[key].OID;
+            let invoiceId = this.state.ordersData[key].InID;
             let card = <Card
-                id={id}
+                id={orderId}
                 key={key}
                 orderData={this.state.ordersData[key]}
-                onClick={() => global.presenter.transitionTo(VIEW.order, id)}/>;
+                onClick={() => global.presenter.transitionTo(VIEW.order, orderId, invoiceId)}/>;
             cards.push(card);
         }
         return cards;
