@@ -47,6 +47,10 @@ class Menu extends Component {
         return "seller-menu";
       case PERSONA.customer.name:
         return "customer-menu";
+      case PERSONA.driver.name:
+        return "driver-menu";
+      default:
+        return "home-menu";
     }
 }
 

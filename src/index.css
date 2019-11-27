@@ -15,8 +15,9 @@
   --ORANGE: #F77700;
   --MID_ORANGE: #ff9a00;
   --LIGHT_ORANGE: #ffb21f;
-  --PURPLE: #7849B9;
-  --LIGHT_PURPLE: #ADA9F5;
+  --DARK_PURPLE: #561f55;
+  --PURPLE: #8b2f97;
+  --LIGHT_PURPLE: #cf56a1;
   --GREEN: #138467;
   --LIGHT_GREEN: #85D8C5;
   --PINK: #F2609E;
@@ -47,7 +48,7 @@ body {
   background-color: transparent;
 }
 .home-menu {
-  background-color: var(--RED);
+  background-color: transparent;
 }
 .home-accent{
     background-color: var(--MID_RED);
@@ -73,4 +74,14 @@ body {
 }
 .seller-background {
   background-color: var(--LIGHT_BLUE);
+}
+
+.driver-menu {
+  background-color: var(--DARK_PURPLE);
+}
+.driver-accent {
+  background-color: var(--PURPLE);
+}
+.driver-background {
+  background-color: var(--LIGHT_PURPLE);
 }

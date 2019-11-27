@@ -22,9 +22,8 @@ class OrderTypeDrive extends Component {
   }
 
   render() {
-    // TODO: Change sell_wrapper to drive_wrapper
     return (
-      <div id="sell_wrapper">
+      <div id="driver_wrapper">
         <div className={"home_block"}>
           <div className={"type_block"}>
             <h1>{driverString}</h1>
