@@ -59,27 +59,27 @@ class MakeOrder extends Component {
                     <form onSubmit={this.handlerInvoiceClick}>
                         <input
                             className={"field"}
-                            required placeholder="User ID?"
+                            required placeholder="User ID"
                             onChange={(event) => {this.setState({buyeriID: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Seller ID?"
+                            required placeholder="Seller ID"
                             onChange={(event) => {this.setState({sellerID: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Deliverer ID?"
+                            required placeholder="Deliverer ID"
                             onChange={(event) => {this.setState({driverID: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Today's date?"
+                            required placeholder="Today's date"
                             onChange={(event) => {this.setState({orderDate: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Delivery date?"
+                            required placeholder="Delivery date"
                             onChange={(event) => {this.setState({deliveryDate: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="What are you buying?"
+                            required placeholder="What are you buying"
                             onChange={(event) => {this.setState({nextinID: event.target.value})}}/>
                         <input
                             id="button"
