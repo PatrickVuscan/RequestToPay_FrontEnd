@@ -9,10 +9,11 @@ import {performLogin,
     getOrderInfo,
     getInvoiceItems} from "./backend";
 
-import { performToSignUp } from "./cache";
+import { performToSignUp, performPersonaSet } from "./cache";
 
 export {performLogin,
     performToSignUp,
+    performPersonaSet,
     performRegister,
     getEntityInfoByUsername,
     getOrdersByEntityAndPersona,

@@ -32,6 +32,10 @@ export default {
             }
         },
         seller: {
+            // action_invoice: {
+            //     name: 'Action invoice',
+            //     string: 'Action an invoice.'
+            // },
             incomplete: {
                 name: 'Incomplete',
                 string: 'Incomplete Orders.'
@@ -56,6 +60,7 @@ export default {
         login: 'login',
         home: 'home',
         signup: 'signup',
+        setup: 'setup',
         orderList: 'orderList',
         cardList: 'cardList',
         order: 'order',

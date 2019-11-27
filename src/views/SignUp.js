@@ -58,15 +58,6 @@ class SignUp extends Component {
                             required type="address"
                             placeholder="Address"
                             onChange={(event) => {this.setState({addressValue: event.target.value})}}/>
-                        {/*<p></p>*/}
-                        {/*<div className="dropdown">*/}
-                        {/*    <a className={"dropbtn"}>|| What is your persona?</a>*/}
-                        {/*    <div className="dropdown-content">*/}
-                        {/*        <a href="#">Buyer</a>*/}
-                        {/*        <a href="#">Seller</a>*/}
-                        {/*        <a href="#">Driver</a>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
                         <input
                             id="button"
                             type="submit"

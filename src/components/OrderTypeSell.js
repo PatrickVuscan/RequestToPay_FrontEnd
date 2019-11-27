@@ -3,6 +3,7 @@ import constants from "../constants";
 
 const seller = constants.PERSONA.seller.name;
 const sellerString = constants.PERSONA.seller.string;
+// const action_invoice = constants.PERSONA.seller.action_invoice.string;
 const incomplete = constants.STATUS.seller.incomplete.string;
 const completed = constants.STATUS.seller.completed.string;
 const VIEW = constants.VIEW;
@@ -28,6 +29,7 @@ class OrderTypeSell extends Component {
           <div className={"type_block"}>
             <h1>{sellerString}</h1>
             <ul>
+              {/*<li onClick={() => this.transitionTo(action_invoice)}>{action_invoice}</li>*/}
               <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
               <li onClick={() => this.transitionTo(completed)}>{completed}</li>
             </ul>

@@ -15,6 +15,7 @@ import React, { Component } from 'react'
 import Home from "./views/Home"
 import Login from './views/Login'
 import SignUp from "./views/SignUp";
+import SetUp from "./views/SetUp";
 import {CardList} from "./views/CardList"
 import Order from "./views/Order";
 import Menu from "./components/Menu"
@@ -37,6 +38,7 @@ class Presenter extends Component {
     this.loginHandler = this.loginHandler.bind(this);
     this.toSignUpHandler = this.toSignUpHandler.bind(this);
     this.registerHandler = this.registerHandler.bind(this);
+    this.personaSetHandler = this.personaSetHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
   }
 
@@ -55,6 +57,9 @@ class Presenter extends Component {
         break;
       case VIEW.signup:
         this.transitionToSignUp();
+        break;
+      case VIEW.setup:
+        this.transitionToSetUp();
         break;
       case VIEW.home:
         this.transitionToHome();
@@ -80,6 +85,10 @@ class Presenter extends Component {
 
   transitionToSignUp(){
     this.setState({currentView: VIEW.signup});
+  }
+
+  transitionToSetUp(){
+    this.setState({currentView: VIEW.setup});
   }
 
   transitionToHome(){
@@ -121,6 +130,19 @@ class Presenter extends Component {
   registerHandler(username){
     this.setLoggedIn(true);
     this.setUsername(username);
+    this.transitionTo(VIEW.home);
+  }
+
+  toSetUpHandler(){
+    this.transitionTo(VIEW.setup);
+  }
+
+  // Set Up Methods ---------------------------//
+
+  personaSetHandler(shifts, personas){
+    shifts.setCustomer(personas.customer);
+    shifts.setSeller(personas.seller);
+    shifts.setDriver(personas.driver);
     this.transitionTo(VIEW.home);
   }
 
@@ -180,6 +202,8 @@ class Presenter extends Component {
         return <Login/>;
       case VIEW.signup:
         return <SignUp/>;
+      case VIEW.setup:
+        return <SetUp/>;
       case VIEW.home:
         return <Home/>;
       case VIEW.cardList:

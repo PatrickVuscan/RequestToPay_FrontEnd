@@ -44,12 +44,14 @@ class Home extends Component {
 
   render() {
     return (
-      <div id="home_container">
-        <OrderTypeWelcome/>
-        {this.state.customer ? (<OrderTypeBuy/>) : (null)}
-        {this.state.seller ? (<OrderTypeSell/>) : (null)}
-        {this.state.driver ? (<OrderTypeDrive/>) : (null)}
-      </div>
+        <div>
+            <div id="home_container">
+                <OrderTypeWelcome/>
+                {this.state.customer ? (<OrderTypeBuy/>) : (null)}
+                {this.state.seller ? (<OrderTypeSell/>) : (null)}
+                {this.state.driver ? (<OrderTypeDrive/>) : (null)}
+            </div>
+        </div>
     );
   }
 }

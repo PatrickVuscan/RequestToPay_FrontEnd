@@ -1,6 +1,6 @@
-/* SignUp.css */
+/* SetUp.css */
 
-#signup_full {
+#setup_full {
     height: inherit;
     width: inherit;
     display: flex;
@@ -14,7 +14,7 @@
     background-size: cover;
 }
 
-#signup_block {
+#setup_block {
     min-height: 20vh;
     width: 300px;
     align-items: center;
@@ -23,7 +23,7 @@
     /* border: 1px solid white; */
 }
 
-#signup_welcome {
+#setup_welcome {
     text-align: left;
     padding-bottom: 3vh;
     font-family: 'Cabin', sans-serif;
@@ -32,7 +32,7 @@
     font-size: 48px;
 }
 
-#signup_welcome p{
+#setup_welcome p{
     margin:0;
     padding:0;
 }
@@ -43,7 +43,7 @@
     outline: none;
 }
 
-#signup_block .field,  #button{
+#setup_block .field,  #button{
     height: 4vh;
     width: 250px;
     margin-left: 0;
@@ -68,16 +68,34 @@
     cursor: pointer;
 }
 
+#setup_block .field,  #wrapper{
+    text-align: left;
+    padding-bottom: 3vh;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 48px;
+}
 
-#signup_block ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+#wrapper
+{
+    display: inline-block;
+    padding:20px;
+
+}
+
+#setup_block ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1; /* Firefox */
 }
 
-#signup_block :-ms-input-placeholder { /* Internet Explorer 10-11 */
+#setup_block :-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: white;
 }
 
-#signup_block ::-ms-input-placeholder { /* Microsoft Edge */
+#setup_block ::-ms-input-placeholder { /* Microsoft Edge */
     color: white;
 }
+
+
+

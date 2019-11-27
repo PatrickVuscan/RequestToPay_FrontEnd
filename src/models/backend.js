@@ -62,6 +62,7 @@ function performRegister(view, credentials, successfulRegisterHandler) {
     }, 2000); // Set Delay (to test the loading animation)
 }
 
+
 /**
  * Get the information related to the entity with username 'username'.
  * Rather than returning a value, 'setEntityInfo' is a callback function provided the data.

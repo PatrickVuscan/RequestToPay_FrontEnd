@@ -3,11 +3,32 @@
 import config from "../constants";
 import request from "request-promise";
 
+/**
+ * Transition to sign up page
+ */
 
-function performToSignUp(view, balls){
+function performToSignUp(view, go){
     view.setState({loading: true});
     setTimeout(function(res) {
-        balls();
+        go();
+        view.setState({loading: false});
+    }, 2000); // Set Delay (to test the loading animation)
+}
+
+/**
+ * Register user as persona(s).
+ *
+ * @param view - view that contains methods for setting each persona
+ * @param personas - personas.customer, personas.seller, and personas.driver contain the info to set persona
+ * @param personaHandler - A callback function, which is used upon a successful update.
+ */
+function performPersonaSet(view, personas, personaHandler) {
+    view.setState({loading: true});
+    setTimeout(function(res) {
+        // view.setCustomer(personas.customer);
+        // view.setSeller(personas.seller);
+        // view.setDriver(personas.driver);
+        personaHandler(view, personas);
         view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)
 }
@@ -24,4 +45,4 @@ function performToSignUp(view, balls){
 
 
 
-export {performToSignUp};
+export {performToSignUp, performPersonaSet};
