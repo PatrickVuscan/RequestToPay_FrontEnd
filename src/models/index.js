@@ -8,6 +8,7 @@ import {performLogin,
     getEntityPersona,
     getOrderInfo,
     performActionInvoice,
+    performMakeOrder,
     getInvoiceItems} from "./backend";
 
 import { performToSignUp, performPersonaSet } from "./cache";
@@ -21,4 +22,5 @@ export {performLogin,
     getEntityPersona,
     getOrderInfo,
     performActionInvoice,
+    performMakeOrder,
     getInvoiceItems};

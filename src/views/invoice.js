@@ -11,9 +11,8 @@ class Invoice extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deliverydate: '',
+            deliverydate: "",
             nextinID: '',
-            loading: false,
         };
         this.handlerInvoiceClick = this.handlerInvoiceClick.bind(this);
     }
@@ -22,7 +21,7 @@ class Invoice extends Component {
         e.preventDefault();
         let invoice_details = {
             'devliverydate': this.state.deliverydate,
-            'nextinID': this.state.nextinID
+            'nextinID': this.state.nextinID,
         };
         performActionInvoice(invoice_details, global.presenter.invoiceHandler)
     }

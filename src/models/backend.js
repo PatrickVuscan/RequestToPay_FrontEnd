@@ -38,7 +38,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
  *
  * @param view - the view that initiated the register.
  * @param credentials - credentials.username and credentials.password contain the respect credentials to validate.
- * @param successfulRegisterHandlerHandler - A callback function, which is used upon a successful register.
+ * @param successfulRegisterHandler - A callback function, which is used upon a successful register.
  */
 function performRegister(view, credentials, successfulRegisterHandler) {
     view.setState({loading: true});
@@ -196,6 +196,35 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
 /**
  * Inserts a new invoice into the database
  *
+ * @param details - contains the details of the order being inserted into the backend
+ * @param topage - contains the method to go the unpaid orders page for customer
+ * @param makeorderHandler - handles the transition from actioning invoice page to the home page
+ */
+function performMakeOrder(details, topage, makeorderHandler) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=${details.driverID}&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
+
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                makeorderHandler(topage); // passing
+            })
+            .catch(function (err) {
+                alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
+ * Inserts a new invoice into the database
+ *
  * @param details - contains the delivery date and the ID that this new invoice replaces
  * @param invoiceHandler - handles the transition from actioning invoice page to the home page
  */
@@ -268,4 +297,5 @@ export {performLogin,
     getEntityPersona,
     getOrderInfo,
     performActionInvoice,
+    performMakeOrder,
     getInvoiceItems};

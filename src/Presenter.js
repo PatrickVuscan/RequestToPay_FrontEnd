@@ -17,6 +17,7 @@ import Login from './views/Login'
 import SignUp from "./views/SignUp";
 import SetUp from "./views/SetUp";
 import Invoice from "./views/invoice";
+import MakeOrder from "./views/MakeOrder";
 import {CardList} from "./views/CardList"
 import Order from "./views/Order";
 import Menu from "./components/Menu"
@@ -25,6 +26,8 @@ import constants from "./constants";
 import './Presenter.css'
 
 const VIEW = constants.VIEW;
+const unpaid = constants.STATUS.customer.unpaid.string;
+
 
 // TODO: Assure that we can open a card list of ANY TYPE. Currently only 'Customer Unpaid' is an option.
 
@@ -62,6 +65,9 @@ class Presenter extends Component {
       case VIEW.setup:
         this.transitionToSetUp();
         break;
+      case VIEW.makeorder:
+        this.transitionToMakeOrder();
+        break;
       case VIEW.invoice:
         this.transitionToInvoice();
         break;
@@ -93,6 +99,10 @@ class Presenter extends Component {
 
   transitionToSetUp(){
     this.setState({currentView: VIEW.setup});
+  }
+
+  transitionToMakeOrder(){
+    this.setState({currentView: VIEW.makeorder});
   }
 
   transitionToInvoice(){
@@ -154,6 +164,13 @@ class Presenter extends Component {
     shifts.setSeller(personas.seller);
     shifts.setDriver(personas.driver);
     this.transitionTo(VIEW.home);
+  }
+
+  // Order Methods ---------------------------//
+
+  makeorderHandler(transition){
+    this.transitionTo(VIEW.makeorder)
+    // transition(unpaid);
   }
 
   // Invoice Methods ---------------------------//
@@ -220,6 +237,8 @@ class Presenter extends Component {
         return <SignUp/>;
       case VIEW.setup:
         return <SetUp/>;
+      case VIEW.makeorder:
+        return <MakeOrder/>;
       case VIEW.invoice:
         return <Invoice/>;
       case VIEW.home:
