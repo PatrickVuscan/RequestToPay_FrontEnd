@@ -58,3 +58,9 @@
     font-weight: 400;
     font-size: 14px;
 }
+
+#order_buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}

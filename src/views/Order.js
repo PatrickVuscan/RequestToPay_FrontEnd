@@ -8,7 +8,9 @@ import React, { Component } from 'react';
 import constants from "../constants";
 import "./Order.css";
 import PayMenu from "../components/PayMenu.js";
+import DeliveryMenu from "../components/DeliveryMenu"
 import Invoice from "../components/Invoice";
+import DriverRoute from "./DriverRoute";
 import {getInfo, getItems} from "../data/InvoiceData";
 
 const VIEW = constants.VIEW;
@@ -20,11 +22,16 @@ class Order extends Component {
     super(props);
     this.state = {
       payMenuOpen: false,
+      driverMenuOpen: true,
+      deliveryMenuOpen: false,
       info: {},
       items : [],
       total : 0
     };
     this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
+    this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
+    this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
+
     this.setInfo = this.setInfo.bind(this);
     this.setItems = this.setItems.bind(this);
     this.setTotal = this.setTotal.bind(this);
@@ -54,6 +61,13 @@ class Order extends Component {
     this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
   }
 
+  toggleDriverMenuOpen(){
+    this.setState(prevState => ({driverMenuOpen: !prevState.driverMenuOpen}));
+  }
+
+  toggleDeliveryMenuOpen(){
+    this.setState(prevState => ({deliveryMenuOpen: !prevState.deliveryMenuOpen}));
+  }
   backgroundSwitch(){
     switch(global.viewPersona){
       case PERSONA.seller.name:
@@ -101,11 +115,51 @@ class Order extends Component {
     );}
   }
 
+  getDeliveryButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => this.toggleDeliveryMenuOpen()}>
+          [[ Delivered ]]
+        </div>
+      );
+    }
+  }
+
+  getRouteButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => this.toggleDriverMenuOpen()}>
+          [[ Route ]]
+        </div>
+      );
+    }
+  }
+
+  getArrivedButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => global.presenter.statusArrived()}>
+          [[ Arrived ]]
+        </div>
+      );
+    }
+  }
+
   getPayMenu() {
     if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
       return(
         <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
       );}
+    if (global.viewPersona === PERSONA.driver.name && this.state.deliveryMenuOpen){
+      return(
+        <DeliveryMenu order={this}/>
+      );}
+  }
+
+  getDriverRoute(){
+    if (global.viewPersona === PERSONA.driver.name && this.state.driverMenuOpen){
+      return <DriverRoute order={this}/>
+    }
   }
 
   // TODO: Getting Invoice Logic
@@ -118,9 +172,15 @@ class Order extends Component {
 
     return (
       <div id={"order_container"} className={this.backgroundSwitch()}>
+        {this.getDriverRoute()}
         <div id={'order_header'} className={this.accentSwitch()}>
           {headerInfo}
-          {payButton}
+          <div id={"order_buttons"}>
+            {payButton}
+            {this.getDeliveryButton()}
+            {this.getRouteButton()}
+            {this.getArrivedButton()}
+          </div>
         </div>
         <div id={"order_wrapper"}>
           <div className={"order_block"}>

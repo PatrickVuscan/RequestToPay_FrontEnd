@@ -117,6 +117,14 @@ class Presenter extends Component {
     this.setState({currentView: VIEW.order,}); // return to view
   }
 
+  statusArrived(){
+    console.log("TEST: Arrived Status for Order #" + global.viewOrderID);
+  }
+
+  statusDelivered(){
+    console.log("TEST: Delivered Status for Order #" + global.viewOrderID);
+  }
+
   // Loading transition ------------------------//
 
   startLoading(){
