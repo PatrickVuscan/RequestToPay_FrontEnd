@@ -1,0 +1,38 @@
+
+
+
+#payMenu_block {
+    position: fixed;
+    bottom: 0;
+    /*max-height: 60px;*/
+    width: inherit;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    color: var(--WHITE);
+}
+
+#payMenu_title {
+    width: inherit;
+    font-size: 20px;
+    padding: 5px 0 10px 36px;
+}
+
+#payMenu_options_wrapper {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+#payMenu_options {
+    width: fit-content;
+    padding: 0 20px;
+    font-size: 20px;
+    cursor: pointer;
+}

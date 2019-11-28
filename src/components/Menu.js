@@ -83,9 +83,6 @@ class Menu extends Component {
         <div className={"menu_block first"} onClick={() => this.transitionTo(VIEW.home)}>
           Home.
         </div>
-        <div className={"menu_block"}>
-          <s>Buying</s>
-        </div>
         <div className={"menu_block"} onClick={() => global.presenter.startLoading()}>
           Loading Test.
         </div>

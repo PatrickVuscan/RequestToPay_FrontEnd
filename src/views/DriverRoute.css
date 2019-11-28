@@ -1,0 +1,74 @@
+/* Driver Route CSS */
+
+#route_container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 910;
+    background-color: var(--PURPLE)
+}
+
+#route_wrapper {
+    width: inherit;
+    min-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#route_map {
+    width: inherit;
+    flex: 10;
+    background-color: var(--PURPLE);
+    background-image: url(/images/bg/bg_map.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+}
+
+#route_block {
+    min-height:150px;
+    /*flex: 1;*/
+    width: inherit;
+    max-width:600px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    color: var(--WHITE);
+    font-size: 20px;
+    background-color: var(--PURPLE)
+}
+#route_address{
+    padding: 15px 0 0 15px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+}
+
+#route_options_wrapper{
+    width: inherit;
+    max-width:600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+}
+
+.route_options{
+    width: fit-content;
+    height: 20px;
+    padding: 0 20px;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
