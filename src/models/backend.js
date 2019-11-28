@@ -197,10 +197,10 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
  * Inserts a new invoice into the database
  *
  * @param details - contains the details of the order being inserted into the backend
- * @param makeorderHandler - handles the transition from actioning invoice page to the home page
+ * @param makeOrderHandler - handles the transition from actioning invoice page to the home page
  */
 //TODO need to solve how to load invoice items aka how to set parameter of a query or smth
-function performMakeOrder(details, makeorderHandler) {
+function performMakeOrder(details, makeOrderHandler) {
     const options = {
         method: 'PUT',
         uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=${details.driverID}&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
@@ -223,7 +223,7 @@ function performMakeOrder(details, makeorderHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                makeorderHandler(); // passing
+                makeOrderHandler(); // passing
             })
             .catch(function (err) {
                 alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);
@@ -234,8 +234,9 @@ function performMakeOrder(details, makeorderHandler) {
 /**
  * Inserts a new item/product into the database
  *
+ * view - the page for inserting a new product
  * @param details - contains the details of the order being inserted into the backend
- * @param makeorderHandler - handles the transition from actioning invoice page to the home page
+ * @param makeProductHandler - handles the transition from actioning product page to the home page
  */
 //TODO need to solve how to load invoice items aka how to set parameter of a query or smth
 function performMakeProduct(view, details, makeProductHandler) {
@@ -266,13 +267,16 @@ function performMakeProduct(view, details, makeProductHandler) {
 /**
  * Inserts a new invoice into the database
  *
+ * @param view - the view of the action invoice page
  * @param details - contains the delivery date and the ID that this new invoice replaces
  * @param invoiceHandler - handles the transition from actioning invoice page to the home page
+ *
  */
-function performActionInvoice(details, invoiceHandler) {
+function performActionInvoice(view, details, invoiceHandler) {
+    view.setState({loading: true});
     const options = {
         method: 'PUT',
-        uri: `${config.api.URL}/invoice?DeliveryDate=${details.deliverydate}&NextInID=${details.nextinID}`,
+        uri: `${config.api.URL}/invoice?DeliveryDate=${details.deliveryDate}&NextInID=${details.nextInID}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -287,6 +291,7 @@ function performActionInvoice(details, invoiceHandler) {
             .catch(function (err) {
                 alert(`The action was unsuccessful: ${err.status} -- ${err.message}`);
             });
+        view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)2000);
 }
 

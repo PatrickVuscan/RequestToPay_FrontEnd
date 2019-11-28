@@ -11,8 +11,8 @@ class Invoice extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deliverydate: "",
-            nextinID: '',
+            deliveryDate: '',
+            nextInID: '',
             loading: false,
         };
         this.handlerInvoiceClick = this.handlerInvoiceClick.bind(this);
@@ -21,10 +21,10 @@ class Invoice extends Component {
     handlerInvoiceClick(e){
         e.preventDefault();
         let invoice_details = {
-            'devliverydate': this.state.deliverydate,
-            'nextinID': this.state.nextinID,
+            'deliveryDate': this.state.deliveryDate,
+            'nextInID': this.state.nextInID,
         };
-        performActionInvoice(invoice_details, global.presenter.invoiceHandler)
+        performActionInvoice(this, invoice_details, global.presenter.invoiceHandler)
     }
 
     render(){
@@ -37,11 +37,11 @@ class Invoice extends Component {
                         <input
                             className={"field"}
                             required placeholder="Delivery date."
-                            onChange={(event) => {this.setState({deliverydate: event.target.value})}}/>
+                            onChange={(event) => {this.setState({deliveryDate: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Previous invoice ID"
-                            onChange={(event) => {this.setState({nextinID: event.target.value})}}/>
+                            required placeholder="Previous invoice ID."
+                            onChange={(event) => {this.setState({nextInID: event.target.value})}}/>
                         <input
                             id="button"
                             type="submit"
