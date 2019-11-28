@@ -53,7 +53,7 @@ class Menu extends Component {
       default:
         return "home-menu";
     }
-  }
+}
 
   render() {
     const {

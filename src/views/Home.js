@@ -10,17 +10,17 @@ import Order from "./Order";
 
 class Home extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            'customer': false,
-            'seller': false,
-            'driver': false
-        };
-        this.setCustomer = this.setCustomer.bind(this);
-        this.setSeller = this.setSeller.bind(this);
-        this.setDriver = this.setDriver.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+        'customer': false,
+        'seller': false,
+        'driver': false
+    };
+    this.setCustomer = this.setCustomer.bind(this);
+    this.setSeller = this.setSeller.bind(this);
+    this.setDriver = this.setDriver.bind(this);
+  }
 
     // TODO: smooth scrolling transitions
     // https://github.com/alvarotrigo/react-fullpage
@@ -43,16 +43,16 @@ class Home extends Component {
         this.setState({'driver': boolean});
     }
 
-    render() {
-        return (
-            <div id="home_container">
-                <OrderTypeWelcome/>
-                {this.state.customer && <OrderTypeBuy/>}
-                {this.state.seller && <OrderTypeSell/>}
-                {this.state.driver && <OrderTypeDrive/>}
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div id="home_container">
+        <OrderTypeWelcome/>
+        {this.state.customer && <OrderTypeBuy/>}
+        {this.state.seller && <OrderTypeSell/>}
+        {this.state.driver && <OrderTypeDrive/>}
+      </div>
+    );
+  }
 }
 
 export default Home;

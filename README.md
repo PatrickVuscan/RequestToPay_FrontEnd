@@ -24,21 +24,42 @@ Password: patrick
 Username: coke \
 Password: coke
 
+### Primary Driver
+Username: driver \
+Password: zoomzoom
+
 --------------------------------
 
 ## File Overview
 
 - src/index.js:
-    - Renders the element defined in Control.js.
-- src/Control.js:
-    - Originally, creates a \<div/> containing the login page.
-    - Upon a successful login, \<div/> now contains appropriate home page.
-- src/containers/Login.js:
-    - The login page definition.
-- src/containers/App.js:
-    - The page that is redirected to after login (by Control.js).
-- src/components/Elements.js:
-    - Contains the button used in the login page.
+    - Renders the element defined in Presenter.js
+- src/Presenter.js:
+    - There is only one instance of Presenter used
+	- Its responsibilities are:
+		- deciding which view is visible to the user
+		- preparing data for the views
+		- handling transitions from one view to another
+- src/constants.js:
+    - Contants used throughout the project
+- src/global.js
+	- Variables (can change) used throughout the project
+	- This is a clean way for Presenter.js to provide data to views
+		- this minimizes the amount that must be passed to child components through props
+- src/views
+	- A folder containing all of the views
+- src/components
+	- A folder containing components that the views are composed of
+- src/models
+	- A folder with functions to access/manipulate data from other sources
+	- index.js has all the functions, but delegates their implementations to backend.js and cache.js
+- src/data
+	- A folder with functions for packaging up data into the desired format
+	- Typically, these functions make use of what is returned from functions in src/models
+- src/assets
+	- A folder for graphics
+- public/images/bg
+	- A folder for the various backgrounds our views use
 
 --------------------------------
 

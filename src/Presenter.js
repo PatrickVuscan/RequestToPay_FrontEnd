@@ -54,9 +54,10 @@ class Presenter extends Component {
    * A function which calls helper functions to setup data for the next transition
    *
    * @param view - The name of the view being transitioned to
-   * @param orderId - An optional parameter. This is necessary for the invoice view.
+   * @param orderId - An optional parameter. This is necessary for the order view.
+   * @param invoiceId - An optional parameter. This is necessary for the order view.
    */
-  transitionTo(view, orderId){
+  transitionTo(view, orderId, invoiceId){
     switch(view){
       case VIEW.login:
         this.transitionToLogOut();
@@ -83,7 +84,7 @@ class Presenter extends Component {
          this.transitionToCardList();
          break;
       case VIEW.order:
-        this.transitionToOrder(orderId);
+        this.transitionToOrder(orderId, invoiceId);
         break;
       default:
         this.transitionToHome();
@@ -94,6 +95,7 @@ class Presenter extends Component {
 
   transitionToLogOut(){
     this.setState({currentView: VIEW.login});
+    this.setCurrentView(VIEW.login);
     global.loggedIn = false;
     global.username = 'Not Logged In!';
   }
@@ -120,18 +122,22 @@ class Presenter extends Component {
 
   transitionToHome(){
     this.setState({currentView: VIEW.home});
+    this.setCurrentView(VIEW.home);
   }
 
   transitionToCardList(){
     this.setState({currentView: VIEW.cardList,});
+    this.setCurrentView(VIEW.cardList);
   }
 
   // TODO: Remove when Buyer Order page created.
   // This is currently testing that a function would be properly called.
-  transitionToOrder(ID) {
-    console.log("TEST: In Transition To Order - " + ID);
+  transitionToOrder(orderId, invoiceId) {
+    console.log("TEST: In Transition To Order - " + orderId);
     this.setState({currentView: VIEW.order,});
-    this.setInvoiceID(ID);
+    this.setCurrentView(VIEW.order);
+    this.setOrderID(orderId);
+    this.setInvoiceID(invoiceId);
   }
 
   // transitionToSellerList(){}       // TODO: Later
@@ -202,6 +208,23 @@ class Presenter extends Component {
     this.setState({currentView: VIEW.invoice,}); // return to view
   }
 
+  // Request to Pay
+  // TODO: Add payment actions here.
+  processPayment(){
+    console.log("TEST: Process payment for Order #" + global.viewOrderID);
+    // TODO: add some function to backend.js to interact with Interac RTP
+    // TODO: add some function to backend.js to change status of Invoice to Paid
+    this.setState({currentView: VIEW.order,}); // return to view
+  }
+
+  statusArrived(){
+    console.log("TEST: Arrived Status for Order #" + global.viewOrderID);
+  }
+
+  statusDelivered(){
+    console.log("TEST: Delivered Status for Order #" + global.viewOrderID);
+  }
+
   // Loading transition ------------------------//
 
   startLoading(){
@@ -240,6 +263,10 @@ class Presenter extends Component {
 
   setInvoiceID(ID){
     global.viewInvoiceID = ID;
+  }
+
+  setOrderID(ID) {
+    global.viewOrderID = ID;
   }
 
   // Views to pass ----------------------------------//

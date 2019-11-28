@@ -8,7 +8,9 @@ import React, { Component } from 'react';
 import constants from "../constants";
 import "./Order.css";
 import PayMenu from "../components/PayMenu.js";
+import DeliveryMenu from "../components/DeliveryMenu"
 import Invoice from "../components/Invoice";
+import DriverRoute from "./DriverRoute";
 import {getInfo, getItems} from "../data/InvoiceData";
 
 const VIEW = constants.VIEW;
@@ -16,125 +18,183 @@ const PERSONA = constants.PERSONA;
 
 class Order extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            payMenuOpen: false,
-            info: {},
-            items : [],
-            total : 0
-        };
-        this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
-        this.setInfo = this.setInfo.bind(this);
-        this.setItems = this.setItems.bind(this);
-        this.setTotal = this.setTotal.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      payMenuOpen: false,
+      driverMenuOpen: true,
+      deliveryMenuOpen: false,
+      info: {},
+      items : [],
+      total : 0
+    };
+    this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
+    this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
+    this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
 
-    componentDidMount() {
-        getInfo(global.viewOrderID, this.setInfo);
-        getItems(global.viewInvoiceID, this.setItems, this.setTotal);
-    }
+    this.setInfo = this.setInfo.bind(this);
+    this.setItems = this.setItems.bind(this);
+    this.setTotal = this.setTotal.bind(this);
+  }
 
-    setInfo(info) {
-        this.setState({'info': info});
-        console.log("INFO" + info);
-    }
+  componentDidMount() {
+    getInfo(global.viewOrderID, this.setInfo);
+    getItems(global.viewInvoiceID, this.setItems, this.setTotal);
+  }
 
-    setItems(items) {
-        this.setState({'items': items});
-        console.log("ITEMS" + items);
-    }
+  setInfo(info) {
+    this.setState({'info': info});
+    console.log("INFO" + info);
+  }
 
-    setTotal(total) {
-        this.setState({'total': total.toFixed(2)});
-        console.log("TOTAL" + total);
-    }
+  setItems(items) {
+    this.setState({'items': items});
+    console.log("ITEMS" + items);
+  }
 
-    togglePayMenuOpen(){
-        this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
-    }
+  setTotal(total) {
+    this.setState({'total': total.toFixed(2)});
+    console.log("TOTAL" + total);
+  }
 
-    backgroundSwitch(){
-        switch(global.viewPersona){
-            case PERSONA.seller.name:
-                return "seller-background";
-            case PERSONA.customer.name:
-                return "customer-background";
-            case PERSONA.driver.name:
-                return "driver-background";
-            default:
-                return "home-background"
-        }
-    }
+  togglePayMenuOpen(){
+    this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
+  }
 
-    accentSwitch() {
-        switch(global.viewPersona) {
-            case PERSONA.seller.name:
-                return "seller-accent";
-            case PERSONA.customer.name:
-                return "customer-accent";
-            case PERSONA.driver.name:
-                return "driver-accent";
-            default:
-                return "home-accent";
-        }
-    }
+  toggleDriverMenuOpen(){
+    this.setState(prevState => ({driverMenuOpen: !prevState.driverMenuOpen}));
+  }
 
-    getHeaderInfo() {
-        let info = this.state.info;
-        return(
-            <div id={"order_GeneralInfo"}>
-                <div id={"order_OrderId"} className={"order_header_item"}> Order #{global.viewOrderID}</div>
-                <div id={"order_OrderDate"} className={"order_header_item"}> Ordered: {info["OrderDate"]}</div>
-                <div id={"order_DeliveryDate"} className={"order_header_item"}> Expected Delivery: {info["DeliveryDate"]}</div>
-                <div id={"order_Status"} className={"order_header_item"}> Status: {info["Status"]}</div>
+  toggleDeliveryMenuOpen(){
+    this.setState(prevState => ({deliveryMenuOpen: !prevState.deliveryMenuOpen}));
+  }
+  backgroundSwitch(){
+    switch(global.viewPersona){
+      case PERSONA.seller.name:
+        return "seller-background";
+      case PERSONA.customer.name:
+        return "customer-background";
+      case PERSONA.driver.name:
+        return "driver-background";
+      default:
+        return "home-background"
+    }
+  }
+
+  accentSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-accent";
+      case PERSONA.customer.name:
+        return "customer-accent";
+      case PERSONA.driver.name:
+        return "driver-accent";
+      default:
+        return "home-accent";
+    }
+  }
+
+  getHeaderInfo() {
+    let info = this.state.info;
+    return(
+        <div id={"order_GeneralInfo"}>
+          <div id={"order_OrderId"} className={"order_header_item"}> Order #{global.viewOrderID}</div>
+          <div id={"order_OrderDate"} className={"order_header_item"}> Ordered: {info["OrderDate"]}</div>
+          <div id={"order_DeliveryDate"} className={"order_header_item"}> Expected Delivery: {info["DeliveryDate"]}</div>
+          <div id={"order_Status"} className={"order_header_item"}> Status: {info["Status"]}</div>
+        </div>
+    );
+  }
+
+  getPayButton() {
+    if (global.viewPersona === PERSONA.customer.name){
+    return(
+        <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
+          [[ Pay Now! ]]
+        </div>
+    );}
+  }
+
+  getDeliveryButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => this.toggleDeliveryMenuOpen()}>
+          [[ Delivered ]]
+        </div>
+      );
+    }
+  }
+
+  getRouteButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => this.toggleDriverMenuOpen()}>
+          [[ Route ]]
+        </div>
+      );
+    }
+  }
+
+  getArrivedButton() {
+    if (global.viewPersona === PERSONA.driver.name) {
+      return (
+        <div className={"order_header_item"} onClick={() => global.presenter.statusArrived()}>
+          [[ Arrived ]]
+        </div>
+      );
+    }
+  }
+
+  getPayMenu() {
+    if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
+      return(
+        <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
+      );}
+    if (global.viewPersona === PERSONA.driver.name && this.state.deliveryMenuOpen){
+      return(
+        <DeliveryMenu order={this}/>
+      );}
+  }
+
+  getDriverRoute(){
+    if (global.viewPersona === PERSONA.driver.name && this.state.driverMenuOpen){
+      return <DriverRoute order={this}/>
+    }
+  }
+
+  // TODO: Getting Invoice Logic
+
+  render() {
+    const { payMenuOpen, info, items, total } = this.state;
+    const headerInfo = this.getHeaderInfo();
+    const payButton = this.getPayButton();
+    const payMenu = this.getPayMenu();
+
+    return (
+      <div id={"order_container"} className={this.backgroundSwitch()}>
+        {this.getDriverRoute()}
+        <div id={'order_header'} className={this.accentSwitch()}>
+          {headerInfo}
+          <div id={"order_buttons"}>
+            {payButton}
+            {this.getDeliveryButton()}
+            {this.getRouteButton()}
+            {this.getArrivedButton()}
+          </div>
+        </div>
+        <div id={"order_wrapper"}>
+          <div className={"order_block"}>
+            <div className={"order_invoice"} id={"order_block_spacer"}/>
+            <div className={"order_invoice"}>
+              <div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>
+              <Invoice info={info} items={items} total={total}/>
             </div>
-        );
-    }
-
-    getPayButton() {
-        if (global.viewPersona === PERSONA.customer.name){
-            return(
-                <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
-                    [[ Pay Now! ]]
-                </div>
-            );}
-    }
-
-    getPayMenu() {
-        if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
-            return(
-                <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
-            );}
-    }
-
-    // TODO: Getting Invoice Logic
-
-    render() {
-        const { payMenuOpen, info, items, total } = this.state;
-        const headerInfo = this.getHeaderInfo();
-        const payButton = this.getPayButton();
-        const payMenu = this.getPayMenu();
-
-        return (
-            <div id={"order_container"} className={this.backgroundSwitch()}>
-                <div id={'order_header'} className={this.accentSwitch()}>
-                    {headerInfo}
-                    {payButton}
-                </div>
-                <div id={"order_wrapper"}>
-                    <div className={"order_block"}>
-                        <div className={"order_invoice"} id={"order_block_spacer"}/>
-                        <div className={"order_invoice"}>
-                            <div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>
-                            <Invoice info={info} items={items} total={total}/>
-                        </div>
-                    </div>
-                </div>
-                {payMenu}
-            </div>
-        );
-    }
+          </div>
+        </div>
+        {payMenu}
+      </div>
+    );
+  }
 
 }
 

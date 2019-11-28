@@ -2,54 +2,52 @@
 
 import React, {Component} from "react";
 import constants from "../constants";
-import "./PayMenu.css"
+import "./DeliveryMenu.css"
 
 const VIEW = constants.VIEW;
 
-class PayMenu extends Component {
+class DeliveryMenu extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-
     };
     this.transitionTo = this.transitionTo.bind(this);
-    this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
-    this.processPayment = this.processPayment.bind(this);
+    this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
   }
 
   transitionTo(view){
-    this.togglePayMenuOpen();
+    this.toggleDeliveryMenuOpen();
     global.presenter.transitionTo(view);
   }
 
-  processPayment(){
-    this.togglePayMenuOpen();
-    global.presenter.processPayment(); // Payment functions in Presenter.
+  statusDelivered(){
+    this.toggleDeliveryMenuOpen();
+    global.presenter.statusDelivered(); // Payment functions in Presenter.
   }
 
-  togglePayMenuOpen(){
-    this.props.order.togglePayMenuOpen()
+  toggleDeliveryMenuOpen(){
+    this.props.order.toggleDeliveryMenuOpen()
   }
 
   render() {
     return (
       <div
         id={"payMenu_block"}
-        className={"customer-accent"}
+        className={"driver-accent"}
       >
         <div id={"payMenu_title"}>
-          Send Payment?
+          Order Delivered?
         </div>
 
         <div id={"payMenu_options_wrapper"}>
           <div id={"payMenu_options"}
                className={"button"}
-               onClick={() => this.processPayment()}>
+               onClick={() => this.statusDelivered()}>
             YES
           </div>
           <div id={"payMenu_options"}
-               onClick={() => this.togglePayMenuOpen()}>
+               onClick={() => this.toggleDeliveryMenuOpen()}>
             NO
           </div>
         </div>
@@ -58,4 +56,4 @@ class PayMenu extends Component {
   }
 }
 
-export default PayMenu;
+export default DeliveryMenu;
