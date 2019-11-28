@@ -232,6 +232,36 @@ function performMakeOrder(details, makeorderHandler) {
 }
 
 /**
+ * Inserts a new item/product into the database
+ *
+ * @param details - contains the details of the order being inserted into the backend
+ * @param makeorderHandler - handles the transition from actioning invoice page to the home page
+ */
+//TODO need to solve how to load invoice items aka how to set parameter of a query or smth
+function performMakeProduct(details, makeProductHandler) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/item?Name=${details.itemName}&SID=${details.sellerID}&Price=${details.itemPrice}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    //TODO use res where res is the ID of the new order
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                makeProductHandler(); // passing
+            })
+            .catch(function (err) {
+                alert(`Registering the product was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
  * Inserts a new invoice into the database
  *
  * @param details - contains the delivery date and the ID that this new invoice replaces
@@ -307,4 +337,5 @@ export {performLogin,
     getOrderInfo,
     performActionInvoice,
     performMakeOrder,
+    performMakeProduct,
     getInvoiceItems};

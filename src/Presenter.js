@@ -11,18 +11,19 @@
 //     - update view data (to package up the information for the view)
 //     - then send the view data back to the view
 
-import React, { Component } from 'react'
 import Home from "./views/Home"
+import React, { Component } from 'react'
 import Login from './views/Login'
-import SignUp from "./views/SignUp";
-import SetUp from "./views/SetUp";
-import Invoice from "./views/invoice";
-import MakeOrder from "./views/MakeOrder";
+import SignUp from "./views/SignUp"
+import SetUp from "./views/SetUp"
+import Products from "./views/Products"
+import Invoice from "./views/invoice"
+import MakeOrder from "./views/MakeOrder"
 import {CardList} from "./views/CardList"
-import Order from "./views/Order";
+import Order from "./views/Order"
 import Menu from "./components/Menu"
-import Loading from "./views/Loading";
-import constants from "./constants";
+import Loading from "./views/Loading"
+import constants from "./constants"
 import './Presenter.css'
 
 const VIEW = constants.VIEW;
@@ -43,6 +44,7 @@ class Presenter extends Component {
     this.toSignUpHandler = this.toSignUpHandler.bind(this);
     this.registerHandler = this.registerHandler.bind(this);
     this.personaSetHandler = this.personaSetHandler.bind(this);
+    this.makeProductHandler = this.makeProductHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
   }
 
@@ -67,6 +69,9 @@ class Presenter extends Component {
         break;
       case VIEW.makeorder:
         this.transitionToMakeOrder();
+        break;
+      case VIEW.products:
+        this.transitionToMakeProduct();
         break;
       case VIEW.invoice:
         this.transitionToInvoice();
@@ -103,6 +108,10 @@ class Presenter extends Component {
 
   transitionToMakeOrder(){
     this.setState({currentView: VIEW.makeorder});
+  }
+
+  transitionToMakeProduct(){
+    this.setState({currentView: VIEW.products});
   }
 
   transitionToInvoice(){
@@ -172,6 +181,12 @@ class Presenter extends Component {
     this.transitionTo(VIEW.home)
   }
 
+  // Product Methods ---------------------------//
+
+  makeProductHandler(){
+    this.transitionTo(VIEW.home)
+  }
+
   // Invoice Methods ---------------------------//
 
   invoiceHandler(){
@@ -236,6 +251,8 @@ class Presenter extends Component {
         return <SignUp/>;
       case VIEW.setup:
         return <SetUp/>;
+      case VIEW.products:
+        return <Products/>;
       case VIEW.makeorder:
         return <MakeOrder/>;
       case VIEW.invoice:
