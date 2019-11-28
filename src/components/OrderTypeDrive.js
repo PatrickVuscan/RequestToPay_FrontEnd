@@ -23,14 +23,15 @@ class OrderTypeDrive extends Component {
 
   render() {
     return (
-      <div id="driver_wrapper">
-        <div className={"home_block"}>
-          <div className={"type_block"}>
-            <h1>{driverString}</h1>
-            <ul>
-              <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
-              <li onClick={() => this.transitionTo(completed)}>{completed}</li>
-            </ul>
+        <div id="driver_wrapper">
+          <div className={"home_block"}>
+            <div className={"type_block"}>
+              <h1>{driverString}</h1>
+              <ul>
+                <li onClick={() => this.transitionTo(incomplete)}>{incomplete}</li>
+                <li onClick={() => this.transitionTo(completed)}>{completed}</li>
+              </ul>
+            </div>
           </div>
         </div>
     );
