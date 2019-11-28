@@ -1,0 +1,141 @@
+/*
+* This component will display the contents of the invoice.
+* If this is a Buying Order, it will have an option to pay,
+* which will reveal a pay menu (transitioning to RTP)
+*/
+
+import React, { Component } from 'react';
+import constants from "../constants";
+import "./Order.css";
+import PayMenu from "../components/PayMenu.js";
+import Invoice from "../components/Invoice";
+import {getInfo, getItems} from "../data/InvoiceData";
+
+const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
+
+class Order extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      payMenuOpen: false,
+      info: {},
+      items : [],
+      total : 0
+    };
+    this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
+    this.setInfo = this.setInfo.bind(this);
+    this.setItems = this.setItems.bind(this);
+    this.setTotal = this.setTotal.bind(this);
+  }
+
+  componentDidMount() {
+    getInfo(global.viewOrderID, this.setInfo);
+    getItems(global.viewInvoiceID, this.setItems, this.setTotal);
+  }
+
+  setInfo(info) {
+    this.setState({'info': info});
+    console.log("INFO" + info);
+  }
+
+  setItems(items) {
+    this.setState({'items': items});
+    console.log("ITEMS" + items);
+  }
+
+  setTotal(total) {
+    this.setState({'total': total.toFixed(2)});
+    console.log("TOTAL" + total);
+  }
+
+  togglePayMenuOpen(){
+    this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
+  }
+
+  backgroundSwitch(){
+    switch(global.viewPersona){
+      case PERSONA.seller.name:
+        return "seller-background";
+      case PERSONA.customer.name:
+        return "customer-background";
+      case PERSONA.driver.name:
+        return "driver-background";
+      default:
+        return "home-background"
+    }
+  }
+
+  accentSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-accent";
+      case PERSONA.customer.name:
+        return "customer-accent";
+      case PERSONA.driver.name:
+        return "driver-accent";
+      default:
+        return "home-accent";
+    }
+  }
+
+  getHeaderInfo() {
+    let info = this.state.info;
+    return(
+        <div id={"order_GeneralInfo"}>
+          <div id={"order_OrderId"} className={"order_header_item"}> Order #{global.viewOrderID}</div>
+          <div id={"order_OrderDate"} className={"order_header_item"}> Ordered: {info["OrderDate"]}</div>
+          <div id={"order_DeliveryDate"} className={"order_header_item"}> Expected Delivery: {info["DeliveryDate"]}</div>
+          <div id={"order_Status"} className={"order_header_item"}> Status: {info["Status"]}</div>
+        </div>
+    );
+  }
+
+  getPayButton() {
+    if (global.viewPersona === PERSONA.customer.name){
+    return(
+        <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
+          [[ Pay Now! ]]
+        </div>
+    );}
+  }
+
+  getPayMenu() {
+    if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
+      return(
+        <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
+      );}
+  }
+
+  // TODO: Getting Invoice Logic
+
+  render() {
+    const { payMenuOpen, info, items, total } = this.state;
+    const headerInfo = this.getHeaderInfo();
+    const payButton = this.getPayButton();
+    const payMenu = this.getPayMenu();
+
+    return (
+      <div id={"order_container"} className={this.backgroundSwitch()}>
+        <div id={'order_header'} className={this.accentSwitch()}>
+          {headerInfo}
+          {payButton}
+        </div>
+        <div id={"order_wrapper"}>
+          <div className={"order_block"}>
+            <div className={"order_invoice"} id={"order_block_spacer"}/>
+            <div className={"order_invoice"}>
+              <div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>
+              <Invoice info={info} items={items} total={total}/>
+            </div>
+          </div>
+        </div>
+        {payMenu}
+      </div>
+    );
+  }
+
+}
+
+export default Order;

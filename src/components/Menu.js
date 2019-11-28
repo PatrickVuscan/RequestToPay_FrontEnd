@@ -2,6 +2,10 @@
 
 import React, {Component} from "react";
 import './Menu.css'
+import constants from "../constants";
+
+const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 class Menu extends Component {
 
@@ -9,38 +13,63 @@ class Menu extends Component {
     super(props);
     this.state = {
       menuOpen: false,
-      showMenu: true,
     };
     this.transitionTo = this.transitionTo.bind(this);
   }
 
   transitionTo(view){
     this.toggleMenuOpen();
-    this.props.transitionTo(view);
+    global.presenter.transitionTo(view);
   }
 
   toggleMenuOpen(){
     this.setState(prevState => ({menuOpen: !prevState.menuOpen}));
   }
 
-  render() {
-    const { menuOpen, showMenu } = this.state;
-    let menuID;
-
-    if (menuOpen) {
-      menuID = "header_block-open";
-    } else {
-      menuID = "header_block-closed";
+  // Change menu class to change colors.
+  viewSwitch(view){
+    switch(view){
+      case VIEW.login:
+        return "login-menu";
+      case VIEW.home:
+        return "home-menu";
+      case VIEW.cardList:
+        return this.userSwitch();
+      case VIEW.order:
+        return this.userSwitch();
+      default:
+        return "home-menu";
     }
+  }
+  userSwitch() {
+    switch(global.viewPersona) {
+      case PERSONA.seller.name:
+        return "seller-menu";
+      case PERSONA.customer.name:
+        return "customer-menu";
+      case PERSONA.driver.name:
+        return "driver-menu";
+      default:
+        return "home-menu";
+    }
+}
+
+  render() {
+    const {
+      menuOpen
+    } = this.state;
 
     return (
-      <div id={menuID} style={{backgroundColor : this.props.menuColor}}>
+
+      <div id={menuOpen ? "header_block-open" : "header_block-closed"}
+           className={this.viewSwitch(this.props.currentView)}
+      >
 
         <div id="header_bar">
           <div id="header_scotia">
             Scotia
           </div>
-          {showMenu &&
+          {global.loggedIn &&
             <div id="header_menu">
               <img id="header_hamburger"
                    src='/images/icon_menu.png'
@@ -51,13 +80,16 @@ class Menu extends Component {
           }
         </div>
 
-        <div className={"menu_block first"} onClick={() => this.transitionTo("home")}>
+        <div className={"menu_block first"} onClick={() => this.transitionTo(VIEW.home)}>
           Home.
         </div>
         <div className={"menu_block"}>
           <s>Buying</s>
         </div>
-        <div className={"menu_block"} onClick={() => this.transitionTo("logOut")}>
+        <div className={"menu_block"} onClick={() => global.presenter.startLoading()}>
+          Loading Test.
+        </div>
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
         </div>
 

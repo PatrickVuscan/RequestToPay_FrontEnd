@@ -3,9 +3,18 @@ export default {
         URL: 'https://worksish-backend-v1.herokuapp.com/api/v1'
     },
     PERSONA: {
-        customer: 'customer', // UI: Buying
-        seller: 'seller', // UI: Selling
-        driver: 'driver'
+        customer: {
+            name: 'customer',
+            string: 'Buying.'
+        },
+        seller: {
+            name: 'seller',
+            string: 'Selling.'
+        },
+        driver: {
+            name: 'driver',
+            string: 'Delivering.'
+        }
     },
     STATUS: {
         customer: {
@@ -31,6 +40,23 @@ export default {
                 name: 'Completed',
                 string: 'Completed Orders.'
             }
+        },
+        driver: {
+            incomplete: {
+                name: 'Incomplete',
+                string: 'To Deliver.'
+            },
+            completed: {
+                name: 'Completed',
+                string: 'Completed Deliveries.'
+            }
         }
+    },
+    VIEW: {
+        login: 'login',
+        home: 'home',
+        orderList: 'orderList',
+        cardList: 'cardList',
+        order: 'order',
     }
 }

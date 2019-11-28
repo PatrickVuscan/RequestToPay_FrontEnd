@@ -6,28 +6,26 @@
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    background-color: var(--LIGHT_ORANGE);
     padding: 120px 0 50px 0;
 }
 
 #CardList_header {
-    position: fixed;
-    top: 60px;
-    z-index: 900;
-    width: 100%;
-    margin: 0;
-    min-height: 60px;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: 40px;
-    background-color: var(--MID_ORANGE);
+     position: fixed;
+     top: 60px;
+     z-index: 900;
+     width: 100%;
+     margin: 0;
+     min-height: 60px;
+     display:flex;
+     flex-direction: row;
+     align-items: center;
+     padding-left: 40px;
 
-    font-family: 'Cabin', sans-serif;
-    font-weight: 700;
-    color: var(--WHITE);
-    font-size: 32px;
-}
+     font-family: 'Cabin', sans-serif;
+     font-weight: 700;
+     color: var(--WHITE);
+     font-size: 32px;
+ }
 
 .Card {
     display: flex;
@@ -35,6 +33,10 @@
     width: 300px;
     padding: 20px 0;
     border-bottom: 3px solid #eee;
+}
+
+.InID{
+    display: none;
 }
 
 .OID {
@@ -62,8 +64,11 @@
 .DeliveryDate:before {
     content: "Delivery on ";
 }
-.Entity:before {
+.customer.Entity:before {
     content: "Sold by ";
+}
+.seller.Entity:before {
+    content: "Ordered by ";
 }
 .Status:before {
     content: "Status is ";

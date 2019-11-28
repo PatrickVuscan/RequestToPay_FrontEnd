@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import {getOrdersOverview} from '../data/CardData'
 import {Card} from '../components/Card'
 import "./CardList.css"
+import constants from "../constants";
+
+const VIEW = constants.VIEW;
+const PERSONA = constants.PERSONA;
 
 /**
- * A component with a high-level view of every order of status 'status' where the entity 'entityId'
- * is listed as the persona 'persona'.
+ * A component with a high-level view of every order of viewStatus 'viewStatus' where the entity 'entityId'
+ * is listed as the viewPersona 'viewPersona'.
  *
  * @props entityId - The ID of the entity viewing the orders.
  * @props persona - The persona for which the orders pertain to (ie: entityId is seller or customer or driver).
@@ -23,8 +27,7 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        let {entityId, persona, statusString} = this.props;
-        getOrdersOverview(entityId, persona, statusString, this.setOrdersData);
+        getOrdersOverview(global.entityId, global.viewPersona, global.viewStatus, this.setOrdersData);
     }
 
     setOrdersData(ordersData) {
@@ -36,26 +39,51 @@ export class CardList extends Component {
         let keys = Object.keys(this.state.ordersData);
         for (let k = 0; k < keys.length; k++) {
             let key = keys[k];
-            let id = this.state.ordersData[key].OID;
+            let orderId = this.state.ordersData[key].OID;
+            let invoiceId = this.state.ordersData[key].InID;
             let card = <Card
-                id={id}
+                id={orderId}
                 key={key}
                 orderData={this.state.ordersData[key]}
-                onClick={() => this.props.cardClickHandler(id)}/>;
+                onClick={() => global.presenter.transitionTo(VIEW.order, orderId, invoiceId)}/>;
             cards.push(card);
         }
         return cards;
     }
 
+    // Change menu class to change colors.
+    accentSwitch() {
+        switch(global.viewPersona) {
+            case PERSONA.seller.name:
+                return "seller-accent";
+            case PERSONA.customer.name:
+                return "customer-accent";
+            case PERSONA.driver.name:
+                return "driver-accent";
+            default:
+                return "home-accent";
+        }
+    }
+    backgroundSwitch() {
+        switch(global.viewPersona) {
+            case PERSONA.seller.name:
+                return "seller-background";
+            case PERSONA.customer.name:
+                return "customer-background";
+            case PERSONA.driver.name:
+                return "driver-background";
+            default:
+                return "home-background";
+        }
+    }
+
     render() {
-        let {status} = this.props;
-        const childElements = this.createCards();
         return (
-            <div id={'CardList_container'}>
-                <div id={'CardList_header'}>
-                    {status}
+            <div id={'CardList_container'} className={this.backgroundSwitch()}>
+                <div id={'CardList_header'} className={this.accentSwitch()}>
+                    {global.viewStatus}
                 </div>
-                {childElements}
+                {this.createCards()}
             </div>
         );
     }
