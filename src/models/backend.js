@@ -238,7 +238,8 @@ function performMakeOrder(details, makeorderHandler) {
  * @param makeorderHandler - handles the transition from actioning invoice page to the home page
  */
 //TODO need to solve how to load invoice items aka how to set parameter of a query or smth
-function performMakeProduct(details, makeProductHandler) {
+function performMakeProduct(view, details, makeProductHandler) {
+    view.setState({loading: true});
     const options = {
         method: 'PUT',
         uri: `${config.api.URL}/item?Name=${details.itemName}&SID=${details.sellerID}&Price=${details.itemPrice}`,
@@ -258,6 +259,7 @@ function performMakeProduct(details, makeProductHandler) {
             .catch(function (err) {
                 alert(`Registering the product was unsuccessful: ${err.status} -- ${err.message}`);
             });
+        view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)2000);
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Products.css"
 import {performMakeProduct} from "../models/index"
-import TextLoading from "../components/TextLoading";
+import MenuTextLoading from "../components/MenuTextLoading";
 import TextProducts from "../components/TextProducts";
 
 
@@ -14,7 +14,8 @@ class Products extends Component {
         this.state = {
             itemName: '',
             sellerID: '',
-            itemPrice: ''
+            itemPrice: '',
+            loading: false,
         };
         this.handlerProductsClick = this.handlerProductsClick.bind(this);
     }
@@ -24,9 +25,9 @@ class Products extends Component {
         let order_details = {
             'itemName': this.state.itemName,
             'sellerID': this.state.sellerID,
-            'itemPrice': this.state.itemPrice
+            'itemPrice': this.state.itemPrice,
         };
-        performMakeProduct(order_details, global.presenter.makeProductHandler)
+        performMakeProduct(this, order_details, global.presenter.makeProductHandler)
     }
 
     render(){
@@ -34,7 +35,7 @@ class Products extends Component {
         return (
             <div id="products_full">
                 <div id="products_block">
-                    {loading ? <TextLoading/> : <TextProducts/>}
+                    {loading ? <MenuTextLoading/> : <TextProducts/>}
                     <form onSubmit={this.handlerProductsClick}>
                         <input
                             className={"field"}

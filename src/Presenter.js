@@ -25,6 +25,8 @@ import Menu from "./components/Menu"
 import Loading from "./views/Loading"
 import constants from "./constants"
 import './Presenter.css'
+import cookie from 'react-cookies'
+
 
 const VIEW = constants.VIEW;
 const unpaid = constants.STATUS.customer.unpaid.string;
@@ -98,6 +100,10 @@ class Presenter extends Component {
     this.setCurrentView(VIEW.login);
     global.loggedIn = false;
     global.username = 'Not Logged In!';
+    cookie.save('currentView', global.currentView, { path: '/' });
+    cookie.remove('username', global.username, { path: '/' });
+    cookie.remove('currentView', global.currentView, { path: '/' });
+    cookie.remove('entityID', global.entityId, { path: '/' });
   }
 
   transitionToSignUp(){
@@ -239,18 +245,22 @@ class Presenter extends Component {
 
   setLoggedIn(isLoggedIn){
     global.loggedIn = isLoggedIn;
+    cookie.save('loggedin', global.loggedIn, { path: '/' , maxAge: 300});
   }
 
   setUsername(username){
     global.username = username;
+    cookie.save('username', global.username, { path: '/' , maxAge: 300});
   }
 
   setEntityId(entityId) {
     global.entityId = entityId;
+    cookie.save('entityID', global.entityId, { path: '/' , maxAge: 300});
   }
 
   setCurrentView(view){
     global.currentView = view;
+    cookie.save('currentView', global.currentView, { path: '/' , maxAge: 300});
   }
 
   setViewPersona(persona) {

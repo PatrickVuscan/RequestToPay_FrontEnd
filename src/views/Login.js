@@ -3,6 +3,8 @@ import "./Login.css"
 import {performLogin, performToSignUp } from "../models/index"
 import TextLogin from "../components/TextLogin";
 import TextLoading from "../components/TextLoading";
+import cookie from 'react-cookies'
+
 
 /**
  * Creates a Login element, containing an username field, password field and login button.

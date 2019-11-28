@@ -11,11 +11,10 @@ const FadeSlow = styled.div`animation: 6s ${keyframes`${fadeIn}`} 1`;
 
 export class TextInvoice extends Component {
 
-    /* TODO: randomize login welcome text*/
     render(){
         return (
             <div id ="text_login">
-                <Fade><p>Start your business.</p></Fade>
+                <Fade><p>Send an invoice.</p></Fade>
             </div>
         );
     }

@@ -11,7 +11,6 @@ const FadeSlow = styled.div`animation: 6s ${keyframes`${fadeIn}`} 1`;
 
 export class TextSignUp extends Component {
 
-    /* TODO: randomize login welcome text*/
     render(){
         return (
             <div id ="text_login">

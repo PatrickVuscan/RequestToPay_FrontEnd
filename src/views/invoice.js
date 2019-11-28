@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./SignUp.css"
 import {performActionInvoice} from "../models/index"
-import TextLoading from "../components/TextLoading";
+import MenuTextLoading from "../components/MenuTextLoading";
 import TextInvoice from "../components/TextInvoice";
 
 /**
@@ -13,6 +13,7 @@ class Invoice extends Component {
         this.state = {
             deliverydate: "",
             nextinID: '',
+            loading: false,
         };
         this.handlerInvoiceClick = this.handlerInvoiceClick.bind(this);
     }
@@ -31,7 +32,7 @@ class Invoice extends Component {
         return (
             <div id="signup_full">
                 <div id="signup_block">
-                    {loading ? <TextLoading/> : <TextInvoice/>}
+                    {loading ? <MenuTextLoading/> : <TextInvoice/>}
                     <form onSubmit={this.handlerInvoiceClick}>
                         <input
                             className={"field"}
