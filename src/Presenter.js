@@ -48,6 +48,7 @@ class Presenter extends Component {
     this.invoiceHandler = this.invoiceHandler.bind(this);
     this.personaSetHandler = this.personaSetHandler.bind(this);
     this.makeProductHandler = this.makeProductHandler.bind(this);
+    this.makeorderHandler = this.makeorderHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
   }
 

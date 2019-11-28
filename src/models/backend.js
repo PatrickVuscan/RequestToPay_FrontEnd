@@ -204,20 +204,19 @@ function performMakeOrder(details, makeOrderHandler) {
     const options = {
         method: 'PUT',
         uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=${details.driverID}&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
-        body: JSON.stringify({
+        body: {
             "invoiceItems": [
                 {
                     "IID": details.itemID,
                     "Quantity": details.itemquantity
                 }
             ]
-        }),
+        },
         headers: {
             'User-Agent': 'Request-Promise'
         },
         json: true // Automatically parses the JSON string in the response
     };
-
     //TODO use res where res is the ID of the new order
 
     setTimeout(function() {

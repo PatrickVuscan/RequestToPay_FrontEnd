@@ -17,8 +17,8 @@ class MakeOrder extends Component {
             driverID: '',
             orderDate: '',
             deliveryDate: '',
-            itemID: '',
-            itemquantity: ''
+            itemID: null,
+            itemquantity: null
         };
         this.handlerMakeOrderClick = this.handlerMakeOrderClick.bind(this);
     }
@@ -31,7 +31,8 @@ class MakeOrder extends Component {
             'driverID': this.state.driverID,
             'orderDate': this.state.orderDate,
             'deliveryDate': this.state.deliveryDate,
-            'items': this.state.items,
+            'itemID': this.state.itemID,
+            'itemquantity': this.state.itemquantity
         };
         performMakeOrder(order_details, global.presenter.makeorderHandler)
     }
