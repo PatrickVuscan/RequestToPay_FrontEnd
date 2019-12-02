@@ -100,7 +100,7 @@ class Menu extends Component {
             Action an invoice.
           </div>
           <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.setup)}>
-            Edit account.
+            Account details.
           </div>
           <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
             Log Out.

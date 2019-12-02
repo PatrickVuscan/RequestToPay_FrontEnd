@@ -19,6 +19,8 @@ class Login extends Component {
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleSignUpClick = this.handleSignUpClick.bind(this);
+
+
     }
 
   handleLoginClick(e){

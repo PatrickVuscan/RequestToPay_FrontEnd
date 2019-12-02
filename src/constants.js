@@ -32,10 +32,6 @@ export default {
             }
         },
         seller: {
-            // action_invoice: {
-            //     name: 'Action invoice',
-            //     string: 'Action an invoice.'
-            // },
             incomplete: {
                 name: 'Incomplete',
                 string: 'Incomplete Orders.'

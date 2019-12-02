@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import "./SetUp.css"
-import {performPersonaSet} from "../models/index"
+import "./SignUp.css"
+import {performLogout} from "../models/index"
 import TextLoading from "../components/TextLoading";
 import TextSetUp from "../components/TextSetUp";
 
 /**
  * Creates a setup element, containing an username field, password fieldS and persona menu and button.
  */
-class SetUp extends Component {
+class Account extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,7 +41,7 @@ class SetUp extends Component {
             'seller': this.state.seller,
             'driver': this.state.driver
         };
-        performPersonaSet(this, credentials, global.presenter.personaSetHandler)
+        // performPersonaSet(this, credentials, global.presenter.personaSetHandler)
     }
 
     render(){
@@ -76,4 +76,4 @@ class SetUp extends Component {
     }
 }
 
-export default SetUp;
+export default Account;

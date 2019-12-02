@@ -12,11 +12,11 @@ import {performLogin,
     performMakeProduct,
     getInvoiceItems} from "./backend";
 
-import { performToSignUp, performPersonaSet } from "./cache";
+import { performToSignUp, performLogout } from "./cache";
 
 export {performLogin,
     performToSignUp,
-    performPersonaSet,
+    performLogout,
     performRegister,
     getEntityInfoByUsername,
     getOrdersByEntityAndPersona,

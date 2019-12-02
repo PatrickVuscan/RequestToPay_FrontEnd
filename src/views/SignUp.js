@@ -16,6 +16,7 @@ class SignUp extends Component {
             nameValue: '',
             usernameValue: '',
             passwordValue: '',
+            phoneValue: '',
             addressValue: '',
             loading: false,
         };
@@ -28,6 +29,7 @@ class SignUp extends Component {
             'name': this.state.nameValue,
             'username': this.state.usernameValue,
             'password': this.state.passwordValue,
+            'phone': this.state.phoneValue,
             'address': this.state.addressValue
         };
         performRegister(this, credentials, global.presenter.registerHandler)
@@ -42,21 +44,26 @@ class SignUp extends Component {
                     <form onSubmit={this.handlerRegisterClick}>
                         <input
                             className={"field"}
-                            required placeholder="Name"
+                            required placeholder="Name."
                             onChange={(event) => {this.setState({nameValue: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Username"
+                            required placeholder="Username."
                             onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
                         <input
                             className={"field"}
                             required type="password"
-                            placeholder="Password"
+                            placeholder="Password."
                             autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+                        {/*<input*/}
+                        {/*    className={"field"}*/}
+                        {/*    required type="phone"*/}
+                        {/*    placeholder="Phone number."*/}
+                        {/*    autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>*/}
                         <input
                             className={"field"}
                             required type="address"
-                            placeholder="Address"
+                            placeholder="Address."
                             onChange={(event) => {this.setState({addressValue: event.target.value})}}/>
                         <input
                             id="button"

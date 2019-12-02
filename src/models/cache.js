@@ -16,18 +16,18 @@ function performToSignUp(view, go){
 }
 
 /**
- * Register user as persona(s).
+ * Log user out
  *
  * @param view - view that contains methods for setting each persona
  * @param personas - personas.customer, personas.seller, and personas.driver contain the info to set persona
  * @param personaHandler - A callback function, which is used upon a successful update.
  */
-function performPersonaSet(view, personas, personaHandler) {
+function performLogout(view, personas, personaHandler) {
     view.setState({loading: true});
     setTimeout(function(res) {
-        // view.setCustomer(personas.customer);
-        // view.setSeller(personas.seller);
-        // view.setDriver(personas.driver);
+        view.setCustomer(false);
+        view.setSeller(false);
+        view.setDriver(false);
         personaHandler(view, personas);
         view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)
@@ -45,4 +45,4 @@ function performPersonaSet(view, personas, personaHandler) {
 
 
 
-export {performToSignUp, performPersonaSet};
+export {performToSignUp, performLogout};
