@@ -27,7 +27,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
                 successfulLoginHandler(credentials.username, res.EID); // passing
             })
             .catch(function (err) {
-                alert(`The login was unsuccessful: ${err.status} -- ${err.message}`);
+                alert(`Unable to find your account.`);
             });
         view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)
@@ -63,7 +63,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
             })
             .catch(function (err) {
                 global.presenter.stopLoading();
-                alert(`There was an error: ${err.status} -- ${err.message}`);
+                alert(`There are no orders where you (Entity: ${entityId}) are a ${persona}.`);
             });
     }, 1000);
 }
@@ -107,7 +107,6 @@ function getEntityPersona(entityId, persona, setPersona) {
  * @param formatter - A function which is used to format the order info
  */
 function getOrderInfo(orderId, setOrderInfo, formatter) {
-    console.log("ORDERID: " + orderId);
     const options = {
         method: 'GET',
         uri: `${config.api.URL}/order?OID=${orderId}&FullOrder=true`,
@@ -148,20 +147,15 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
         },
         json: true // Automatically parses the JSON string in the response
     };
-    console.log(invoiceId);
 
     global.presenter.startLoading();
 
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                console.log("Success");
-                console.log(res);
                 if (setOrderTotal === undefined) {
-                    console.log("No Set Orders Total");
                     setOrderItems(formatter(res));
                 } else {
-                    console.log("Set Orders Total");
                     setOrderItems(formatter(res, setOrderTotal));
                 }
                 global.presenter.stopLoading();
