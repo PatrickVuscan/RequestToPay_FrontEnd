@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import OrderTypeWelcome from "../components/OrderTypeWelcome";
-import OrderTypeBuy from "../components/OrderTypeBuy";
-import OrderTypeSell from "../components/OrderTypeSell";
-import OrderTypeDrive from "../components/OrderTypeDrive";
+import Welcome from "../components/Welcome";
+import PersonaMenu from "../components/PersonaMenu"
 import "./Home.css"
 import {getEntityPersona} from "../models";
 import constants from "../constants";
-import Order from "./Order";
 
 class Home extends Component {
 
@@ -46,10 +43,10 @@ class Home extends Component {
   render() {
     return (
       <div id="home_container">
-        <OrderTypeWelcome/>
-        {this.state.customer && <OrderTypeBuy/>}
-        {this.state.seller && <OrderTypeSell/>}
-        {this.state.driver && <OrderTypeDrive/>}
+        <Welcome/>
+        {this.state.customer && <PersonaMenu persona={constants.PERSONA.customer.name}/>}
+        {this.state.seller && <PersonaMenu persona={constants.PERSONA.seller.name}/>}
+        {this.state.driver && <PersonaMenu persona={constants.PERSONA.driver.name}/>}
       </div>
     );
   }
