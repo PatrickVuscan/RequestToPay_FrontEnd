@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {getOrdersOverview} from '../data/CardData/'
 import {Card} from '../components/Card'
 import "./CardList.css"
 import constants from "../constants";
@@ -27,7 +26,7 @@ export class CardList extends Component {
     }
 
     componentDidMount() {
-        getOrdersOverview(global.entityId, global.viewPersona, global.viewStatus, this.setOrdersData);
+        global.presenter.getOrdersOverview(this.setOrdersData);
     }
 
     setOrdersData(ordersData) {

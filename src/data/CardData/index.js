@@ -1,5 +1,4 @@
 import constants from '../../constants'
-import {getOrdersByEntityAndPersona} from "../../models";
 import {getFormattedCustomerUnpaidOrders,
     getFormattedCustomerPaidOrders,
     getFormattedCustomerCompletedOrders} from "./Customer";
@@ -14,14 +13,15 @@ import {getFormattedDriverIncompleteOrders,
  * as well as have the status 'statusName'.
  * Rather than being returned, setOrdersData is provided the list of JSON objects.
  *
+ * @param getter - The function used to access order data
  * @param entityId - The id of the entity who must be a part of the orders
  * @param persona - The persona that the entity 'entityId' must have for the orders
  * @param statusString - The string of the status (relative to persona) that the order must be
  * @param setOrdersData - The function that will be passed the list of JSON objects to store
  */
-export function getOrdersOverview(entityId, persona, statusString, setOrdersData) {
+export function getCardData(getter, entityId, persona, statusString, setOrdersData) {
     let formatter = ordersDataFormatter[persona][statusString];
-    getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData);
+    getter(entityId, persona, formatter, setOrdersData);
 }
 
 /* --------------------------------------------- */

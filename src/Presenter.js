@@ -7,7 +7,8 @@ import Menu from "./components/Menu"
 import Loading from "./views/Loading";
 import constants from "./constants";
 import './Presenter.css'
-import {setOrderStatus} from "./models";
+import {getOrdersByEntityAndPersona, setOrderStatus} from "./models";
+import {getCardData} from "./data/CardData";
 
 const VIEW = constants.VIEW;
 
@@ -123,6 +124,12 @@ class Presenter extends Component {
 
   stopLoading(){
       this.setState({isLoading: false})
+  }
+
+  // Populate CardList -------------------------//
+
+  getOrdersOverview(setOrdersData) {
+      getCardData(getOrdersByEntityAndPersona, global.entityId, global.viewPersona, global.viewStatus, setOrdersData);
   }
 
   // Global Setters ----------------------------//
