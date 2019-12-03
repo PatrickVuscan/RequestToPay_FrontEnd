@@ -4,7 +4,7 @@
 
 ### Accessing On Heroku
 
-Visit: https://worksish-frontend-v1.herokuapp.com/
+Visit: https://request-to-pay.herokuapp.com/
 
 ### Setting Up Locally
 
