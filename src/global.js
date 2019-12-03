@@ -1,16 +1,17 @@
-/* This contains the static data to be accessed and modified across files */
-
-/**
- * global static variables
- *
- * @props entityId - The ID of the entity viewing the orders.
- * @props viewPersona - The viewPersona for which the orders pertain to (ie: entityId is seller or customer or driver).
- * @props viewStatus - The viewStatus of orders.
- */
 import constants from './constants'
 
-const VIEW = constants.VIEW;
-
+/**
+ * The static data to be accessed and modified across files.
+ *
+ * @type {{loggedIn: boolean,
+ * viewInvoiceID: string,
+ * currentView: *,
+ * entityId: string,
+ * viewPersona: string,
+ * viewStatus: string,
+ * viewOrderID: string,
+ * username: string}}
+ */
 const global = {
 
   loggedIn: false,
@@ -20,14 +21,11 @@ const global = {
   entityId: '',
 
   /* View Data ---------------------------*/
-  viewPersona: "ORIG",
-  viewStatus: "orig",
-  currentView: VIEW.login,
+  currentView: constants.VIEW.login,
+  viewPersona: '',
+  viewStatus: '',
   viewOrderID: '',
   viewInvoiceID: '',
-
-  /* Style -------------------------------*/
-  // menuColor: 'transparent', // TODO: replace with CSS?
 };
 
 export default global

@@ -1,6 +1,14 @@
+/**
+ * The constant data to be accessed across files.
+ */
 export default {
     api: {
-        URL: 'https://worksish-backend-v1.herokuapp.com/api/v1'
+        URL: 'https://worksish-backend-v1.herokuapp.com/api/v1',
+        OrderStatus: {
+            Arrived: 'ArrivedStatus',
+            Delivered: 'DeliveredStatus',
+            Paid: 'PaidStatus'
+        }
     },
     PERSONA: {
         customer: {

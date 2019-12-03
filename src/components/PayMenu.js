@@ -24,8 +24,9 @@ class PayMenu extends Component {
   }
 
   processPayment(){
+    let {updateOrder} = this.props;
     this.togglePayMenuOpen();
-    global.presenter.processPayment(); // Payment functions in Presenter.
+    global.presenter.processPayment(updateOrder); // Payment functions in Presenter.
   }
 
   togglePayMenuOpen(){

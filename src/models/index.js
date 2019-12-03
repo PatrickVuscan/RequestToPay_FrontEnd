@@ -1,14 +1,18 @@
-// Contains all methods to read / write data
-// implementation is delegated elsewhere (backend.js & cache.js)
-
 import {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
-    getInvoiceItems} from "./backend";
+    getInvoiceItems,
+    setOrderStatus} from "./backend";
 
+/**
+ * Provides all methods to read/write data.
+ *
+ * Implementations are delegated to other files within ./models.
+ */
 export {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
-    getInvoiceItems};
+    getInvoiceItems,
+    setOrderStatus};

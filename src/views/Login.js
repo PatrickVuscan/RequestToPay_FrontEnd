@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./Login.css"
 import {performLogin} from "../models/index"
-import TextLogin from "../components/TextLogin";
-import TextLoading from "../components/TextLoading";
+import LoginHeader from "../components/text/LoginHeader";
+import LoggingInHeader from "../components/text/LoggingInHeader";
 
 /**
  * Creates a Login element, containing an username field, password field and login button.
@@ -32,7 +32,7 @@ class Login extends Component {
     return (
       <div id="login_full">
         <div id="login_block">
-          {loading ? <TextLoading/> : <TextLogin/>}
+          {loading ? <LoggingInHeader/> : <LoginHeader/>}
           <form onSubmit={this.handleLoginClick}>
             <input
               className={"field"}
