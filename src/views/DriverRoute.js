@@ -18,6 +18,24 @@ class DriverRoute extends Component {
     this.toggleRouteMenuOpen();
   }
 
+  getArrivedButton() {
+    if (!global.invoiceArrived) {
+      return (
+        <div className={"route_options"}
+             onClick={() => this.statusArrived()}>
+          Arrived.
+        </div>
+      );
+    } else {
+      return (
+        <div className={"route_options"}>
+          Already arrived!
+        </div>
+      );
+    }
+  }
+
+
   render() {
 
     return (
@@ -34,10 +52,7 @@ class DriverRoute extends Component {
               987-654-3210<br/>
             </div>
             <div id={"route_options_wrapper"}>
-                <div className={"route_options"}
-                     onClick={() => this.statusArrived()}>
-                  Arrived.
-                </div>
+                {this.getArrivedButton()}
                 <div className={"route_options"}
                      onClick={() => this.toggleRouteMenuOpen()}>
                   Invoice.
