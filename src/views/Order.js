@@ -22,16 +22,16 @@ class Order extends Component {
     super(props);
     this.state = {
       payMenuOpen: false,
-      driverMenuOpen: true,
+      routeMenuOpen: true,
       deliveryMenuOpen: false,
       info: {},
       items : [],
-      total : 0
+      total : 0,
     };
     this.updateOrder = this.updateOrder.bind(this);
 
     this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
-    this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
+    this.toggleRouteMenuOpen = this.toggleRouteMenuOpen.bind(this);
     this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
 
     this.setInfo = this.setInfo.bind(this);
@@ -64,13 +64,14 @@ class Order extends Component {
     this.setState(prevState => ({payMenuOpen: !prevState.payMenuOpen}));
   }
 
-  toggleDriverMenuOpen(){
-    this.setState(prevState => ({driverMenuOpen: !prevState.driverMenuOpen}));
+  toggleRouteMenuOpen(){
+    this.setState(prevState => ({routeMenuOpen: !prevState.routeMenuOpen}));
   }
 
   toggleDeliveryMenuOpen(){
     this.setState(prevState => ({deliveryMenuOpen: !prevState.deliveryMenuOpen}));
   }
+
   backgroundSwitch(){
     switch(global.viewPersona){
       case PERSONA.seller.name:
@@ -110,7 +111,7 @@ class Order extends Component {
   }
 
   getPayButton() {
-    if (global.viewPersona === PERSONA.customer.name){
+    if (global.viewPersona === PERSONA.customer.name && !global.invoicePaid){
     return(
         <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
           [[ Pay Now! ]]
@@ -119,7 +120,7 @@ class Order extends Component {
   }
 
   getDeliveryButton() {
-    if (global.viewPersona === PERSONA.driver.name) {
+    if (global.viewPersona === PERSONA.driver.name && global.invoiceArrived && !global.invoiceDelivered) {
       return (
         <div className={"order_header_item"} onClick={() => this.toggleDeliveryMenuOpen()}>
           [[ Delivered ]]
@@ -129,9 +130,9 @@ class Order extends Component {
   }
 
   getRouteButton() {
-    if (global.viewPersona === PERSONA.driver.name) {
+    if (global.viewPersona === PERSONA.driver.name && !global.invoiceDelivered) {
       return (
-        <div className={"order_header_item"} onClick={() => this.toggleDriverMenuOpen()}>
+        <div className={"order_header_item"} onClick={() => this.toggleRouteMenuOpen()}>
           [[ Route ]]
         </div>
       );
@@ -139,7 +140,7 @@ class Order extends Component {
   }
 
   getArrivedButton() {
-    if (global.viewPersona === PERSONA.driver.name) {
+    if (global.viewPersona === PERSONA.driver.name && !global.invoiceArrived) {
       return (
         <div className={"order_header_item"} onClick={() => global.presenter.statusArrived(this.updateOrder)}>
           [[ Arrived ]]
@@ -160,13 +161,13 @@ class Order extends Component {
   }
 
   getDriverRoute(){
-    if (global.viewPersona === PERSONA.driver.name && this.state.driverMenuOpen){
+    if (global.viewPersona === PERSONA.driver.name && this.state.routeMenuOpen){
       return <DriverRoute order={this} updateOrder={this.updateOrder}/>
     }
   }
 
   render() {
-    const { payMenuOpen, info, items, total } = this.state;
+    const { info, items, total } = this.state;
     const headerInfo = this.getHeaderInfo();
     const payButton = this.getPayButton();
     const payMenu = this.getPayMenu();

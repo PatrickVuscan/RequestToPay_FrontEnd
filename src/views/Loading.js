@@ -18,7 +18,7 @@ class Loading extends Component {
       case VIEW.login:
         return " login-menu";
       case VIEW.home:
-        return " home-menu";
+        return " home-accent";
       case VIEW.cardList:
         return this.backgroundSwitch();
       case VIEW.order:
@@ -37,7 +37,7 @@ class Loading extends Component {
       case PERSONA.driver.name:
         return "driver-menu";
       default:
-        return "home-menu";
+        return "home-accent";
     }
   }
 

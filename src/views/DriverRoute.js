@@ -11,15 +11,20 @@ class DriverRoute extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
+    this.toggleRouteMenuOpen = this.toggleRouteMenuOpen.bind(this);
+    this.statusArrived = this.statusArrived.bind(this);
   }
 
-  toggleDriverMenuOpen(){
-    this.props.order.toggleDriverMenuOpen();
+  toggleRouteMenuOpen(){
+    this.props.order.toggleRouteMenuOpen();
+  }
+
+  statusArrived(){
+    global.presenter.statusArrived(this.props.updateOrder);
+    this.toggleRouteMenuOpen();
   }
 
   render() {
-    let {updateOrder} = this.props;
 
     return (
       <div id={"route_container"} className={"driver-background"}>
@@ -36,11 +41,11 @@ class DriverRoute extends Component {
             </div>
             <div id={"route_options_wrapper"}>
                 <div className={"route_options"}
-                     onClick={() => global.presenter.statusArrived(updateOrder)}>
+                     onClick={() => this.statusArrived()}>
                   Arrived.
                 </div>
                 <div className={"route_options"}
-                     onClick={() => this.toggleDriverMenuOpen()}>
+                     onClick={() => this.toggleRouteMenuOpen()}>
                   Invoice.
                 </div>
             </div>

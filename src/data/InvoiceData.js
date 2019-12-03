@@ -95,6 +95,9 @@ function calculateItemCost(orderItem) {
  * @returns {string} - The status of 'order'
  */
 function getStatus(order) {
+    global.invoicePaid = order[status.Paid];
+    global.invoiceArrived = order[status.Arrived];
+    global.invoiceDelivered = order[status.Delivered];
     if (!order[status.Delivered]) {
         if(!order[status.Arrived]) {
             if (!order[status.Paid]) {
