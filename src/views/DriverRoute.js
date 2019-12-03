@@ -1,9 +1,3 @@
-/*
-* This component will display the contents of the invoice.
-* If this is a Buying Order, it will have an option to pay,
-* which will reveal a pay menu (transitioning to RTP)
-*/
-
 import React, { Component } from 'react';
 import "./DriverRoute.css";
 
@@ -52,10 +46,8 @@ class DriverRoute extends Component {
           </div>
         </div>
       </div>
-
     );
   }
-
 }
 
 export default DriverRoute;

@@ -1,9 +1,3 @@
-/*
-* This component will display the contents of the invoice.
-* If this is a Buying Order, it will have an option to pay,
-* which will reveal a pay menu (transitioning to RTP)
-*/
-
 import React, {cloneElement, Component} from 'react';
 import constants from "../constants";
 import "./Order.css";
@@ -13,9 +7,11 @@ import Invoice from "../components/Invoice";
 import DriverRoute from "./DriverRoute";
 import {getInfo, getItems} from "../data/InvoiceData";
 
-const VIEW = constants.VIEW;
 const PERSONA = constants.PERSONA;
 
+/**
+ * View containing all order information.
+ */
 class Order extends Component {
 
   constructor(props) {
@@ -199,7 +195,6 @@ class Order extends Component {
       </div>
     );
   }
-
 }
 
 export default Order;

@@ -1,5 +1,7 @@
 import constants from "../../constants";
 
+/* Functions common to the implementations contained in CardData's Customer.js, Seller.js, Driver.js */
+
 /**
  * Returns a version of ordersData that is formatted for a high-level card.
  * It only includes orders that satisfy 'orderCondition'.
