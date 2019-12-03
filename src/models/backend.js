@@ -27,42 +27,10 @@ function performLogin(view, credentials, successfulLoginHandler) {
                 successfulLoginHandler(credentials.username, res.EID); // passing
             })
             .catch(function (err) {
-                alert(`The login was unsuccessful: ${err.status} -- ${err.message}`);
+                alert(`Unable to find your account.`);
             });
         view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)
-}
-
-/**
- * Get the information related to the entity with username 'username'.
- * Rather than returning a value, 'setEntityInfo' is a callback function provided the data.
- *
- * @param username - The username of the entity
- * @param setEntityInfo - A callback function, which is used to save the entity information
- */
-function getEntityInfoByUsername(username, setEntityInfo) {
-    const options = {
-        method: 'GET',
-        uri: `${config.api.URL}/entityByName?user=${username}`,
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };
-
-    global.presenter.startLoading();
-
-    setTimeout(function() {
-        request(options)
-            .then(function (res) {
-                setEntityInfo(res);
-                global.presenter.stopLoading();
-            })
-            .catch(function (err) {
-                global.presenter.stopLoading();
-                alert(`There was an error: ${err.status} -- ${err.message}`);
-            });
-    }, 1000);
 }
 
 /**
@@ -78,7 +46,7 @@ function getEntityInfoByUsername(username, setEntityInfo) {
 function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData) {
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/entityOrdersUInvoiceUEntityByIdAndPersona?EID=${entityId}&Persona=${persona}`,
+        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -95,7 +63,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
             })
             .catch(function (err) {
                 global.presenter.stopLoading();
-                alert(`There was an error: ${err.status} -- ${err.message}`);
+                alert(`There are no orders where you (Entity: ${entityId}) are a ${persona}.`);
             });
     }, 1000);
 }
@@ -110,7 +78,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
 function getEntityPersona(entityId, persona, setPersona) {
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/entityOrdersUInvoiceUEntityByIdAndPersona?EID=${entityId}&Persona=${persona}`,
+        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -139,10 +107,9 @@ function getEntityPersona(entityId, persona, setPersona) {
  * @param formatter - A function which is used to format the order info
  */
 function getOrderInfo(orderId, setOrderInfo, formatter) {
-    console.log("ORDERID: " + orderId);
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/orderUInvoiceUEntity?OID=${orderId}`,
+        uri: `${config.api.URL}/order?OID=${orderId}&FullOrder=true`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -180,20 +147,15 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
         },
         json: true // Automatically parses the JSON string in the response
     };
-    console.log(invoiceId);
 
     global.presenter.startLoading();
 
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                console.log("Success");
-                console.log(res);
                 if (setOrderTotal === undefined) {
-                    console.log("No Set Orders Total");
                     setOrderItems(formatter(res));
                 } else {
-                    console.log("Set Orders Total");
                     setOrderItems(formatter(res, setOrderTotal));
                 }
                 global.presenter.stopLoading();
@@ -205,7 +167,6 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
 }
 
 export {performLogin,
-    getEntityInfoByUsername,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
