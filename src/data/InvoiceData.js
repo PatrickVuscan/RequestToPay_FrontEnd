@@ -1,6 +1,8 @@
 import constants from "../constants";
 import {getInvoiceItems, getOrderInfo} from "../models";
 
+const status = constants.api.OrderStatus;
+
 /**
  * Get the information (entities, statuses & dates) of the order with id 'orderId'.
  *
@@ -93,15 +95,15 @@ function calculateItemCost(orderItem) {
  * @returns {string} - The status of 'order'
  */
 function getStatus(order) {
-    if (!order["DeliveredStatus"]) {
-        if(!order["ArrivedStatus"]) {
-            if (!order["PaidStatus"]) {
+    if (!order[status.Delivered]) {
+        if(!order[status.Arrived]) {
+            if (!order[status.Paid]) {
                 return "Unpaid & Not Arrived";
             } else {
                 return "Paid & Not Arrived";
             }
         } else {
-            if (!order["PaidStatus"]) {
+            if (!order[status.Paid]) {
                 return "Unpaid & Arrived";
             } else {
                 return "Paid & Arrived";

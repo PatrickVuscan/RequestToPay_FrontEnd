@@ -162,8 +162,6 @@ class Order extends Component {
     }
   }
 
-  // TODO: Getting Invoice Logic
-
   render() {
     const { payMenuOpen, info, items, total } = this.state;
     const headerInfo = this.getHeaderInfo();

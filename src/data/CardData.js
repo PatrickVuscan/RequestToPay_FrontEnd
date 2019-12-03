@@ -206,16 +206,18 @@ function isStatusCompleted(orderData) {
 
 // DIRECT INTERPRETATION OF DATABASE VALUES
 
+const orderStatus = constants.api.OrderStatus;
+
 function isPaid(orderData) {
-    return orderData["PaidStatus"] === true;
+    return orderData[orderStatus.Paid] === true;
 }
 
 function isArrived(orderData) {
-    return orderData["ArrivedStatus"] === true;
+    return orderData[orderStatus.Arrived] === true;
 }
 
 function isDelivered(orderData) {
-    return orderData["DeliveredStatus"] == true;
+    return orderData[orderStatus.Delivered] == true;
 }
 
 /* --------------------------------------------------- */
