@@ -108,7 +108,7 @@ function getEntityInfoByUsername(username, setEntityInfo) {
 function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData) {
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/entityOrdersUInvoiceUEntityByIdAndPersona?EID=${entityId}&Persona=${persona}`,
+        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -222,7 +222,7 @@ function performMakeOrder(details, makeOrderHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                makeOrderHandler(); // passing
+                makeOrderHandler(details.buyerID); // passing
             })
             .catch(function (err) {
                 alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);

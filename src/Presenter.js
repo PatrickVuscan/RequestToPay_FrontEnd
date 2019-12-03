@@ -191,7 +191,8 @@ class Presenter extends Component {
 
   // Order Methods ---------------------------//
 
-  makeorderHandler(){
+  makeorderHandler(entityId){
+    this.setEntityId(entityId);
     this.transitionTo(VIEW.home)
   }
 
