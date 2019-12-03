@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getOrdersOverview} from '../data/CardData'
+import {getOrdersOverview} from '../data/CardData/'
 import {Card} from '../components/Card'
 import "./CardList.css"
 import constants from "../constants";

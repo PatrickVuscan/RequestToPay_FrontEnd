@@ -1,16 +1,3 @@
-// We only have 1 presenter
-
-// -------------------
-
-// It's responsibilities are:
-// - handle events due to user input, talk to model layer, then get updates in view again
-// - when handling events, it will speak to model layer (models/index.js):
-//     - tell view to show it is waiting for a response (if it chooses to represent this)
-//     - make use of a model layer
-// - when receiving info from model layer, it will:
-//     - update view data (to package up the information for the view)
-//     - then send the view data back to the view
-
 import React, { Component } from 'react'
 import Home from "./views/Home"
 import Login from './views/Login'
@@ -24,7 +11,19 @@ import {setOrderStatus} from "./models";
 
 const VIEW = constants.VIEW;
 
+/**
+ * Singleton Presenter in MVP Architecture.
+ */
 class Presenter extends Component {
+
+  // Responsibilities Include:
+  // - handle events due to user input, talk to model layer, then get updates in view again
+  // - when handling events, it will speak to model layer (models/index.js):
+  //     - tell view to show it is waiting for a response (if it chooses to represent this)
+  //     - make use of a model layer
+  // - when receiving info from model layer, it will:
+  //     - update view data (to package up the information for the view)
+  //     - then send the view data back to the view
 
   constructor(props) {
     super(props);
@@ -191,4 +190,6 @@ class Presenter extends Component {
   }
 }
 
+// Exporting Presenter as a Singleton
+Object.freeze(Presenter);
 export default Presenter;
