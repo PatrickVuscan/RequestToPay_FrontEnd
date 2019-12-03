@@ -46,7 +46,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
 function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData) {
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/entityOrdersUInvoiceUEntityByIdAndPersona?EID=${entityId}&Persona=${persona}`,
+        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -78,7 +78,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
 function getEntityPersona(entityId, persona, setPersona) {
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/entityOrdersUInvoiceUEntityByIdAndPersona?EID=${entityId}&Persona=${persona}`,
+        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -110,7 +110,7 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
     console.log("ORDERID: " + orderId);
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/orderUInvoiceUEntity?OID=${orderId}`,
+        uri: `${config.api.URL}/order?OID=${orderId}&FullOrder=true`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
