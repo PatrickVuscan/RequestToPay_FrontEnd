@@ -22,8 +22,9 @@ class DeliveryMenu extends Component {
   }
 
   statusDelivered(){
+    let {updateOrder} = this.props;
     this.toggleDeliveryMenuOpen();
-    global.presenter.statusDelivered(); // Payment functions in Presenter.
+    global.presenter.statusDelivered(updateOrder);
   }
 
   toggleDeliveryMenuOpen(){

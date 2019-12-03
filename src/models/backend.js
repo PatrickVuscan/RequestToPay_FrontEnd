@@ -166,8 +166,43 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
     }, 1000);
 }
 
+/**
+ * Set the status of type 'status' for order 'orderId' to the state 'state'.
+ *
+ * @param orderId - The id of the order who's status is being set
+ * @param status - The status type being set ('Paid', 'Arrived', 'Delivered')
+ * @param state - The state that 'status' is being set to ('true', 'false')
+ * @param actionOnSuccess - An optional callback function, to do upon successful completion of the PUT request.
+ */
+function setOrderStatus(orderId, status, state, actionOnSuccess) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/orderStatus?OID=${orderId}&status=${status}&state=${state}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    global.presenter.startLoading();
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                global.presenter.stopLoading();
+                if (actionOnSuccess !== undefined) {
+                    actionOnSuccess();
+                }
+            })
+            .catch(function (err) {
+                global.presenter.stopLoading();
+            });
+    }, 500);
+}
+
 export {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
-    getInvoiceItems};
+    getInvoiceItems,
+    setOrderStatus};

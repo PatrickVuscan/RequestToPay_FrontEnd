@@ -4,7 +4,7 @@
 * which will reveal a pay menu (transitioning to RTP)
 */
 
-import React, { Component } from 'react';
+import React, {cloneElement, Component} from 'react';
 import constants from "../constants";
 import "./Order.css";
 import PayMenu from "../components/PayMenu.js";
@@ -28,6 +28,8 @@ class Order extends Component {
       items : [],
       total : 0
     };
+    this.updateOrder = this.updateOrder.bind(this);
+
     this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
     this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
     this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
@@ -38,23 +40,24 @@ class Order extends Component {
   }
 
   componentDidMount() {
+    this.updateOrder();
+  }
+
+  updateOrder() {
     getInfo(global.viewOrderID, this.setInfo);
     getItems(global.viewInvoiceID, this.setItems, this.setTotal);
   }
 
   setInfo(info) {
     this.setState({'info': info});
-    console.log("INFO" + info);
   }
 
   setItems(items) {
     this.setState({'items': items});
-    console.log("ITEMS" + items);
   }
 
   setTotal(total) {
     this.setState({'total': total.toFixed(2)});
-    console.log("TOTAL" + total);
   }
 
   togglePayMenuOpen(){
@@ -138,7 +141,7 @@ class Order extends Component {
   getArrivedButton() {
     if (global.viewPersona === PERSONA.driver.name) {
       return (
-        <div className={"order_header_item"} onClick={() => global.presenter.statusArrived()}>
+        <div className={"order_header_item"} onClick={() => global.presenter.statusArrived(this.updateOrder)}>
           [[ Arrived ]]
         </div>
       );
@@ -148,17 +151,17 @@ class Order extends Component {
   getPayMenu() {
     if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
       return(
-        <PayMenu payMenuOpen={this.state.payMenuOpen} order={this}/>
+        <PayMenu payMenuOpen={this.state.payMenuOpen} order={this} updateOrder={this.updateOrder}/>
       );}
     if (global.viewPersona === PERSONA.driver.name && this.state.deliveryMenuOpen){
       return(
-        <DeliveryMenu order={this}/>
+        <DeliveryMenu order={this} updateOrder={this.updateOrder}/>
       );}
   }
 
   getDriverRoute(){
     if (global.viewPersona === PERSONA.driver.name && this.state.driverMenuOpen){
-      return <DriverRoute order={this}/>
+      return <DriverRoute order={this} updateOrder={this.updateOrder}/>
     }
   }
 
@@ -167,6 +170,8 @@ class Order extends Component {
     const headerInfo = this.getHeaderInfo();
     const payButton = this.getPayButton();
     const payMenu = this.getPayMenu();
+
+    console.log(this.state);
 
     return (
       <div id={"order_container"} className={this.backgroundSwitch()}>
