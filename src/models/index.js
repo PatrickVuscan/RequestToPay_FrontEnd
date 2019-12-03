@@ -5,10 +5,12 @@ import {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
-    getInvoiceItems} from "./backend";
+    getInvoiceItems,
+    setOrderStatus} from "./backend";
 
 export {performLogin,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
-    getInvoiceItems};
+    getInvoiceItems,
+    setOrderStatus};

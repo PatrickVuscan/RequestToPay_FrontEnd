@@ -20,10 +20,9 @@ import Menu from "./components/Menu"
 import Loading from "./views/Loading";
 import constants from "./constants";
 import './Presenter.css'
+import {setOrderStatus} from "./models";
 
 const VIEW = constants.VIEW;
-
-// TODO: Assure that we can open a card list of ANY TYPE. Currently only 'Customer Unpaid' is an option.
 
 class Presenter extends Component {
 
@@ -84,20 +83,12 @@ class Presenter extends Component {
     this.setCurrentView(VIEW.cardList);
   }
 
-  // TODO: Remove when Buyer Order page created.
-  // This is currently testing that a function would be properly called.
   transitionToOrder(orderId, invoiceId) {
-    console.log("TEST: In Transition To Order - " + orderId);
     this.setState({currentView: VIEW.order,});
     this.setCurrentView(VIEW.order);
     this.setOrderID(orderId);
     this.setInvoiceID(invoiceId);
   }
-
-  // transitionToSellerList(){}       // TODO: Later
-  // transitionToBuyerInvoice(ID){}   // TODO: Later
-  // transitionToSellerInvoice(ID){}  // TODO: Later
-  // transitionToPayID(ID){}          // TODO: Later
 
   // Log In Methods ----------------------------//
 
@@ -109,20 +100,20 @@ class Presenter extends Component {
   }
 
   // Request to Pay
-  // TODO: Add payment actions here.
-  processPayment(){
-    console.log("TEST: Process payment for Order #" + global.viewOrderID);
-    // TODO: add some function to backend.js to interact with Interac RTP
-    // TODO: add some function to backend.js to change status of Invoice to Paid
-    this.setState({currentView: VIEW.order,}); // return to view
+
+  processPayment(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Paid, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
-  statusArrived(){
-    console.log("TEST: Arrived Status for Order #" + global.viewOrderID);
+  statusArrived(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Arrived, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
-  statusDelivered(){
-    console.log("TEST: Delivered Status for Order #" + global.viewOrderID);
+  statusDelivered(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Delivered, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
   // Loading transition ------------------------//

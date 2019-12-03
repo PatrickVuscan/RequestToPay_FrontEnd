@@ -19,6 +19,7 @@ class DriverRoute extends Component {
   }
 
   render() {
+    let {updateOrder} = this.props;
 
     return (
       <div id={"route_container"} className={"driver-background"}>
@@ -35,7 +36,7 @@ class DriverRoute extends Component {
             </div>
             <div id={"route_options_wrapper"}>
                 <div className={"route_options"}
-                     onClick={() => global.presenter.statusArrived()}>
+                     onClick={() => global.presenter.statusArrived(updateOrder)}>
                   Arrived.
                 </div>
                 <div className={"route_options"}
