@@ -34,38 +34,6 @@ function performLogin(view, credentials, successfulLoginHandler) {
 }
 
 /**
- * Get the information related to the entity with username 'username'.
- * Rather than returning a value, 'setEntityInfo' is a callback function provided the data.
- *
- * @param username - The username of the entity
- * @param setEntityInfo - A callback function, which is used to save the entity information
- */
-function getEntityInfoByUsername(username, setEntityInfo) {
-    const options = {
-        method: 'GET',
-        uri: `${config.api.URL}/entityByName?user=${username}`,
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };
-
-    global.presenter.startLoading();
-
-    setTimeout(function() {
-        request(options)
-            .then(function (res) {
-                setEntityInfo(res);
-                global.presenter.stopLoading();
-            })
-            .catch(function (err) {
-                global.presenter.stopLoading();
-                alert(`There was an error: ${err.status} -- ${err.message}`);
-            });
-    }, 1000);
-}
-
-/**
  * Get the orders pertaining to the entity with ID 'entityID',
  * where the entity is the 'viewPersona' (customer, seller or driver).
  * Rather than returning a value, 'setOrdersData' is is a callback function provided the data.
@@ -205,7 +173,6 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
 }
 
 export {performLogin,
-    getEntityInfoByUsername,
     getOrdersByEntityAndPersona,
     getEntityPersona,
     getOrderInfo,
