@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Welcome from "../components/Welcome";
+import Welcome from "../components/text/Welcome";
 import PersonaMenu from "../components/PersonaMenu"
 import "./Home.css"
 import {getEntityPersona} from "../models";
