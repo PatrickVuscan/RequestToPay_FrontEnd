@@ -3,8 +3,8 @@
 
 #payMenu_block {
     position: fixed;
+    z-index: 200;
     bottom: 0;
-    /*max-height: 60px;*/
     width: inherit;
     display: flex;
     align-items: center;

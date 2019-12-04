@@ -26,6 +26,9 @@ const global = {
   viewStatus: '',
   viewOrderID: '',
   viewInvoiceID: '',
+  invoicePaid: false,
+  invoiceArrived: false,
+  invoiceDelivered: false,
 };
 
 export default global

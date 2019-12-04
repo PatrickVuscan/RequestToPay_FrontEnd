@@ -16,28 +16,28 @@ class Loading extends Component {
   viewSwitch(view){
     switch(view){
       case VIEW.login:
-        return " login-menu";
+        return " login-background";
       case VIEW.home:
-        return " home-menu";
+        return " home-background";
       case VIEW.cardList:
         return this.backgroundSwitch();
       case VIEW.order:
         return this.backgroundSwitch();
       default:
-        return " home-menu";
+        return " home-background";
     }
   }
 
   backgroundSwitch() {
     switch(global.viewPersona) {
       case PERSONA.seller.name:
-        return "seller-menu";
+        return "seller-background";
       case PERSONA.customer.name:
-        return "customer-menu";
+        return "customer-background";
       case PERSONA.driver.name:
-        return "driver-menu";
+        return "driver-background";
       default:
-        return "home-menu";
+        return "home-background";
     }
   }
 
@@ -49,7 +49,7 @@ class Loading extends Component {
           Scotia
         </div>
         <div id={"loading_block"} onClick={() => global.presenter.stopLoading()}>
-          <img src={loader} alt={"LOADING..."}/>
+          <img src={loader} alt={"LOADING..."} id={"loader"}/>
         </div>
       </div>
     );
