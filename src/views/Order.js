@@ -141,7 +141,6 @@ class Order extends Component {
           <div className={"order_block"}>
             <div className={"order_invoice"} id={"order_block_spacer"}/>
             <div className={"order_invoice"}>
-              <div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>
               <Invoice info={info} items={items} total={total}/>
             </div>
           </div>

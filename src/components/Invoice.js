@@ -3,14 +3,27 @@ import DataTable from '../components/table/DataTable';
 
 class Invoice extends Component {
 
-    getEntityTable() {
+    getTitle() {
         const {info} = this.props;
-        const headings = ["Supplier", "Customer"];
-        const rows = [
-            [info["SellerName"], info["CustomerName"]],
-            [info["SellerBillingAddress"], info["CustomerBillingAddress"]]
-        ];
-        return (<DataTable id={"Entities"} headings={headings} rows={rows} title="" />);
+        return (<div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>);
+    }
+
+    getEntityInfo() {
+        const {info} = this.props;
+        return (
+            <div id={"EntityInfo"}>
+                <div id={"Supplier"}>
+                    {info["SellerName"]}
+                    <br/>
+                    {info["SellerBillingAddress"]}
+                </div>
+                <div id={"Customer"}>
+                    {info["CustomerName"]}
+                    <br/>
+                    {info["CustomerBillingAddress"]}
+                </div>
+            </div>
+        );
     }
 
     getItemsTable() {
@@ -37,17 +50,19 @@ class Invoice extends Component {
     render() {
         const {items} = this.props;
         if (items.length !== 0) {
-            const entityTable = this.getEntityTable();
+            const entityInfo = this.getEntityInfo();
+            const title = this.getTitle();
             const itemsTable = this.getItemsTable();
             const totalDiv = this.getTotalDiv();
-            return (
-                <div id={"Invoice"}>
-                    {entityTable}
-                    <br/>
-                    {itemsTable}
-                    <br/>
-                    {totalDiv}
-                </div>
+            return (<div id={"Invoice"}>
+                        {entityInfo}
+                        <br/>
+                        {title}
+                        <br/>
+                        {itemsTable}
+                        <br/>
+                        {totalDiv}
+                    </div>
             );
         } else {
             return ("Retrieving your invoice.");
