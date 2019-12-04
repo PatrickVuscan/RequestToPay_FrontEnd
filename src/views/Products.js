@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./Products.css"
 import {performMakeProduct} from "../models/index"
-import MenuTextLoading from "../components/MenuTextLoading";
-import TextProducts from "../components/TextProducts";
+import MenuTextLoading from "../components/text/MenuTextLoading";
+import TextProducts from "../components/text/TextProducts";
 
 
 /**

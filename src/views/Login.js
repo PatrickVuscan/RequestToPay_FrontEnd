@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./Login.css"
 import {performLogin, performToSignUp } from "../models/index"
-import TextLogin from "../components/TextLogin";
-import TextLoading from "../components/TextLoading";
+import LoginHeader from "../components/text/LoginHeader";
+import LoggingInHeader from "../components/text/LoggingInHeader";
 import cookie from 'react-cookies'
 
 
@@ -19,7 +19,6 @@ class Login extends Component {
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleSignUpClick = this.handleSignUpClick.bind(this);
-
 
     }
 

@@ -372,4 +372,5 @@ export {performLogin,
     performActionInvoice,
     performMakeOrder,
     performMakeProduct,
-    getInvoiceItems};
+    getInvoiceItems,
+    setOrderStatus};

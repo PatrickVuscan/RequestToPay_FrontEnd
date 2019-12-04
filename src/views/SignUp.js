@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./SignUp.css"
-import {performLogin, performRegister} from "../models/index"
-import TextLoading from "../components/TextLoading";
-import TextSignUp from "/Users/windsorhuang/Desktop/RequestToPay_FrontEnd/src/components/TextSignUp";
+import { performRegister} from "../models/index"
+import LoggingInHeader from "../components/text/LoggingInHeader";
+import TextSignUp from "/Users/windsorhuang/Desktop/RequestToPay_FrontEnd/src/components/text/TextSignUp";
 
 
 
@@ -40,7 +40,7 @@ class SignUp extends Component {
         return (
             <div id="signup_full">
                 <div id="signup_block">
-                    {loading ? <TextLoading/> : <TextSignUp/>}
+                    {loading ? <LoggingInHeader/> : <TextSignUp/>}
                     <form onSubmit={this.handlerRegisterClick}>
                         <input
                             className={"field"}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Home from "./views/Home"
-import React, { Component } from 'react'
 import Login from './views/Login'
 import SignUp from "./views/SignUp"
 import SetUp from "./views/SetUp"

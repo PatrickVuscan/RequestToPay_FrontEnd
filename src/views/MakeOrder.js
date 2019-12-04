@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./MakeOrder.css"
 import {performMakeOrder} from "../models/index"
-import TextLoading from "../components/TextLoading";
-import TextMakeOrder from "../components/TextMakeOrder";
+import TextMakeOrder from "../components/text/TextMakeOrder";
+import LoggingInHeader from "../components/text/LoggingInHeader";
 
 
 /**
@@ -42,7 +42,7 @@ class MakeOrder extends Component {
         return (
             <div id="makeorder_full">
                 <div id="makeorder_block">
-                    {loading ? <TextLoading/> : <TextMakeOrder/>}
+                    {loading ? <LoggingInHeader/> : <TextMakeOrder/>}
                     <form onSubmit={this.handlerMakeOrderClick}>
                         <input
                             className={"field"}

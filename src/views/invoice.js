@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./SignUp.css"
 import {performActionInvoice} from "../models/index"
-import MenuTextLoading from "../components/MenuTextLoading";
-import TextInvoice from "../components/TextInvoice";
+import MenuTextLoading from "../components/text/MenuTextLoading";
+import TextInvoice from "../components/text/TextInvoice";
 
 /**
  * Creates an invoice element, containing an username field, password fieldS and persona menu and button.

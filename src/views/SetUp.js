@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import "./SignUp.css"
 import {performLogout} from "../models/index"
-import TextLoading from "../components/TextLoading";
-import TextSetUp from "../components/TextSetUp";
+import LoggingInHeader from "../components/text/LoggingInHeader";
+import TextSetUp from "../components/text/TextSetUp";
 
 /**
  * Creates a setup element, containing an username field, password fieldS and persona menu and button.
@@ -49,7 +49,7 @@ class Account extends Component {
         return (
             <div id="setup_full">
                 <div id="setup_block">
-                    {loading ? <TextLoading/> : <TextSetUp/>}
+                    {loading ? <LoggingInHeader/> : <TextSetUp/>}
                     <form onSubmit={this.handlerPersonaClick}>
                         <input type="checkbox"
                                className={"field"}
