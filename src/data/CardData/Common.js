@@ -31,6 +31,10 @@ function getFormattedOrders(ordersData, orderCondition, getOrderStatus, orderFor
 
 // Statuses For Front-End
 
+function isStatusUnapproved(orderData) {
+    return !isApproved(orderData);
+}
+
 function isStatusUnpaid(orderData) {
     return !isPaid(orderData);
 }
@@ -53,6 +57,10 @@ function isStatusCompleted(orderData) {
 
 const orderStatus = constants.api.OrderStatus;
 
+function isApproved(orderData) {
+    return orderData[orderStatus.Approved] === true;
+}
+
 function isPaid(orderData) {
     return orderData[orderStatus.Paid] === true;
 }
@@ -69,4 +77,4 @@ function isDelivered(orderData) {
 /* Exported Functions */
 /* ------------------ */
 
-export {getFormattedOrders, isStatusUnpaid, isStatusPaid, isStatusIncomplete, isStatusCompleted}
+export {getFormattedOrders, isStatusUnapproved, isStatusUnpaid, isStatusPaid, isStatusIncomplete, isStatusCompleted}

@@ -91,7 +91,7 @@ class Menu extends Component {
             Register a product.
           </div>
           <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.invoice)}>
-            Action an invoice.
+            Manage invoices.
           </div>
           {/*<div className={"menu_block"} onClick={() => this.transitionTo(VIEW.setup)}>*/}
           {/*  Account details.*/}

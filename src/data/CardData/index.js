@@ -2,7 +2,7 @@ import constants from '../../constants'
 import {getFormattedCustomerUnpaidOrders,
     getFormattedCustomerPaidOrders,
     getFormattedCustomerCompletedOrders} from "./Customer";
-import {getFormattedSellerIncompleteOrders,
+import {getFormattedSellerUnapprovedOrders,getFormattedSellerIncompleteOrders,
     getFormattedSellerCompletedOrders} from "./Seller";
 import {getFormattedDriverIncompleteOrders,
     getFormattedDriverCompletedOrders} from "./Driver";
@@ -37,6 +37,7 @@ const customerUnpaidString = constants.STATUS.customer.unpaid.string;
 const customerPaidString = constants.STATUS.customer.paid.string;
 const customerCompletedString = constants.STATUS.customer.completed.string
 const seller = constants.PERSONA.seller.name;
+const sellerUnapprovedString = constants.STATUS.seller.unapproved.string;
 const sellerIncompleteString = constants.STATUS.seller.incomplete.string;
 const sellerCompletedString = constants.STATUS.seller.completed.string;
 const driver = constants.PERSONA.driver.name;
@@ -49,6 +50,7 @@ ordersDataFormatter.customer[customerUnpaidString] = getFormattedCustomerUnpaidO
 ordersDataFormatter.customer[customerPaidString] = getFormattedCustomerPaidOrders;
 ordersDataFormatter.customer[customerCompletedString] = getFormattedCustomerCompletedOrders;
 ordersDataFormatter[seller] = {};
+ordersDataFormatter.seller[sellerUnapprovedString] = getFormattedSellerUnapprovedOrders;
 ordersDataFormatter.seller[sellerIncompleteString] = getFormattedSellerIncompleteOrders;
 ordersDataFormatter.seller[sellerCompletedString] = getFormattedSellerCompletedOrders;
 ordersDataFormatter[driver] = {};
