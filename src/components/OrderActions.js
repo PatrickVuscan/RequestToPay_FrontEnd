@@ -16,6 +16,8 @@ class OrderActions extends Component {
 
   userSwitch() {
     switch (global.viewPersona) {
+      case PERSONA.seller.name:
+        return "orderActions_options seller-accent";
       case PERSONA.customer.name:
         return "orderActions_options customer-accent";
       case PERSONA.driver.name:
@@ -29,8 +31,8 @@ class OrderActions extends Component {
     if (global.viewPersona === PERSONA.seller.name && !global.invoiceApproved){
       return(
           <div className={this.userSwitch()}
-               onClick={() => global.presenter.statusApproved(this.props.order.updateOrder)}>
-            <img src={"images/icons/invoice.png"} className="icon" alt={"$"}/>
+               onClick={() => this.props.order.toggleInvoiceMenuOpen()}>
+            <img src={"images/icons/invoice.png"} className="icon" alt={"I"}/>
           </div>
       );}
   }

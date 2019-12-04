@@ -4,7 +4,7 @@ import Login from './views/Login'
 import SignUp from "./views/SignUp"
 import SetUp from "./views/SetUp"
 import Products from "./views/Products"
-import Invoice from "./views/invoice"
+import Invoice from "./views/Invoice"
 import MakeOrder from "./views/MakeOrder"
 import {CardList} from "./views/CardList"
 import Order from "./views/Order"

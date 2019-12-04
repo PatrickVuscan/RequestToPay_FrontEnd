@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import "./SignUp.css"
+import "./Invoice.css"
 import {performActionInvoice} from "../models/index"
+import InvoiceMenu from "../components/InvoiceMenu";
 import MenuTextLoading from "../components/text/MenuTextLoading";
 import TextInvoice from "../components/text/TextInvoice";
 
@@ -11,6 +12,7 @@ class Invoice extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            driverID: '',
             deliveryDate: '',
             nextInID: '',
             loading: false,
@@ -21,19 +23,25 @@ class Invoice extends Component {
     handlerInvoiceClick(e){
         e.preventDefault();
         let invoice_details = {
+            'driverID': this.state.driverID,
             'deliveryDate': this.state.deliveryDate,
             'nextInID': this.state.nextInID,
         };
-        performActionInvoice(this, invoice_details, global.presenter.invoiceHandler)
+        performActionInvoice(this, invoice_details, global.presenter.invoiceHandler);
+
     }
 
     render(){
         const { loading } = this.state;
         return (
-            <div id="signup_full">
-                <div id="signup_block">
+            <div id="invoice_full">
+                <div id="invoice_block">
                     {loading ? <MenuTextLoading/> : <TextInvoice/>}
                     <form onSubmit={this.handlerInvoiceClick}>
+                        <input
+                            className={"field"}
+                            required placeholder="Driver ID."
+                            onChange={(event) => {this.setState({driverID: event.target.value})}}/>
                         <input
                             className={"field"}
                             required placeholder="Delivery date."
@@ -45,7 +53,7 @@ class Invoice extends Component {
                         <input
                             id="button"
                             type="submit"
-                            value="Submit."/>
+                            value="Send invoice."/>
                     </form>
                 </div>
             </div>

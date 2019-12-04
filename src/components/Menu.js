@@ -90,9 +90,9 @@ class Menu extends Component {
           <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.products)}>
             Register a product.
           </div>
-          <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.invoice)}>
-            Manage invoices.
-          </div>
+          {/*<div className={"menu_block"} onClick={() => this.transitionTo(VIEW.invoice)}>*/}
+          {/*  Manage invoices.*/}
+          {/*</div>*/}
           {/*<div className={"menu_block"} onClick={() => this.transitionTo(VIEW.setup)}>*/}
           {/*  Account details.*/}
           {/*</div>*/}

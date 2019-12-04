@@ -14,7 +14,7 @@ export class TextInvoice extends Component {
     render(){
         return (
             <div id ="text_login">
-                <Fade><p>Incoming orders.</p></Fade>
+                <Fade><p>Confirm invoice.</p></Fade>
             </div>
         );
     }

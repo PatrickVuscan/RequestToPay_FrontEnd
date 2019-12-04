@@ -54,6 +54,10 @@ class MakeOrder extends Component {
                             onChange={(event) => {this.setState({sellerID: event.target.value})}}/>
                         <input
                             className={"field"}
+                            required placeholder="Driver ID"
+                            onChange={(event) => {this.setState({driverID: event.target.value})}}/>
+                        <input
+                            className={"field"}
                             required placeholder="Delivery date"
                             onChange={(event) => {this.setState({deliveryDate: event.target.value})}}/>
                         <input
