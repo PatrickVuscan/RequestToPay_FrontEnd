@@ -210,6 +210,11 @@ class Presenter extends Component {
     this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
+  statusApproved(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Approved, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
+  }
+
   statusArrived(actionOnSuccess){
     setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Arrived, true, actionOnSuccess);
     this.setState({currentView: VIEW.order,}); // return to updated view

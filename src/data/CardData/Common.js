@@ -35,6 +35,10 @@ function isStatusUnapproved(orderData) {
     return !isApproved(orderData);
 }
 
+function isStatusApprovedAndUnpaid(orderData) {
+    return isApproved(orderData) && !isPaid(orderData);
+}
+
 function isStatusUnpaid(orderData) {
     return !isPaid(orderData);
 }
@@ -77,4 +81,5 @@ function isDelivered(orderData) {
 /* Exported Functions */
 /* ------------------ */
 
-export {getFormattedOrders, isStatusUnapproved, isStatusUnpaid, isStatusPaid, isStatusIncomplete, isStatusCompleted}
+export {getFormattedOrders, isStatusUnapproved, isStatusApprovedAndUnpaid,
+    isStatusUnpaid, isStatusPaid, isStatusIncomplete, isStatusCompleted}

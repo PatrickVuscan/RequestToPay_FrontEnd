@@ -25,6 +25,16 @@ class OrderActions extends Component {
     }
   }
 
+  getApproveButton() {
+    if (global.viewPersona === PERSONA.seller.name && !global.invoiceApproved){
+      return(
+          <div className={this.userSwitch()}
+               onClick={() => global.presenter.statusApproved(this.props.order.updateOrder)}>
+            <img src={"images/icons/invoice.png"} className="icon" alt={"$"}/>
+          </div>
+      );}
+  }
+
   getPayButton() {
     if (global.viewPersona === PERSONA.customer.name && !global.invoicePaid){
       return(
@@ -34,6 +44,7 @@ class OrderActions extends Component {
         </div>
       );}
   }
+
 
   getArrivedButton(){
     if (global.viewPersona === PERSONA.driver.name && !global.invoiceArrived) {
@@ -72,6 +83,7 @@ class OrderActions extends Component {
     return (
       <div id={"orderActions_block"}>
         <div id={"orderActions_wrapper"}>
+          {this.getApproveButton()}
           {this.getPayButton()}
           {this.getArrivedButton()}
           {this.getRouteButton()}

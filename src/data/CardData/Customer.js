@@ -1,5 +1,5 @@
 import constants from "../../constants";
-import {getFormattedOrders, isStatusCompleted, isStatusPaid, isStatusUnpaid} from "./Common";
+import {getFormattedOrders, isStatusApprovedAndUnpaid, isStatusCompleted, isStatusPaid, isStatusUnpaid} from "./Common";
 
 /* ----------------------------------------------- */
 /* Definitions of Persona's OrdersData Formatters  */
@@ -13,7 +13,7 @@ import {getFormattedOrders, isStatusCompleted, isStatusPaid, isStatusUnpaid} fro
  * @returns [] - A list of JSON objects, where each JSON object is one order
  */
 function getFormattedCustomerUnpaidOrders(ordersData) {
-    let statusCondition = isStatusUnpaid;
+    let statusCondition = isStatusApprovedAndUnpaid;
     let getOrderStatusForPersona = getOrderStatusForCustomer;
     let orderFormatter = getFormattedCustomerOrder;
     return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
