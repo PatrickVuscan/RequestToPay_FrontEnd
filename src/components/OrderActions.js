@@ -30,7 +30,7 @@ class OrderActions extends Component {
       return(
         <div className={this.userSwitch()}
              onClick={() => this.props.order.togglePayMenuOpen()}>
-          $
+          <img src={"images/icons/pay.png"} className="icon" alt={"$"}/>
         </div>
       );}
   }

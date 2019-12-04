@@ -49,7 +49,7 @@ class Loading extends Component {
           Scotia
         </div>
         <div id={"loading_block"} onClick={() => global.presenter.stopLoading()}>
-          <img src={loader} alt={"LOADING..."}/>
+          <img src={loader} alt={"LOADING..."} id={"loader"}/>
         </div>
       </div>
     );

@@ -32,5 +32,8 @@
     font-weight: 700;
     color: var(--WHITE);
     font-size: 36px;
+}
 
+#loader{
+    mix-blend-mode: multiply;
 }
