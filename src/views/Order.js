@@ -5,6 +5,7 @@ import PayMenu from "../components/PayMenu.js";
 import DeliveryMenu from "../components/DeliveryMenu"
 import Invoice from "../components/Invoice";
 import DriverRoute from "./DriverRoute";
+import OrderActions from "../components/OrderActions";
 import {getInfo, getItems} from "../data/InvoiceData";
 
 const PERSONA = constants.PERSONA;
@@ -106,45 +107,6 @@ class Order extends Component {
     );
   }
 
-  getPayButton() {
-    if (global.viewPersona === PERSONA.customer.name && !global.invoicePaid){
-    return(
-        <div className={"order_header_item"} onClick={() => this.togglePayMenuOpen()}>
-          [[ Pay Now! ]]
-        </div>
-    );}
-  }
-
-  getDeliveryButton() {
-    if (global.viewPersona === PERSONA.driver.name && global.invoiceArrived && !global.invoiceDelivered) {
-      return (
-        <div className={"order_header_item"} onClick={() => this.toggleDeliveryMenuOpen()}>
-          [[ Delivered ]]
-        </div>
-      );
-    }
-  }
-
-  getRouteButton() {
-    if (global.viewPersona === PERSONA.driver.name && !global.invoiceDelivered) {
-      return (
-        <div className={"order_header_item"} onClick={() => this.toggleRouteMenuOpen()}>
-          [[ Route ]]
-        </div>
-      );
-    }
-  }
-
-  getArrivedButton() {
-    if (global.viewPersona === PERSONA.driver.name && !global.invoiceArrived) {
-      return (
-        <div className={"order_header_item"} onClick={() => global.presenter.statusArrived(this.updateOrder)}>
-          [[ Arrived ]]
-        </div>
-      );
-    }
-  }
-
   getPayMenu() {
     if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
       return(
@@ -165,7 +127,6 @@ class Order extends Component {
   render() {
     const { info, items, total } = this.state;
     const headerInfo = this.getHeaderInfo();
-    const payButton = this.getPayButton();
     const payMenu = this.getPayMenu();
 
     console.log(this.state);
@@ -175,12 +136,6 @@ class Order extends Component {
         {this.getDriverRoute()}
         <div id={'order_header'} className={this.accentSwitch()}>
           {headerInfo}
-          <div id={"order_buttons"}>
-            {payButton}
-            {this.getDeliveryButton()}
-            {this.getRouteButton()}
-            {this.getArrivedButton()}
-          </div>
         </div>
         <div id={"order_wrapper"}>
           <div className={"order_block"}>
@@ -192,6 +147,7 @@ class Order extends Component {
           </div>
         </div>
         {payMenu}
+        <OrderActions order={this}/>
       </div>
     );
   }

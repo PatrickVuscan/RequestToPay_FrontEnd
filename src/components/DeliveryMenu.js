@@ -2,7 +2,7 @@
 
 import React, {Component} from "react";
 import constants from "../constants";
-import "./DeliveryMenu.css"
+import "./PayMenu.css"
 
 const VIEW = constants.VIEW;
 
