@@ -50,7 +50,8 @@ body {
     background-color: var(--MID_RED);
 }
 .home-background {
-  background-color: var(--LIGHT_RED);
+  /*background-color: var(--LIGHT_RED);*/
+  background: linear-gradient(to bottom, var(--MID_RED) 0%, var(--LIGHT_RED) 100%);
 }
 .customer-menu {
   background-color: var(--ORANGE);
@@ -59,7 +60,8 @@ body {
   background-color: var(--MID_ORANGE);
 }
 .customer-background {
-  background-color: var(--LIGHT_ORANGE);
+  /*background-color: var(--LIGHT_ORANGE);*/
+  background: linear-gradient(to bottom, var(--MID_ORANGE) 0%, var(--LIGHT_ORANGE) 100%);
 }
 
 .seller-menu {
@@ -69,7 +71,9 @@ body {
   background-color: var(--BLUE);
 }
 .seller-background {
-  background-color: var(--LIGHT_BLUE);
+  /*background-color: var(--LIGHT_BLUE);*/
+  background: linear-gradient(to bottom, var(--BLUE) 0%, var(--LIGHT_BLUE) 100%);
+
 }
 
 .driver-menu {
@@ -79,5 +83,6 @@ body {
   background-color: var(--PURPLE);
 }
 .driver-background {
-  background-color: var(--LIGHT_PURPLE);
+  /*background-color: var(--LIGHT_PURPLE);*/
+  background: linear-gradient(to bottom, var(--PURPLE) 0%, var(--LIGHT_PURPLE) 100%);
 }
