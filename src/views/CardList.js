@@ -27,6 +27,7 @@ export class CardList extends Component {
 
     componentDidMount() {
         global.presenter.getOrdersOverview(this.setOrdersData);
+        window.scrollTo(0,0);
     }
 
     setOrdersData(ordersData) {
