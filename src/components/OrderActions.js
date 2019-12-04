@@ -40,7 +40,7 @@ class OrderActions extends Component {
       return (
         <div className={this.userSwitch()}
              onClick={() => global.presenter.statusArrived(this.props.order.updateOrder)}>
-          A
+          <img src={"images/icons/arrived.png"} className="icon" alt={"A"}/>
         </div>
       );
     }
@@ -51,6 +51,7 @@ class OrderActions extends Component {
       return (
         <div className={this.userSwitch()}
              onClick={() => this.props.order.toggleRouteMenuOpen()}>
+          <img src={"images/icons/route.png"} className="icon" alt={"R"}/>
         </div>
       );
     }
@@ -61,7 +62,7 @@ class OrderActions extends Component {
       return (
         <div className={this.userSwitch()}
              onClick={() => this.props.order.toggleDeliveryMenuOpen()}>
-          D
+          <img src={"images/icons/delivered.png"} className="icon" alt={"D"}/>
         </div>
       );
     }
