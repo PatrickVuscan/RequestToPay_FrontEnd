@@ -1,37 +1,5 @@
-/* Using endpoints provided by RequestToPay_BackEnd */
-
 import config from "../constants";
 import request from "request-promise";
-
-/**
- * Validate login credentials.
- *
- * @param view - the view that initiated the login.
- * @param credentials - credentials.username and credentials.password contain the respect credentials to validate.
- * @param successfulLoginHandler - A callback function, which is used upon a successful login.
- */
-function performLogin(view, credentials, successfulLoginHandler) {
-    view.setState({loading: true});
-    const options = {
-        method: 'GET',
-        uri: `${config.api.URL}/login?user=${credentials.username}&pass=${credentials.password}`,
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };
-
-    setTimeout(function() {
-        request(options)
-            .then(function (res) {
-                successfulLoginHandler(credentials.username, res.EID); // passing
-            })
-            .catch(function (err) {
-                alert(`Unable to find your account.`);
-            });
-        view.setState({loading: false});
-    }, 2000); // Set Delay (to test the loading animation)
-}
 
 /**
  * Get the orders pertaining to the entity with ID 'entityID',
@@ -50,7 +18,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true
     };
 
     global.presenter.startLoading();
@@ -69,37 +37,6 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
 }
 
 /**
- * Get whether the 'persona' (customer, seller or driver) is relevant to the entity with id 'entityId'.
- *
- * @param entityId - The ID for the entity that is being searched by
- * @param persona - The persona that is being searched by
- * @param setPersona - A callback function, which is passed true if the persona applies to the entity
- */
-function getEntityPersona(entityId, persona, setPersona) {
-    const options = {
-        method: 'GET',
-        uri: `${config.api.URL}/ordersByPersona?EID=${entityId}&Persona=${persona}`,
-        headers: {
-            'User-Agent': 'Request-Promise'
-        },
-        json: true // Automatically parses the JSON string in the response
-    };
-
-    global.presenter.startLoading();
-
-    setTimeout(function() {
-        request(options)
-            .then(function (res) {
-                setPersona(true);
-                global.presenter.stopLoading();
-            })
-            .catch(function (err) {
-                global.presenter.stopLoading();
-            });
-    }, 1000);
-}
-
-/**
  * Get the information (entities, statuses and dates) related to the order with id 'orderId'.
  *
  * @param orderId - The id of the order
@@ -113,7 +50,7 @@ function getOrderInfo(orderId, setOrderInfo, formatter) {
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true
     };
 
     global.presenter.startLoading();
@@ -145,7 +82,7 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true
     };
 
     global.presenter.startLoading();
@@ -181,7 +118,7 @@ function setOrderStatus(orderId, status, state, actionOnSuccess) {
         headers: {
             'User-Agent': 'Request-Promise'
         },
-        json: true // Automatically parses the JSON string in the response
+        json: true
     };
 
     global.presenter.startLoading();
@@ -200,9 +137,7 @@ function setOrderStatus(orderId, status, state, actionOnSuccess) {
     }, 500);
 }
 
-export {performLogin,
-    getOrdersByEntityAndPersona,
-    getEntityPersona,
+export {getOrdersByEntityAndPersona,
     getOrderInfo,
     getInvoiceItems,
     setOrderStatus};

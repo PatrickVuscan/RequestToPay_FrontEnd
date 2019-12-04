@@ -1,9 +1,9 @@
 import {performLogin,
-    getOrdersByEntityAndPersona,
-    getEntityPersona,
+    getEntityPersona} from './Entity';
+import {getOrdersByEntityAndPersona,
     getOrderInfo,
     getInvoiceItems,
-    setOrderStatus} from "./backend";
+    setOrderStatus} from './Order';
 
 /**
  * Provides all methods to read/write data.
