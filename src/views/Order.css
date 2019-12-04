@@ -46,9 +46,11 @@
     font-size: 18px;
 }
 .order_block {
+    min-width: 300px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    font-family: 'Cabin', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     color: var(--WHITE);
     font-size: 30px;
@@ -56,7 +58,7 @@
 
 .order_invoice {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #order_buttons{

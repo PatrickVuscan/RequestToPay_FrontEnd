@@ -22,7 +22,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                successfulLoginHandler(credentials.username, res.EID);
+                successfulLoginHandler(credentials.username, res.Name, res.EID);
             })
             .catch(function (err) {
                 alert(`Unable to find your account.`);

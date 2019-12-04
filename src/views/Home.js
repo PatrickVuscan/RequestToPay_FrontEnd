@@ -19,9 +19,6 @@ class Home extends Component {
     this.setDriver = this.setDriver.bind(this);
   }
 
-  // TODO: smooth scrolling transitions
-  // https://github.com/alvarotrigo/react-fullpage
-
     componentDidMount() {
         getEntityPersona(global.entityId, constants.PERSONA.customer.name, this.setCustomer);
         getEntityPersona(global.entityId, constants.PERSONA.seller.name, this.setSeller);
