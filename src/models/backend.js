@@ -27,7 +27,7 @@ function performLogin(view, credentials, successfulLoginHandler) {
                 successfulLoginHandler(credentials.username, res.EID); // passing
             })
             .catch(function (err) {
-                alert(`The login was unsuccessful: ${err.status} -- ${err.message}`);
+                alert(`Unable to find your account.`);
             });
         view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)
@@ -125,7 +125,7 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
             })
             .catch(function (err) {
                 global.presenter.stopLoading();
-                alert(`There was an error: ${err.status} -- ${err.message}`);
+                alert(`There are no orders where you (Entity: ${entityId}) are a ${persona}.`);
             });
     }, 1000);
 }
@@ -169,10 +169,9 @@ function getEntityPersona(entityId, persona, setPersona) {
  * @param formatter - A function which is used to format the order info
  */
 function getOrderInfo(orderId, setOrderInfo, formatter) {
-    console.log("ORDERID: " + orderId);
     const options = {
         method: 'GET',
-        uri: `${config.api.URL}/orderUInvoiceUEntity?OID=${orderId}`,
+        uri: `${config.api.URL}/order?OID=${orderId}&FullOrder=true`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -311,20 +310,15 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
         },
         json: true // Automatically parses the JSON string in the response
     };
-    console.log(invoiceId);
 
     global.presenter.startLoading();
 
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                console.log("Success");
-                console.log(res);
                 if (setOrderTotal === undefined) {
-                    console.log("No Set Orders Total");
                     setOrderItems(formatter(res));
                 } else {
-                    console.log("Set Orders Total");
                     setOrderItems(formatter(res, setOrderTotal));
                 }
                 global.presenter.stopLoading();
@@ -333,6 +327,40 @@ function getInvoiceItems(invoiceId, setOrderItems, formatter, setOrderTotal) {
                 global.presenter.stopLoading();
             });
     }, 1000);
+}
+
+/**
+ * Set the status of type 'status' for order 'orderId' to the state 'state'.
+ *
+ * @param orderId - The id of the order who's status is being set
+ * @param status - The status type being set ('Paid', 'Arrived', 'Delivered')
+ * @param state - The state that 'status' is being set to ('true', 'false')
+ * @param actionOnSuccess - An optional callback function, to do upon successful completion of the PUT request.
+ */
+function setOrderStatus(orderId, status, state, actionOnSuccess) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/orderStatus?OID=${orderId}&status=${status}&state=${state}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    global.presenter.startLoading();
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                global.presenter.stopLoading();
+                if (actionOnSuccess !== undefined) {
+                    actionOnSuccess();
+                }
+            })
+            .catch(function (err) {
+                global.presenter.stopLoading();
+            });
+    }, 500);
 }
 
 export {performLogin,

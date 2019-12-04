@@ -1,5 +1,3 @@
-/* Random money related quote for the login page */
-
 import React, {Component} from "react";
 import "./Text.css"
 import styled, { keyframes } from "styled-components";
@@ -8,7 +6,10 @@ import { fadeInUp, fadeInDown } from "react-animations";
 const Fade = styled.div`animation: 1s ${keyframes`${fadeInUp}`} 1`;
 const FadeSlow = styled.div`animation: 3s ${keyframes`${fadeInDown}`} 1`;
 
-export class OrderTypeWelcome extends Component {
+/**
+ * Welcome Component Addressing User.
+ */
+export class Welcome extends Component {
   render(){
     return (
       <div id={"welcome_wrapper"}>
@@ -24,4 +25,4 @@ export class OrderTypeWelcome extends Component {
   }
 }
 
-export default OrderTypeWelcome;
+export default Welcome;

@@ -1,9 +1,3 @@
-/*
-* This component will display the contents of the invoice.
-* If this is a Buying Order, it will have an option to pay,
-* which will reveal a pay menu (transitioning to RTP)
-*/
-
 import React, { Component } from 'react';
 import "./DriverRoute.css";
 
@@ -11,12 +5,36 @@ class DriverRoute extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleDriverMenuOpen = this.toggleDriverMenuOpen.bind(this);
+    this.toggleRouteMenuOpen = this.toggleRouteMenuOpen.bind(this);
+    this.statusArrived = this.statusArrived.bind(this);
   }
 
-  toggleDriverMenuOpen(){
-    this.props.order.toggleDriverMenuOpen();
+  toggleRouteMenuOpen(){
+    this.props.order.toggleRouteMenuOpen();
   }
+
+  statusArrived(){
+    global.presenter.statusArrived(this.props.updateOrder);
+    this.toggleRouteMenuOpen();
+  }
+
+  getArrivedButton() {
+    if (!global.invoiceArrived) {
+      return (
+        <div className={"route_options"}
+             onClick={() => this.statusArrived()}>
+          Arrived.
+        </div>
+      );
+    } else {
+      return (
+        <div className={"route_options"}>
+          Already arrived!
+        </div>
+      );
+    }
+  }
+
 
   render() {
 
@@ -34,22 +52,17 @@ class DriverRoute extends Component {
               987-654-3210<br/>
             </div>
             <div id={"route_options_wrapper"}>
+                {this.getArrivedButton()}
                 <div className={"route_options"}
-                     onClick={() => global.presenter.statusArrived()}>
-                  Arrived.
-                </div>
-                <div className={"route_options"}
-                     onClick={() => this.toggleDriverMenuOpen()}>
+                     onClick={() => this.toggleRouteMenuOpen()}>
                   Invoice.
                 </div>
             </div>
           </div>
         </div>
       </div>
-
     );
   }
-
 }
 
 export default DriverRoute;

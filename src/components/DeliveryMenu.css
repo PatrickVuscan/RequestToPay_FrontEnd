@@ -4,7 +4,6 @@
 #payMenu_block {
     position: fixed;
     bottom: 0;
-    /*max-height: 60px;*/
     width: inherit;
     display: flex;
     align-items: center;

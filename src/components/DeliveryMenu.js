@@ -2,7 +2,7 @@
 
 import React, {Component} from "react";
 import constants from "../constants";
-import "./DeliveryMenu.css"
+import "./PayMenu.css"
 
 const VIEW = constants.VIEW;
 
@@ -22,8 +22,9 @@ class DeliveryMenu extends Component {
   }
 
   statusDelivered(){
+    let {updateOrder} = this.props;
     this.toggleDeliveryMenuOpen();
-    global.presenter.statusDelivered(); // Payment functions in Presenter.
+    global.presenter.statusDelivered(updateOrder);
   }
 
   toggleDeliveryMenuOpen(){

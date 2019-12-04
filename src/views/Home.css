@@ -47,14 +47,14 @@
 
 #welcome_wrapper {
     background-color: var(--MID_RED);
-    background-image: url(/images/bg/bg_home02.jpg);
+    background-image: url(/images/bg/bg_home03.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
 }
 
-#sell_wrapper {
+#seller_wrapper {
     background-color: var(--BLUE);
     background-image: url(/images/bg/bg_selling.jpg);
     background-repeat: no-repeat;
@@ -75,7 +75,7 @@
 
 
 /* Maximum aspect ratio */
-#buy_block {
+#customer_block {
     background-color: var(--MID_ORANGE);
     background-image: url(/images/bg/bg_buying.jpg);
     background-repeat: no-repeat;
@@ -85,7 +85,7 @@
 }
 
 @media (max-aspect-ratio: 1/1) {
-    #buy_block {
+    #customer_block {
         background-image: url(/images/bg/bg_buying_portrait.jpg);
         background-repeat: no-repeat;
         background-attachment: fixed;

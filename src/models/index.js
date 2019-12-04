@@ -1,6 +1,3 @@
-// Contains all methods to read / write data
-// implementation is delegated elsewhere (backend.js & cache.js)
-
 import {performLogin,
     performRegister,
     getEntityInfoByUsername,
@@ -10,7 +7,8 @@ import {performLogin,
     performActionInvoice,
     performMakeOrder,
     performMakeProduct,
-    getInvoiceItems} from "./backend";
+    getInvoiceItems,
+    setOrderStatus} from "./backend";
 
 import { performToSignUp, performLogout } from "./cache";
 
@@ -25,4 +23,5 @@ export {performLogin,
     performActionInvoice,
     performMakeOrder,
     performMakeProduct,
-    getInvoiceItems};
+    getInvoiceItems,
+    setOrderStatus};

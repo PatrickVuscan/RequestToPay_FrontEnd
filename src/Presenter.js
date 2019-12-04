@@ -1,16 +1,4 @@
-// We only have 1 presenter
-
-// -------------------
-
-// It's responsibilities are:
-// - handle events due to user input, talk to model layer, then get updates in view again
-// - when handling events, it will speak to model layer (models/index.js):
-//     - tell view to show it is waiting for a response (if it chooses to represent this)
-//     - make use of a model layer
-// - when receiving info from model layer, it will:
-//     - update view data (to package up the information for the view)
-//     - then send the view data back to the view
-
+import React, { Component } from 'react'
 import Home from "./views/Home"
 import React, { Component } from 'react'
 import Login from './views/Login'
@@ -25,16 +13,26 @@ import Menu from "./components/Menu"
 import Loading from "./views/Loading"
 import constants from "./constants"
 import './Presenter.css'
-import cookie from 'react-cookies'
-
+import {getOrdersByEntityAndPersona, setOrderStatus} from "./models";
+import {getCardData} from "./data/CardData";
 
 const VIEW = constants.VIEW;
 const unpaid = constants.STATUS.customer.unpaid.string;
 
 
-// TODO: Assure that we can open a card list of ANY TYPE. Currently only 'Customer Unpaid' is an option.
-
+/**
+ * Singleton Presenter in MVP Architecture.
+ */
 class Presenter extends Component {
+
+  // Responsibilities Include:
+  // - handle events due to user input, talk to model layer, then get updates in view again
+  // - when handling events, it will speak to model layer (models/index.js):
+  //     - tell view to show it is waiting for a response (if it chooses to represent this)
+  //     - make use of a model layer
+  // - when receiving info from model layer, it will:
+  //     - update view data (to package up the information for the view)
+  //     - then send the view data back to the view
 
   constructor(props) {
     super(props);
@@ -134,20 +132,12 @@ class Presenter extends Component {
     this.setCurrentView(VIEW.cardList);
   }
 
-  // TODO: Remove when Buyer Order page created.
-  // This is currently testing that a function would be properly called.
   transitionToOrder(orderId, invoiceId) {
-    console.log("TEST: In Transition To Order - " + orderId);
     this.setState({currentView: VIEW.order,});
     this.setCurrentView(VIEW.order);
     this.setOrderID(orderId);
     this.setInvoiceID(invoiceId);
   }
-
-  // transitionToSellerList(){}       // TODO: Later
-  // transitionToBuyerInvoice(ID){}   // TODO: Later
-  // transitionToSellerInvoice(ID){}  // TODO: Later
-  // transitionToPayID(ID){}          // TODO: Later
 
   // Log In Methods ----------------------------//
 
@@ -214,20 +204,20 @@ class Presenter extends Component {
   }
 
   // Request to Pay
-  // TODO: Add payment actions here.
-  processPayment(){
-    console.log("TEST: Process payment for Order #" + global.viewOrderID);
-    // TODO: add some function to backend.js to interact with Interac RTP
-    // TODO: add some function to backend.js to change status of Invoice to Paid
-    this.setState({currentView: VIEW.order,}); // return to view
+
+  processPayment(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Paid, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
-  statusArrived(){
-    console.log("TEST: Arrived Status for Order #" + global.viewOrderID);
+  statusArrived(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Arrived, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
-  statusDelivered(){
-    console.log("TEST: Delivered Status for Order #" + global.viewOrderID);
+  statusDelivered(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Delivered, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
   // Loading transition ------------------------//
@@ -238,6 +228,12 @@ class Presenter extends Component {
 
   stopLoading(){
       this.setState({isLoading: false})
+  }
+
+  // Populate CardList -------------------------//
+
+  getOrdersOverview(setOrdersData) {
+      getCardData(getOrdersByEntityAndPersona, global.entityId, global.viewPersona, global.viewStatus, setOrdersData);
   }
 
   // Global Setters ----------------------------//
@@ -315,4 +311,6 @@ class Presenter extends Component {
   }
 }
 
+// Exporting Presenter as a Singleton
+Object.freeze(Presenter);
 export default Presenter;

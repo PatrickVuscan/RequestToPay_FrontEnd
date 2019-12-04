@@ -25,6 +25,8 @@
 #text_welcome p{
     margin: -6px;
     padding:0;
+    text-shadow: 2px 2px 4px #ff0000;
+
 }
 #text_welcome #username{
     text-transform: capitalize;

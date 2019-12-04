@@ -1,0 +1,32 @@
+/* Order Actions CSS*/
+
+#orderActions_block{
+width:inherit;
+    position:fixed;
+    bottom: 0;
+    z-index: 100;
+}
+#orderActions_wrapper{
+    width:inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.orderActions_options{
+    font-family: 'Cabin', sans-serif;
+    font-weight: 400;
+    color: var(--WHITE);
+    font-size: 20px;
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon{
+    height: 40px;
+    width: 40px;
+}

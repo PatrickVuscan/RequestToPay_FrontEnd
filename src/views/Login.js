@@ -42,7 +42,7 @@ class Login extends Component {
     return (
       <div id="login_full">
         <div id="login_block">
-          {loading ? <TextLoading/> : <TextLogin/>}
+          {loading ? <LoggingInHeader/> : <LoginHeader/>}
           <form onSubmit={this.handleLoginClick}>
             <input
               className={"field"}
