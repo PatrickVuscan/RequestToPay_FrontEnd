@@ -37,6 +37,102 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
 }
 
 /**
+ * Inserts a new invoice into the database
+ *
+ * @param details - contains the details of the order being inserted into the backend
+ * @param makeOrderHandler - handles the transition from actioning invoice page to the home page
+ */
+function performMakeOrder(details, makeOrderHandler) {
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=5&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
+        body: {
+            "invoiceItems": [
+                {
+                    "IID": details.itemID,
+                    "Quantity": details.itemQuantity
+                }
+            ]
+        },
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                makeOrderHandler(details.buyerID); // passing
+            })
+            .catch(function (err) {
+                alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
+ * Inserts a new item/product into the database
+ *
+ * view - the page for inserting a new product
+ * @param details - contains the details of the order being inserted into the backend
+ * @param makeProductHandler - handles the transition from actioning product page to the home page
+ */
+function performMakeProduct(view, details, makeProductHandler) {
+    view.setState({loading: true});
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/item?Name=${details.itemName}&SID=${details.sellerID}&Price=${details.itemPrice}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                makeProductHandler(); // passing
+            })
+            .catch(function (err) {
+                alert(`Registering the product was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+        view.setState({loading: false});
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
+ * Inserts a new invoice into the database
+ *
+ * @param view - the view of the action invoice page
+ * @param details - contains the delivery date and the ID that this new invoice replaces
+ * @param invoiceHandler - handles the transition from actioning invoice page to the home page
+ *
+ */
+function performActionInvoice(view, details, invoiceHandler) {
+    view.setState({loading: true});
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/invoice?DeliveryDate=${details.deliveryDate}&NextInID=${details.nextInID}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                invoiceHandler(); // passing
+            })
+            .catch(function (err) {
+                alert(`The action was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+        view.setState({loading: false});
+    }, 2000); // Set Delay (to test the loading animation)2000);
+}
+
+/**
  * Get the information (entities, statuses and dates) related to the order with id 'orderId'.
  *
  * @param orderId - The id of the order
@@ -138,6 +234,9 @@ function setOrderStatus(orderId, status, state, actionOnSuccess) {
 }
 
 export {getOrdersByEntityAndPersona,
+    performMakeProduct,
+    performMakeOrder,
+    performActionInvoice,
     getOrderInfo,
     getInvoiceItems,
     setOrderStatus};

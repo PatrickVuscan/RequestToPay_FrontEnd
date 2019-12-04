@@ -1,6 +1,7 @@
 import React, {cloneElement, Component} from 'react';
 import constants from "../constants";
 import "./Order.css";
+import InvoiceMenu from "../components/InvoiceMenu";
 import PayMenu from "../components/PayMenu.js";
 import DeliveryMenu from "../components/DeliveryMenu"
 import Invoice from "../components/Invoice";
@@ -18,6 +19,7 @@ class Order extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      invoiceMenuOpen: false,
       payMenuOpen: false,
       routeMenuOpen: true,
       deliveryMenuOpen: false,
@@ -27,6 +29,7 @@ class Order extends Component {
     };
     this.updateOrder = this.updateOrder.bind(this);
 
+    this.toggleInvoiceMenuOpen = this.toggleInvoiceMenuOpen.bind(this);
     this.togglePayMenuOpen = this.togglePayMenuOpen.bind(this);
     this.toggleRouteMenuOpen = this.toggleRouteMenuOpen.bind(this);
     this.toggleDeliveryMenuOpen = this.toggleDeliveryMenuOpen.bind(this);
@@ -55,6 +58,10 @@ class Order extends Component {
 
   setTotal(total) {
     this.setState({'total': total.toFixed(2)});
+  }
+
+  toggleInvoiceMenuOpen(){
+    this.setState(prevState => ({invoiceMenuOpen: !prevState.invoiceMenuOpen}));
   }
 
   togglePayMenuOpen(){
@@ -111,6 +118,10 @@ class Order extends Component {
     if (global.viewPersona === PERSONA.customer.name && this.state.payMenuOpen){
       return(
         <PayMenu payMenuOpen={this.state.payMenuOpen} order={this} updateOrder={this.updateOrder}/>
+      );}
+    if (global.viewPersona === PERSONA.seller.name && this.state.invoiceMenuOpen){
+      return(
+          <InvoiceMenu order={this} updateOrder={this.updateOrder}/>
       );}
     if (global.viewPersona === PERSONA.driver.name && this.state.deliveryMenuOpen){
       return(

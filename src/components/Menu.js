@@ -83,6 +83,12 @@ class Menu extends Component {
         <div className={"menu_block first"} onClick={() => this.transitionTo(VIEW.home)}>
           Home.
         </div>
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.makeorder)}>
+          Make an order.
+        </div>
+        <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.products)}>
+          Register a product.
+        </div>
         <div className={"menu_block"} onClick={() => this.transitionTo(VIEW.login)}>
           Log Out.
         </div>
