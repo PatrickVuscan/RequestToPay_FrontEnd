@@ -37,6 +37,7 @@ class Login extends Component {
             <input
               className={"field"}
               required placeholder="Username"
+              autoCapitalize="none"
               onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
             <input
               className={"field"}
