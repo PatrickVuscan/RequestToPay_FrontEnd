@@ -44,7 +44,7 @@ function performRegister(view, credentials, successfulRegisterHandler) {
     view.setState({loading: true});
     const options = {
         method: 'PUT',
-        uri: `${config.api.URL}/entity?Name=${credentials.name}&Username=${credentials.username}&Password=${credentials.password}&BillingAddress=${credentials.address}`,
+        uri: `${config.api.URL}/entity?Name=${credentials.name}&Username=${credentials.username}&Password=${credentials.password}&BillingAddress=${credentials.address}&PhoneNumber=${credentials.phone}`,
         headers: {
             'User-Agent': 'Request-Promise'
         },
@@ -53,7 +53,7 @@ function performRegister(view, credentials, successfulRegisterHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                successfulRegisterHandler(credentials.username, res.EID); // passing
+                successfulRegisterHandler(credentials.username, res); // passing
             })
             .catch(function (err) {
                 alert(`The register was unsuccessful: ${err.status} -- ${err.message}`);
@@ -207,7 +207,7 @@ function performMakeOrder(details, makeOrderHandler) {
             "invoiceItems": [
                 {
                     "IID": details.itemID,
-                    "Quantity": details.itemquantity
+                    "Quantity": details.itemQuantity
                 }
             ]
         },

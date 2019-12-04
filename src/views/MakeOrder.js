@@ -11,14 +11,16 @@ import LoggingInHeader from "../components/text/LoggingInHeader";
 class MakeOrder extends Component {
     constructor(props) {
         super(props);
+        const today = new Date();
+        const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         this.state = {
-            buyerID: '',
+            buyerID: global.entityId,
             sellerID: '',
-            driverID: '',
-            orderDate: '',
+            driverID: null,
+            orderDate: date,
             deliveryDate: '',
             itemID: null,
-            itemquantity: null
+            itemQuantity: null
         };
         this.handlerMakeOrderClick = this.handlerMakeOrderClick.bind(this);
     }
@@ -32,8 +34,9 @@ class MakeOrder extends Component {
             'orderDate': this.state.orderDate,
             'deliveryDate': this.state.deliveryDate,
             'itemID': this.state.itemID,
-            'itemquantity': this.state.itemquantity
+            'itemQuantity': this.state.itemQuantity
         };
+        console.log(this.state.orderDate);
         performMakeOrder(order_details, global.presenter.makeorderHandler)
     }
 
@@ -43,23 +46,12 @@ class MakeOrder extends Component {
             <div id="makeorder_full">
                 <div id="makeorder_block">
                     {loading ? <LoggingInHeader/> : <TextMakeOrder/>}
+
                     <form onSubmit={this.handlerMakeOrderClick}>
-                        <input
-                            className={"field"}
-                            required placeholder="User ID"
-                            onChange={(event) => {this.setState({buyerID: event.target.value})}}/>
                         <input
                             className={"field"}
                             required placeholder="Seller ID"
                             onChange={(event) => {this.setState({sellerID: event.target.value})}}/>
-                        <input
-                            className={"field"}
-                            required placeholder="Deliverer ID"
-                            onChange={(event) => {this.setState({driverID: event.target.value})}}/>
-                        <input
-                            className={"field"}
-                            required placeholder="Today's date"
-                            onChange={(event) => {this.setState({orderDate: event.target.value})}}/>
                         <input
                             className={"field"}
                             required placeholder="Delivery date"
@@ -71,7 +63,7 @@ class MakeOrder extends Component {
                         <input
                             className={"field"}
                             required placeholder="Item quantity."
-                            onChange={(event) => {this.setState({itemquantity: event.target.value})}}/>
+                            onChange={(event) => {this.setState({itemQuantity: event.target.value})}}/>
                         <input
                             id="button"
                             type="submit"

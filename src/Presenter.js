@@ -147,15 +147,16 @@ class Presenter extends Component {
     this.transitionTo(VIEW.home);
   }
 
-  // Sign Up Methords ---------------------------//
+  // Sign Up Methods ---------------------------//
 
   toSignUpHandler(){
     this.transitionTo(VIEW.signup);
   }
 
-  registerHandler(username){
+  registerHandler(username, entityId){
     this.setLoggedIn(true);
     this.setUsername(username);
+    this.setEntityId(entityId);
     this.transitionTo(VIEW.home);
   }
 

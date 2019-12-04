@@ -19,8 +19,6 @@ function performToSignUp(view, go){
  * Log user out
  *
  * @param view - view that contains methods for setting each persona
- * @param personas - personas.customer, personas.seller, and personas.driver contain the info to set persona
- * @param personaHandler - A callback function, which is used upon a successful update.
  */
 function performLogout(view, personas, personaHandler) {
     view.setState({loading: true});

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import "./SignUp.css"
 import {performLogout} from "../models/index"
-import LoggingInHeader from "../components/text/LoggingInHeader";
-import TextSetUp from "../components/text/TextSetUp";
-
+import AccountHeader from "../components/text/AccountHeader";
+import TextAccount from "../components/text/Account";
 /**
  * Creates a setup element, containing an username field, password fieldS and persona menu and button.
  */
@@ -16,10 +15,7 @@ class Account extends Component {
             'driver': false,
             loading: false,
         };
-        this.setCustomer = this.setCustomer.bind(this);
-        this.setSeller = this.setSeller.bind(this);
-        this.setDriver = this.setDriver.bind(this);
-        this.handlerPersonaClick = this.handlerPersonaClick.bind(this);
+        this.handlerLogOutClick = this.handlerLogOutClick.bind(this);
     }
 
     setCustomer(boolean) {
@@ -34,41 +30,44 @@ class Account extends Component {
         this.setState({'driver': boolean});
     }
 
-    handlerPersonaClick(e){
+    handlerLogOutClick(e){
         e.preventDefault();
         let credentials = {
-            'customer': this.state.customer,
-            'seller': this.state.seller,
-            'driver': this.state.driver
+            'username': this.state.usernameValue,
+            'password': this.state.passwordValue
         };
-        // performPersonaSet(this, credentials, global.presenter.personaSetHandler)
+        performLogout(this, credentials, global.presenter.loginHandler);
     }
 
     render(){
         const { loading } = this.state;
         return (
-            <div id="setup_full">
-                <div id="setup_block">
-                    {loading ? <LoggingInHeader/> : <TextSetUp/>}
-                    <form onSubmit={this.handlerPersonaClick}>
-                        <input type="checkbox"
-                               className={"field"}
-                               name="customer"
-                               onChange={() => {this.setState({customer: true})}}
-                               value="Are you a customer?"/> Are you a customer?
-                            <input
-                                className={"field"}
-                                type="checkbox"
-                                name="seller"
-                                onChange={() => {this.setState({seller: true})}}
-                                value="Are you a seller?"/> Are you a seller?
-                                <input
-                                    className={"field"}
-                                    type="checkbox"
-                                    name="driver"
-                                    onChange={() => {this.setState({driver: true})}}
-                                    value="Are you a driver?"/> Are you a driver?
-                                    <input id="button" type="submit" value="Save."/>
+            <div id="signup_full">
+                <div id="signup_block">
+                    {loading ? <AccountHeader/> : <TextAccount/>}
+                    <form onSubmit={this.handlerLogOutClick}>
+                        <input
+                            className={"field"}
+                            required placeholder="Name."
+                            onChange={(event) => {this.setState({nameValue: event.target.value})}}/>
+                        <input
+                            className={"field"}
+                            required placeholder="Username."
+                            onChange={(event) => {this.setState({usernameValue: event.target.value})}}/>
+                        <input
+                            className={"field"}
+                            required type="password"
+                            placeholder="Password."
+                            autoCapitalize="none" onChange={(event) => {this.setState({passwordValue: event.target.value})}}/>
+                        <input
+                            className={"field"}
+                            required type="address"
+                            placeholder="Address."
+                            onChange={(event) => {this.setState({addressValue: event.target.value})}}/>
+                        <input
+                            id="button"
+                            type="submit"
+                            value="Register."/>
                     </form>
                 </div>
             </div>
