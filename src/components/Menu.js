@@ -31,6 +31,12 @@ class Menu extends Component {
     switch(view){
       case VIEW.login:
         return "login-menu";
+      case VIEW.signup:
+        return "login-menu";
+      case VIEW.products:
+        return "login-menu";
+      case VIEW.makeorder:
+        return "login-menu";
       case VIEW.home:
         return "home-menu";
       case VIEW.cardList:

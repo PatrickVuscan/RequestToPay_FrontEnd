@@ -14,7 +14,7 @@ export class TextProducts extends Component {
     render(){
         return (
             <div id ="text_login">
-                <Fade><p>Register your product.</p></Fade>
+                <Fade><p>Register a product.</p></Fade>
             </div>
         );
     }

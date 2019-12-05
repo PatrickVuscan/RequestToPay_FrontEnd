@@ -48,16 +48,17 @@ class OrderActions extends Component {
     if (!global.invoicePaid) { // is not paid, make actionable
       if (this.isCustomer()){
         return (
-            <div className={this.userSwitch()}
-                 onClick={() => this.props.order.togglePayMenuOpen()}>
-              {this.getPayIcon()}
-            </div>
+          <div className={this.userSwitch()}
+               onClick={() => this.props.order.togglePayMenuOpen()}>
+            {this.getPayIcon()}
+          </div>
         );
       } else {
         return (
-            <div className={"orderActions_options incomplete"}>
-              {this.getPayIcon()}
-            </div>
+          <div className={"orderActions_options incomplete"}
+               onClick={() => this.props.order.updateOrder()}>
+            {this.getPayIcon()}
+          </div>
         )
       }
     } else {  // is paid
@@ -70,7 +71,7 @@ class OrderActions extends Component {
   }
 
   getApproveIcon() {
-    return (<img src={"images/icons/invoice.png"} className="icon" alt={"I"}/>);
+    return (<img src={"images/icons/approved.png"} className="icon" alt={"I"}/>);
   }
 
   getApproveButton() {
@@ -114,7 +115,8 @@ class OrderActions extends Component {
         );
       } else {
         return (
-            <div className={"orderActions_options incomplete"}>
+            <div className={"orderActions_options incomplete"}
+                 onClick={() => this.props.order.updateOrder()}>
               {this.getArrivedIcon()}
             </div>
         )
@@ -154,7 +156,8 @@ class OrderActions extends Component {
         );
       } else {
         return (
-            <div className={"orderActions_options incomplete"}>
+            <div className={"orderActions_options incomplete"}
+                 onClick={() => this.props.order.updateOrder()}>
               {this.getDeliveredIcon()}
             </div>
         )
@@ -196,10 +199,10 @@ class OrderActions extends Component {
       <div id={"orderActions_block"}>
         <div id={"orderActions_wrapper"}>
           {this.getApproveButton()}
+          {this.getRouteButton()}
           {this.getPayButton()}
           {this.getArrivedButton()}
           {this.getDeliveredButton()}
-          {this.getRouteButton()}
         </div>
       </div>
     );

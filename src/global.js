@@ -18,6 +18,7 @@ const global = {
 
   /* User Data ---------------------------*/
   username: 'Not Logged In!',
+  name: '',
   entityId: '',
 
   /* View Data ---------------------------*/
