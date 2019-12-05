@@ -50,11 +50,11 @@ class InvoiceMenu extends Component {
                          onClick={() => this.processInvoice()}>
                         YES
                     </div>
-                    <div id={"payMenu_options"}
-                         className={"button"}
-                         onClick={() => global.presenter.transitionTo(VIEW.invoice)}>
-                        UPDATE
-                    </div>
+                    {/*<div id={"payMenu_options"}*/}
+                    {/*     className={"button"}*/}
+                    {/*     onClick={() => global.presenter.transitionTo(VIEW.invoice)}>*/}
+                    {/*    UPDATE*/}
+                    {/*</div>*/}
                     <div id={"payMenu_options"}
                          onClick={() => this.toggleInvoiceMenuOpen()}>
                         NO

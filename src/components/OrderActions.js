@@ -146,7 +146,7 @@ class OrderActions extends Component {
   }
 
   getDeliveredButton() {
-    if (!global.invoiceDelivered) {
+    if (!global.invoiceDelivered && global.invoicePaid) {
       if (this.isDriver()){
         return (
           <div className={this.userSwitch()}
