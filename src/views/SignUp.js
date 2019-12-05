@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import "./SignUp.css"
 import { performRegister} from "../models/index"
 import LoggingInHeader from "../components/text/LoggingInHeader";
-import TextSignUp from "/Users/windsorhuang/Desktop/RequestToPay_FrontEnd/src/components/text/TextSignUp";
-
+import TextSignUp from "../components/text/TextRegister";
 
 
 /**
