@@ -16,6 +16,8 @@ class OrderActions extends Component {
 
   userSwitch() {
     switch (global.viewPersona) {
+      case PERSONA.seller.name:
+        return "orderActions_options seller-accent";
       case PERSONA.customer.name:
         return "orderActions_options customer-accent";
       case PERSONA.driver.name:
@@ -28,7 +30,9 @@ class OrderActions extends Component {
   isCustomerDriver() {
     return (this.isCustomer() || this.isDriver());
   }
-
+  isSeller() {
+    return (global.viewPersona === PERSONA.seller.name);
+  }
   isCustomer() {
     return (global.viewPersona === PERSONA.customer.name);
   }
@@ -65,6 +69,36 @@ class OrderActions extends Component {
       )
     }
   }
+
+  getApproveIcon() {
+    return (<img src={"images/icons/approved.png"} className="icon" alt={"I"}/>);
+  }
+
+  getApproveButton() {
+    if (!global.invoiceApproved) { // is not paid, make actionable
+      if (this.isSeller()){
+        return (
+            <div className={this.userSwitch()}
+                 onClick={() => this.props.order.toggleInvoiceMenuOpen()}>
+              {this.getApproveIcon()}
+            </div>
+        );
+      } else {
+        return (
+            <div className={"orderActions_options incomplete"}>
+              {this.getApproveIcon()}
+            </div>
+        )
+      }
+    } else {  // is paid
+      return (
+          <div className={"orderActions_options complete"}>
+            {this.getApproveIcon()}
+          </div>
+      )
+    }
+  }
+
 
   getArrivedIcon(){
     return(<img src={"images/icons/arrived.png"} className="icon" alt={"A"}/>);
@@ -112,7 +146,7 @@ class OrderActions extends Component {
   }
 
   getDeliveredButton() {
-    if (!global.invoiceDelivered) {
+    if (!global.invoiceDelivered && global.invoicePaid) {
       if (this.isDriver()){
         return (
           <div className={this.userSwitch()}
@@ -164,6 +198,7 @@ class OrderActions extends Component {
     return (
       <div id={"orderActions_block"}>
         <div id={"orderActions_wrapper"}>
+          {this.getApproveButton()}
           {this.getRouteButton()}
           {this.getPayButton()}
           {this.getArrivedButton()}

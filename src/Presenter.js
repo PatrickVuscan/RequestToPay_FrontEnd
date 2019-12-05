@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Home from "./views/Home"
 import Login from './views/Login'
+import SignUp from "./views/SignUp"
+import Products from "./views/Products"
+import Invoice from "./views/Invoice"
+import MakeOrder from "./views/MakeOrder"
 import {CardList} from "./views/CardList"
 import Order from "./views/Order";
 import Menu from "./components/Menu"
@@ -33,6 +37,11 @@ class Presenter extends Component {
       isLoading: false,
     };
     this.loginHandler = this.loginHandler.bind(this);
+    this.toSignUpHandler = this.toSignUpHandler.bind(this);
+    this.registerHandler = this.registerHandler.bind(this);
+    this.invoiceHandler = this.invoiceHandler.bind(this);
+    this.makeProductHandler = this.makeProductHandler.bind(this);
+    this.makeorderHandler = this.makeorderHandler.bind(this);
     global.presenter = this;  // TODO: singleton pattern?
   }
 
@@ -49,6 +58,18 @@ class Presenter extends Component {
     switch(view){
       case VIEW.login:
         this.transitionToLogOut();
+        break;
+      case VIEW.signup:
+        this.transitionToSignUp();
+        break;
+      case VIEW.makeorder:
+        this.transitionToMakeOrder();
+        break;
+      case VIEW.products:
+        this.transitionToMakeProduct();
+        break;
+      case VIEW.invoice:
+        this.transitionToInvoice();
         break;
       case VIEW.home:
         this.transitionToHome();
@@ -73,9 +94,25 @@ class Presenter extends Component {
     global.username = 'Not Logged In!';
   }
 
+  transitionToSignUp(){
+    this.setState({currentView: VIEW.signup});
+  }
+
   transitionToHome(){
     this.setState({currentView: VIEW.home});
     this.setCurrentView(VIEW.home);
+  }
+
+  transitionToMakeOrder(){
+    this.setState({currentView: VIEW.makeorder});
+  }
+
+  transitionToMakeProduct(){
+    this.setState({currentView: VIEW.products});
+  }
+
+  transitionToInvoice(){
+    this.setState({currentView: VIEW.invoice});
   }
 
   transitionToCardList(){
@@ -100,10 +137,48 @@ class Presenter extends Component {
     this.transitionTo(VIEW.home);
   }
 
+  // Sign Up Methods ---------------------------//
+
+  toSignUpHandler(){
+    this.transitionTo(VIEW.signup);
+  }
+
+  registerHandler(name, username, entityId){
+    this.setLoggedIn(true);
+    this.setName(name);
+    this.setUsername(username);
+    this.setEntityId(entityId);
+    this.transitionTo(VIEW.home);
+  }
+
+  // Order Methods ---------------------------//
+
+  makeorderHandler(entityId){
+    this.setEntityId(entityId);
+    this.transitionTo(VIEW.home)
+  }
+
+  // Product Methods ---------------------------//
+
+  makeProductHandler(){
+    this.transitionTo(VIEW.home)
+  }
+
+  // Invoice Methods ---------------------------//
+
+  invoiceHandler(){
+    this.transitionTo(VIEW.home);
+  }
+
   // Request to Pay
 
   processPayment(actionOnSuccess){
     setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Paid, true, actionOnSuccess);
+    this.setState({currentView: VIEW.order,}); // return to updated view
+  }
+
+  statusApproved(actionOnSuccess){
+    setOrderStatus(global.viewOrderID, constants.api.OrderStatus.Approved, true, actionOnSuccess);
     this.setState({currentView: VIEW.order,}); // return to updated view
   }
 
@@ -163,6 +238,7 @@ class Presenter extends Component {
     global.viewStatus = status;
   }
 
+
   setInvoiceID(ID){
     global.viewInvoiceID = ID;
   }
@@ -176,6 +252,14 @@ class Presenter extends Component {
     switch(view){
       case VIEW.login:
         return <Login/>;
+      case VIEW.signup:
+        return <SignUp/>;
+      case VIEW.products:
+        return <Products/>;
+      case VIEW.makeorder:
+        return <MakeOrder/>;
+      case VIEW.invoice:
+        return <Invoice/>;
       case VIEW.home:
         return <Home/>;
       case VIEW.cardList:

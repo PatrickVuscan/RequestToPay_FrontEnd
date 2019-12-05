@@ -1,9 +1,23 @@
 import constants from "../../constants";
-import {getFormattedOrders, isStatusCompleted, isStatusIncomplete, isStatusPaid} from "./Common";
+import {getFormattedOrders, isStatusUnapproved, isStatusCompleted, isStatusIncomplete, isStatusPaid} from "./Common";
 
 /* ----------------------------------------------- */
 /* Definitions of Persona's OrdersData Formatters  */
 /* ----------------------------------------------- */
+
+/**
+ * Returns a version of ordersData that is formatted for a high-level card
+ * viewed by a seller, only including the orders that are not approved.
+ *
+ * @param ordersData - A list of JSON objects, where each object is an order where the entity was a seller
+ * @returns [] - A list of JSON objects, where each JSON object is one order
+ */
+function getFormattedSellerUnapprovedOrders(ordersData) {
+    let statusCondition = isStatusUnapproved;
+    let getOrderStatusForPersona = getOrderStatusForSeller;
+    let orderFormatter = getFormattedSellerOrder;
+    return getFormattedOrders(ordersData, statusCondition, getOrderStatusForPersona, orderFormatter);
+}
 
 /**
  * Returns a version of ordersData that is formatted for a high-level card
@@ -101,4 +115,4 @@ function getFormattedSellerOrder(orderData, status) {
 /* Exported Functions */
 /* ------------------ */
 
-export {getFormattedSellerIncompleteOrders, getFormattedSellerCompletedOrders}
+export {getFormattedSellerUnapprovedOrders, getFormattedSellerIncompleteOrders, getFormattedSellerCompletedOrders}

@@ -95,25 +95,30 @@ function calculateItemCost(orderItem) {
  * @returns {string} - The status of 'order'
  */
 function getStatus(order) {
+    global.invoiceApproved = order[status.Approved];
     global.invoicePaid = order[status.Paid];
     global.invoiceArrived = order[status.Arrived];
     global.invoiceDelivered = order[status.Delivered];
-    if (!order[status.Delivered]) {
-        if(!order[status.Arrived]) {
-            if (!order[status.Paid]) {
-                return "Unpaid & Not Arrived";
+    if (order[status.Approved]) {
+        if (!order[status.Delivered]) {
+            if (!order[status.Arrived]) {
+                if (!order[status.Paid]) {
+                    return "Unpaid & Not Arrived";
+                } else {
+                    return "Paid & Not Arrived";
+                }
             } else {
-                return "Paid & Not Arrived";
+                if (!order[status.Paid]) {
+                    return "Unpaid & Arrived";
+                } else {
+                    return "Paid & Arrived";
+                }
             }
         } else {
-            if (!order[status.Paid]) {
-                return "Unpaid & Arrived";
-            } else {
-                return "Paid & Arrived";
-            }
+            return "Completed";
         }
     } else {
-        return "Completed";
+        return "Pending approval."
     }
 }
 

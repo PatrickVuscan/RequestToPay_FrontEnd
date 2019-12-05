@@ -5,6 +5,7 @@ export default {
     api: {
         URL: 'https://worksish-backend-v1.herokuapp.com/api/v1',
         OrderStatus: {
+            Approved: 'ApprovedStatus',
             Arrived: 'ArrivedStatus',
             Delivered: 'DeliveredStatus',
             Paid: 'PaidStatus'
@@ -40,6 +41,10 @@ export default {
             }
         },
         seller: {
+            unapproved: {
+                name: 'Unapproved',
+                string: 'Unapproved Invoices.'
+            },
             incomplete: {
                 name: 'Incomplete',
                 string: 'Incomplete Orders.'
@@ -63,6 +68,10 @@ export default {
     VIEW: {
         login: 'login',
         home: 'home',
+        signup: 'signup',
+        invoice: 'invoice',
+        products: 'products',
+        makeorder: 'makeorder',
         orderList: 'orderList',
         cardList: 'cardList',
         order: 'order',
