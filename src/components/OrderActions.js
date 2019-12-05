@@ -161,10 +161,10 @@ class OrderActions extends Component {
     return (
       <div id={"orderActions_block"}>
         <div id={"orderActions_wrapper"}>
+          {this.getRouteButton()}
           {this.getPayButton()}
           {this.getArrivedButton()}
           {this.getDeliveredButton()}
-          {this.getRouteButton()}
         </div>
       </div>
     );

@@ -11,16 +11,24 @@ class Invoice extends Component {
     getEntityInfo() {
         const {info} = this.props;
         return (
-            <div id={"EntityInfo"}>
-                <div id={"Supplier"}>
-                    {info["SellerName"]}
-                    <br/>
-                    {info["SellerBillingAddress"]}
+            <div id={"entity_info"}>
+                <div className={"entity_block"}>
+                    <div id={"seller_name"}>
+                        Sold by {info["SellerName"]}.
+                    </div>
+                    <div className={"entity_address"}>
+                        {info["SellerName"]}<br/>
+                        {info["SellerBillingAddress"]}
+                    </div>
                 </div>
-                <div id={"Customer"}>
-                    {info["CustomerName"]}
-                    <br/>
-                    {info["CustomerBillingAddress"]}
+                <div className={"entity_block"}>
+                    <div id={"customer_name"}>
+                        Purchased by {info["CustomerName"]}.
+                    </div>
+                    <div className={"entity_address"}>
+                        {info["CustomerName"]}<br/>
+                        {info["CustomerBillingAddress"]}
+                    </div>
                 </div>
             </div>
         );
@@ -44,7 +52,12 @@ class Invoice extends Component {
 
     getTotalDiv() {
         const {total} = this.props;
-        return (<div id={"Total"}>Total: ${total}</div>)
+        return (
+          <div id={"order_total"}>
+              <div id={"order_total_title"}>Total:</div>
+              <div id={"order_total_amount"}>${total}</div>
+          </div>
+        )
     }
 
     render() {
@@ -56,11 +69,8 @@ class Invoice extends Component {
             const totalDiv = this.getTotalDiv();
             return (<div id={"Invoice"}>
                         {entityInfo}
-                        <br/>
                         {title}
-                        <br/>
                         {itemsTable}
-                        <br/>
                         {totalDiv}
                     </div>
             );

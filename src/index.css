@@ -44,10 +44,10 @@ body {
   background-color: transparent;
 }
 .home-menu {
-  background-color: transparent;
+  background-color: rgba(236,17,26, 0.75);
 }
 .home-accent{
-    background-color: var(--MID_RED);
+  background-color: var(--MID_RED);
 }
 .home-background {
   /*background-color: var(--LIGHT_RED);*/
