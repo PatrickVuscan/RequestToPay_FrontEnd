@@ -23,20 +23,24 @@
     height: 100px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 0 15px 25px;
+    align-items: center;
+    padding: 15px 0;
+}
 
-    font-family: 'Cabin', sans-serif;
-    font-weight: 400;
-    color: var(--WHITE);
-    font-size: 32px;
+#order_GeneralInfo{
+    width: 300px;
 }
 
 .order_header_item {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    color: var(--WHITE);
     font-size: 16px;
 }
 
 #order_OrderId {
+    font-family: 'Cabin', sans-serif;
+    color: var(--WHITE);
     font-weight: 700;
     font-size: 24px;
     padding-bottom: 5px;
@@ -65,4 +69,74 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+}
+
+.entity_block {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #eee;
+}
+
+#seller_name, #customer_name, #order_invoiceID {
+    font-family: 'Cabin', sans-serif;
+    font-weight: 700;
+    color: var(--WHITE);
+    font-size: 20px;
+    padding-bottom:5px;
+}
+
+#order_invoiceID {
+    border-bottom: 1px solid #eee;
+}
+
+/* Invoice Table Styles */
+
+.Cell-header, .Table caption {
+    font-family: 'Cabin', sans-serif;
+    color: var(--WHITE);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.Table {
+    width: 300px;
+    border-spacing: 0;
+}
+
+.Table caption {
+    padding: 5px 0;
+    text-align: left;
+}
+
+.Cell {
+    text-align: left;
+    padding: 2px 0 0 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.Cell-header {
+    border-bottom: 1px solid #eee;
+}
+
+#order_total {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: flex-end;
+    margin-top: 5px;
+}
+
+#order_total_title {
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+#order_total_amount {
+    padding: 0 15px 0 10px;
+}
+
+#order_total_amount, #order_total_title {
+    padding-top: 5px;
+    border-top: 1px solid #eee;
 }
