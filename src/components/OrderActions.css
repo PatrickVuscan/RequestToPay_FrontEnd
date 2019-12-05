@@ -30,3 +30,11 @@ width:inherit;
     height: 40px;
     width: 40px;
 }
+
+.complete{
+    background-color: green;
+}
+
+.incomplete{
+    background-color: red;
+}

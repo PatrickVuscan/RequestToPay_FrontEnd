@@ -3,14 +3,35 @@ import DataTable from '../components/table/DataTable';
 
 class Invoice extends Component {
 
-    getEntityTable() {
+    getTitle() {
         const {info} = this.props;
-        const headings = ["Supplier", "Customer"];
-        const rows = [
-            [info["SellerName"], info["CustomerName"]],
-            [info["SellerBillingAddress"], info["CustomerBillingAddress"]]
-        ];
-        return (<DataTable id={"Entities"} headings={headings} rows={rows} title="" />);
+        return (<div id={"order_invoiceID"}> Invoice #{info["InID"]}</div>);
+    }
+
+    getEntityInfo() {
+        const {info} = this.props;
+        return (
+            <div id={"entity_info"}>
+                <div className={"entity_block"}>
+                    <div id={"seller_name"}>
+                        Sold by {info["SellerName"]}.
+                    </div>
+                    <div className={"entity_address"}>
+                        {info["SellerName"]}<br/>
+                        {info["SellerBillingAddress"]}
+                    </div>
+                </div>
+                <div className={"entity_block"}>
+                    <div id={"customer_name"}>
+                        Purchased by {info["CustomerName"]}.
+                    </div>
+                    <div className={"entity_address"}>
+                        {info["CustomerName"]}<br/>
+                        {info["CustomerBillingAddress"]}
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     getItemsTable() {
@@ -31,23 +52,27 @@ class Invoice extends Component {
 
     getTotalDiv() {
         const {total} = this.props;
-        return (<div id={"Total"}>Total: ${total}</div>)
+        return (
+          <div id={"order_total"}>
+              <div id={"order_total_title"}>Total:</div>
+              <div id={"order_total_amount"}>${total}</div>
+          </div>
+        )
     }
 
     render() {
         const {items} = this.props;
         if (items.length !== 0) {
-            const entityTable = this.getEntityTable();
+            const entityInfo = this.getEntityInfo();
+            const title = this.getTitle();
             const itemsTable = this.getItemsTable();
             const totalDiv = this.getTotalDiv();
-            return (
-                <div id={"Invoice"}>
-                    {entityTable}
-                    <br/>
-                    {itemsTable}
-                    <br/>
-                    {totalDiv}
-                </div>
+            return (<div id={"Invoice"}>
+                        {entityInfo}
+                        {title}
+                        {itemsTable}
+                        {totalDiv}
+                    </div>
             );
         } else {
             return ("Retrieving your invoice.");

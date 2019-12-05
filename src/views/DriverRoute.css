@@ -31,7 +31,6 @@
 
 #route_block {
     min-height:150px;
-    /*flex: 1;*/
     width: inherit;
     max-width:600px;
     margin: 0;
@@ -44,7 +43,6 @@
     font-weight: 400;
     color: var(--WHITE);
     font-size: 20px;
-    background-color: var(--PURPLE)
 }
 #route_address{
     padding: 15px 0 0 15px;
