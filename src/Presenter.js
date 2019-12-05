@@ -143,8 +143,9 @@ class Presenter extends Component {
     this.transitionTo(VIEW.signup);
   }
 
-  registerHandler(username, entityId){
+  registerHandler(name, username, entityId){
     this.setLoggedIn(true);
+    this.setName(name);
     this.setUsername(username);
     this.setEntityId(entityId);
     this.transitionTo(VIEW.home);

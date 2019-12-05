@@ -14,7 +14,7 @@ export class TextSignUp extends Component {
     render(){
         return (
             <div id ="text_login">
-                <Fade><p>Get Started.</p></Fade>
+                <Fade><p>Get started.</p></Fade>
             </div>
         );
     }

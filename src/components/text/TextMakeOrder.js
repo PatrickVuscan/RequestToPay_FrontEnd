@@ -14,7 +14,7 @@ export class TextMakeOrder extends Component {
     render(){
         return (
             <div id ="text_login">
-                <Fade><p>Make an order.</p></Fade>
+                <Fade><p>Make new. Order.</p></Fade>
             </div>
         );
     }

@@ -40,13 +40,13 @@ class MakeOrder extends Component {
         performMakeOrder(this, order_details, global.presenter.makeorderHandler)
     }
 
+
     render(){
         const { loading } = this.state;
         return (
             <div id="makeorder_full">
                 <div id="makeorder_block">
                     {loading ? <LoggingInHeader/> : <TextMakeOrder/>}
-
                     <form onSubmit={this.handlerMakeOrderClick}>
                         <input
                             className={"field"}

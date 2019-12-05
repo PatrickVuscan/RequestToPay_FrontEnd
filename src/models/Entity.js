@@ -51,7 +51,7 @@ function performRegister(view, credentials, successfulRegisterHandler) {
     setTimeout(function() {
         request(options)
             .then(function (res) {
-                successfulRegisterHandler(credentials.username, res); // passing
+                successfulRegisterHandler(credentials.name, credentials.username, res); // passing
             })
             .catch(function (err) {
                 alert(`The register was unsuccessful: ${err.status} -- ${err.message}`);
