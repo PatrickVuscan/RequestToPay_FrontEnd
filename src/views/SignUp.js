@@ -18,7 +18,7 @@ class SignUp extends Component {
             passwordValue: '',
             addressValue: '',
             phoneValue: '',
-            loading: false,
+            loading: false
         };
         this.handlerRegisterClick = this.handlerRegisterClick.bind(this);
     }
@@ -29,8 +29,8 @@ class SignUp extends Component {
             'name': this.state.nameValue,
             'username': this.state.usernameValue,
             'password': this.state.passwordValue,
+            'address': this.state.addressValue,
             'phone': this.state.phoneValue,
-            'address': this.state.addressValue
         };
         performRegister(this, credentials, global.presenter.registerHandler)
     }
@@ -62,7 +62,7 @@ class SignUp extends Component {
                             onChange={(event) => {this.setState({addressValue: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required type="address"
+                            required type="phone number"
                             placeholder="Phone number."
                             onChange={(event) => {this.setState({phoneValue: event.target.value})}}/>
                         <input

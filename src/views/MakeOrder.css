@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     background-color: #FF384A;
+    background-image: linear-gradient(315deg, #ec111a 0%, #FF969B 74%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center center;

@@ -43,7 +43,7 @@ export default {
         seller: {
             unapproved: {
                 name: 'Unapproved',
-                string: 'Action invoices.'
+                string: 'Unapproved invoices.'
             },
             incomplete: {
                 name: 'Incomplete',

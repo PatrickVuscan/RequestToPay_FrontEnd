@@ -42,7 +42,8 @@ function getOrdersByEntityAndPersona(entityId, persona, formatter, setOrdersData
  * @param details - contains the details of the order being inserted into the backend
  * @param makeOrderHandler - handles the transition from actioning invoice page to the home page
  */
-function performMakeOrder(details, makeOrderHandler) {
+function performMakeOrder(view, details, makeOrderHandler) {
+    view.setState({loading: true});
     const options = {
         method: 'PUT',
         uri: `${config.api.URL}/order?SID=${details.sellerID}&CID=${details.buyerID}&DID=5&OrderDate=${details.orderDate}&DeliveryDate=${details.deliveryDate}`,
@@ -68,6 +69,7 @@ function performMakeOrder(details, makeOrderHandler) {
             .catch(function (err) {
                 alert(`The order was unsuccessful: ${err.status} -- ${err.message}`);
             });
+        view.setState({loading: false});
     }, 2000); // Set Delay (to test the loading animation)2000);
 }
 

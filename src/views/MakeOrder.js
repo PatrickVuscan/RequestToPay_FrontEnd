@@ -20,7 +20,8 @@ class MakeOrder extends Component {
             orderDate: date,
             deliveryDate: '',
             itemID: null,
-            itemQuantity: null
+            itemQuantity: null,
+            loading: false
         };
         this.handlerMakeOrderClick = this.handlerMakeOrderClick.bind(this);
     }
@@ -36,8 +37,7 @@ class MakeOrder extends Component {
             'itemID': this.state.itemID,
             'itemQuantity': this.state.itemQuantity
         };
-        console.log(this.state.orderDate);
-        performMakeOrder(order_details, global.presenter.makeorderHandler)
+        performMakeOrder(this, order_details, global.presenter.makeorderHandler)
     }
 
     render(){

@@ -13,7 +13,7 @@ class Products extends Component {
         super(props);
         this.state = {
             itemName: '',
-            sellerID: '',
+            sellerID: global.entityId,
             itemPrice: '',
             loading: false,
         };
@@ -43,16 +43,12 @@ class Products extends Component {
                             onChange={(event) => {this.setState({itemName: event.target.value})}}/>
                         <input
                             className={"field"}
-                            required placeholder="Your seller ID."
-                            onChange={(event) => {this.setState({sellerID: event.target.value})}}/>
-                        <input
-                            className={"field"}
                             required placeholder="Product price."
                             onChange={(event) => {this.setState({itemPrice: event.target.value})}}/>
                         <input
                             id="button"
                             type="submit"
-                            value="Create product."/>
+                            value="Submit."/>
                     </form>
                 </div>
             </div>
