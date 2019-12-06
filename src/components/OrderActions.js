@@ -47,7 +47,7 @@ class OrderActions extends Component {
       case STATUSES.arrived:
         return !global.invoiceApproved;
       case STATUSES.delivered:
-        return !global.invoiceArrived || !global.invoiceApproved;
+        return !global.invoiceArrived || !global.invoicePaid;
       default:
         return null;
     }
