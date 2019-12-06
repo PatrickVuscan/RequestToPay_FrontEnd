@@ -75,5 +75,11 @@ export default {
         orderList: 'orderList',
         cardList: 'cardList',
         order: 'order',
+    },
+    STATUSES: {
+        approved: 'approved',
+        paid: 'paid',
+        arrived: 'arrived',
+        delivered: 'delivered',
     }
 }

@@ -1,10 +1,11 @@
-/* Order Actions Action toolbar Order View */
+/* Order Actions toolbar for the Order View */
 
 import React, {Component} from "react";
 import constants from "../constants";
 import "./OrderActions.css"
 
 const PERSONA = constants.PERSONA;
+const STATUSES = constants.STATUSES;
 
 class OrderActions extends Component {
 
@@ -27,9 +28,6 @@ class OrderActions extends Component {
     }
   }
 
-  isCustomerDriver() {
-    return (this.isCustomer() || this.isDriver());
-  }
   isSeller() {
     return (global.viewPersona === PERSONA.seller.name);
   }
@@ -40,137 +38,118 @@ class OrderActions extends Component {
     return (global.viewPersona === PERSONA.driver.name);
   }
 
-  getPayIcon() {
-    return (<img src={"images/icons/pay.png"} className="icon" alt={"$"}/>);
+  conditionalStatusIncomplete(type){
+    switch(type) {
+      case STATUSES.approved:
+        return false;
+      case STATUSES.paid:
+        return !global.invoiceApproved;
+      case STATUSES.arrived:
+        return !global.invoiceApproved;
+      case STATUSES.delivered:
+        return !global.invoiceArrived || !global.invoiceApproved;
+      default:
+        return null;
+    }
   }
 
-  getPayButton() {
-    if (!global.invoicePaid) { // is not paid, make actionable
-      if (this.isCustomer()){
+  getStatusIncomplete(type){
+    switch(type) {
+      case STATUSES.approved:
+        return !global.invoiceApproved;
+      case STATUSES.paid:
+        return !global.invoicePaid;
+      case STATUSES.arrived:
+        return !global.invoiceArrived;
+      case STATUSES.delivered:
+        return !global.invoiceDelivered;
+      default:
+        return null;
+    }
+  }
+
+  getEntityType(type){
+    switch(type) {
+      case STATUSES.approved:
+        return this.isSeller();
+      case STATUSES.paid:
+        return this.isCustomer();
+      case STATUSES.arrived:
+        return this.isDriver();
+      case STATUSES.delivered:
+        return this.isDriver();
+      default:
+        return null;
+    }
+  }
+
+  getOnClickAction(type) {
+    switch(type) {
+      case STATUSES.approved:
+        this.props.order.toggleInvoiceMenuOpen();
+        break;
+      case STATUSES.paid:
+        this.props.order.togglePayMenuOpen();
+        break;
+      case STATUSES.arrived:
+        global.presenter.statusArrived(this.props.order.updateOrder);
+        break;
+      case STATUSES.delivered:
+        this.props.order.toggleDeliveryMenuOpen();
+        break;
+      default:
+        this.props.order.updateOrder();
+    }
+  }
+
+  getIcon(status) {
+    switch(status) {
+      case STATUSES.approved:
+        return (<img src={"images/icons/approved.png"} className="icon" alt={"I"}/>);
+      case STATUSES.paid:
+        return (<img src={"images/icons/pay.png"} className="icon" alt={"$"}/>);
+      case STATUSES.arrived:
+        return (<img src={"images/icons/arrived.png"} className="icon" alt={"A"}/>);
+      case STATUSES.delivered:
+        return (<img src={"images/icons/delivered.png"} className="icon" alt={"D"}/>);
+      default:
+        return null;
+    }
+  }
+
+  getButton(status) {
+    if (this.conditionalStatusIncomplete(status)) {
+      return (
+        <div className={"orderActions_options inactive"}
+             onClick={() => this.props.order.updateOrder()}>
+          {this.getIcon(status)}
+        </div>
+      )
+    }
+    if (this.getStatusIncomplete(status)) {
+      if (this.getEntityType(status)){
         return (
           <div className={this.userSwitch()}
-               onClick={() => this.props.order.togglePayMenuOpen()}>
-            {this.getPayIcon()}
+               onClick={() => this.getOnClickAction(status)}>
+            {this.getIcon(status)}
           </div>
         );
       } else {
         return (
           <div className={"orderActions_options incomplete"}
                onClick={() => this.props.order.updateOrder()}>
-            {this.getPayIcon()}
+            {this.getIcon(status)}
           </div>
         )
       }
-    } else {  // is paid
+    } else {
       return (
         <div className={"orderActions_options complete"}>
-          {this.getPayIcon()}
+          {this.getIcon(status)}
         </div>
       )
     }
   }
-
-  getApproveIcon() {
-    return (<img src={"images/icons/approved.png"} className="icon" alt={"I"}/>);
-  }
-
-  getApproveButton() {
-    if (!global.invoiceApproved) { // is not paid, make actionable
-      if (this.isSeller()){
-        return (
-            <div className={this.userSwitch()}
-                 onClick={() => this.props.order.toggleInvoiceMenuOpen()}>
-              {this.getApproveIcon()}
-            </div>
-        );
-      } else {
-        return (
-            <div className={"orderActions_options incomplete"}>
-              {this.getApproveIcon()}
-            </div>
-        )
-      }
-    } else {  // is paid
-      return (
-          <div className={"orderActions_options complete"}>
-            {this.getApproveIcon()}
-          </div>
-      )
-    }
-  }
-
-
-  getArrivedIcon(){
-    return(<img src={"images/icons/arrived.png"} className="icon" alt={"A"}/>);
-  }
-
-  getArrivedButton() {
-    if (!global.invoiceArrived) {
-      if (this.isDriver()){
-        return (
-            <div className={this.userSwitch()}
-                 onClick={() => global.presenter.statusArrived(this.props.order.updateOrder)}>
-              {this.getArrivedIcon()}
-            </div>
-        );
-      } else {
-        return (
-            <div className={"orderActions_options incomplete"}
-                 onClick={() => this.props.order.updateOrder()}>
-              {this.getArrivedIcon()}
-            </div>
-        )
-      }
-    } else {
-      return (
-          <div className={"orderActions_options complete"}>
-            {this.getArrivedIcon()}
-          </div>
-      )
-    }
-  }
-
-  // getArrivedButton(){
-  //   if (global.viewPersona === PERSONA.driver.name && !global.invoiceArrived) {
-  //     return (
-  //       <div className={this.userSwitch()}
-  //            onClick={() => global.presenter.statusArrived(this.props.order.updateOrder)}>
-  //         <img src={"images/icons/arrived.png"} className="icon" alt={"A"}/>
-  //       </div>
-  //     );
-  //   }
-  // }
-
-  getDeliveredIcon(){
-    return(<img src={"images/icons/delivered.png"} className="icon" alt={"D"}/>);
-  }
-
-  getDeliveredButton() {
-    if (!global.invoiceDelivered && global.invoicePaid) {
-      if (this.isDriver()){
-        return (
-          <div className={this.userSwitch()}
-               onClick={() => this.props.order.toggleDeliveryMenuOpen()}>
-            {this.getDeliveredIcon()}
-          </div>
-        );
-      } else {
-        return (
-            <div className={"orderActions_options incomplete"}
-                 onClick={() => this.props.order.updateOrder()}>
-              {this.getDeliveredIcon()}
-            </div>
-        )
-      }
-    } else {
-      return (
-          <div className={"orderActions_options complete"}>
-            {this.getDeliveredIcon()}
-          </div>
-      )
-    }
-  }
-
 
   getRouteButton(){
     if (this.isDriver() && !global.invoiceDelivered) {
@@ -183,26 +162,15 @@ class OrderActions extends Component {
     }
   }
 
-  // getDeliveredButton(){
-  //   if (global.viewPersona === PERSONA.driver.name && global.invoiceArrived && !global.invoiceDelivered) {
-  //     return (
-  //       <div className={this.userSwitch()}
-  //            onClick={() => this.props.order.toggleDeliveryMenuOpen()}>
-  //         <img src={"images/icons/delivered.png"} className="icon" alt={"D"}/>
-  //       </div>
-  //     );
-  //   }
-  // }
-
   render() {
     return (
       <div id={"orderActions_block"}>
         <div id={"orderActions_wrapper"}>
-          {this.getApproveButton()}
           {this.getRouteButton()}
-          {this.getPayButton()}
-          {this.getArrivedButton()}
-          {this.getDeliveredButton()}
+          {this.getButton(STATUSES.approved)}
+          {this.getButton(STATUSES.paid)}
+          {this.getButton(STATUSES.arrived)}
+          {this.getButton(STATUSES.delivered)}
         </div>
       </div>
     );
