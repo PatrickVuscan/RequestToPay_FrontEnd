@@ -17,6 +17,7 @@ class Login extends Component {
     };
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleSignUpClick = this.handleSignUpClick.bind(this);
+    this.handleDemoClick = this.handleDemoClick.bind(this);
     }
 
   handleLoginClick(e){
@@ -31,6 +32,11 @@ class Login extends Component {
     handleSignUpClick(e){
         e.preventDefault();
         performToSignUp(this, global.presenter.toSignUpHandler);
+    }
+
+    handleDemoClick(e){
+        e.preventDefault();
+        performToSignUp(this, global.presenter.toDemoSetupHandler);
     }
 
   render(){
@@ -61,6 +67,12 @@ class Login extends Component {
                     id="button"
                     type="submit"
                     value="Sign up."/>
+            </form>
+            <form onSubmit={this.handleDemoClick}>
+                <input
+                    id="button"
+                    type="submit"
+                    value="Demo."/>
             </form>
         </div>
       </div>

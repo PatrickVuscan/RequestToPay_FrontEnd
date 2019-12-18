@@ -13,6 +13,7 @@ import constants from "./constants";
 import './Presenter.css'
 import {getOrdersByEntityAndPersona, setOrderStatus} from "./models";
 import {getCardData} from "./data/CardData";
+import DemoSetup from "./views/DemoSetup";
 
 const VIEW = constants.VIEW;
 
@@ -38,6 +39,7 @@ class Presenter extends Component {
     };
     this.loginHandler = this.loginHandler.bind(this);
     this.toSignUpHandler = this.toSignUpHandler.bind(this);
+    this.toDemoSetupHandler = this.toDemoSetupHandler.bind(this);
     this.registerHandler = this.registerHandler.bind(this);
     this.invoiceHandler = this.invoiceHandler.bind(this);
     this.makeProductHandler = this.makeProductHandler.bind(this);
@@ -61,6 +63,9 @@ class Presenter extends Component {
         break;
       case VIEW.signup:
         this.transitionToSignUp();
+        break;
+      case VIEW.demosetup:
+        this.transitionToDemoSetup();
         break;
       case VIEW.makeorder:
         this.transitionToMakeOrder();
@@ -96,6 +101,10 @@ class Presenter extends Component {
 
   transitionToSignUp(){
     this.setState({currentView: VIEW.signup});
+  }
+
+  transitionToDemoSetup(){
+    this.setState({currentView: VIEW.demosetup});
   }
 
   transitionToHome(){
@@ -149,6 +158,12 @@ class Presenter extends Component {
     this.setUsername(username);
     this.setEntityId(entityId);
     this.transitionTo(VIEW.home);
+  }
+
+  // Demo Setup Method ---------------------------//
+
+  toDemoSetupHandler(){
+    this.transitionTo(VIEW.demosetup);
   }
 
   // Order Methods ---------------------------//
@@ -254,6 +269,8 @@ class Presenter extends Component {
         return <Login/>;
       case VIEW.signup:
         return <SignUp/>;
+      case VIEW.demosetup:
+        return <DemoSetup/>;
       case VIEW.products:
         return <Products/>;
       case VIEW.makeorder:

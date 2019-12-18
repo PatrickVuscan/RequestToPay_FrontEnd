@@ -4,10 +4,7 @@ import { performRegister} from "../models/index"
 import LoggingInHeader from "../components/text/LoggingInHeader";
 import TextSignUp from "../components/text/TextRegister";
 
-
-/**
- * Creates a signup element, containing an username field, password fieldS and persona menu and button.
- */
+/* Creates a sign-up element, containing an username field, password field and persona menu and button. */
 class SignUp extends Component {
     constructor(props) {
         super(props);
