@@ -1,5 +1,6 @@
 import {performLogin,
     performRegister,
+    performDemoRegister,
     performToSignUp,
     performLogout,
     getEntityPersona} from './Entity';
@@ -20,6 +21,7 @@ import {getOrdersByEntityAndPersona,
  */
 export {performLogin,
     performRegister,
+    performDemoRegister,
     performToSignUp,
     performLogout,
     getOrdersByEntityAndPersona,

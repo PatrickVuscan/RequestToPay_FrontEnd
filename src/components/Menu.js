@@ -33,6 +33,8 @@ class Menu extends Component {
         return "login-menu";
       case VIEW.signup:
         return "login-menu";
+      case VIEW.demosetup:
+        return "login-menu";
       case VIEW.products:
         return "login-menu";
       case VIEW.makeorder:

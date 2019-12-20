@@ -60,10 +60,31 @@ function performRegister(view, credentials, successfulRegisterHandler) {
     }, 2000); // Set Delay (to test the loading animation)
 }
 
+function performDemoRegister(view, credentials, successfulRegisterHandler) {
+    view.setState({loading: true});
+    const options = {
+        method: 'PUT',
+        uri: `${config.api.URL}/demoEntity?Name=${credentials.name}&Username=${credentials.username}&Password=${credentials.password}&BillingAddress=${credentials.address}&PhoneNumber=${credentials.phone}`,
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+    setTimeout(function() {
+        request(options)
+            .then(function (res) {
+                successfulRegisterHandler(credentials.name, credentials.username, res); // passing
+            })
+            .catch(function (err) {
+                alert(`The register was unsuccessful: ${err.status} -- ${err.message}`);
+            });
+        view.setState({loading: false});
+    }, 2000); // Set Delay (to test the loading animation)
+}
+
 /**
  * Transition to sign up page
  */
-
 function performToSignUp(view, go){
     view.setState({loading: true});
     setTimeout(function(res) {
@@ -121,6 +142,7 @@ function getEntityPersona(entityId, persona, setPersona) {
 
 export {performLogin,
     performRegister,
+    performDemoRegister,
     performToSignUp,
     performLogout,
     getEntityPersona};

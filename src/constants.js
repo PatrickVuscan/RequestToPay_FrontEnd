@@ -69,6 +69,7 @@ export default {
         login: 'login',
         home: 'home',
         signup: 'signup',
+        demosetup: 'demosetup',
         invoice: 'invoice',
         products: 'products',
         makeorder: 'makeorder',
